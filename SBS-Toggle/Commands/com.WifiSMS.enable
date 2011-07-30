@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -f /tmp/WifiSMS ]
+then
+	rm -f /tmp/WifiSMS;
+	killall WifiSMS;
+else
+	touch /tmp/WifiSMS;
+	sudo -u mobile nohup /User/Library/WifiSMS/WifiSMS "$*" > /dev/null 2>&1 &
+fi
