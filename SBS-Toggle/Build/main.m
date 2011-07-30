@@ -16,7 +16,7 @@ BOOL isEnabled()
 {
 	NSFileManager *filemgr;
 	filemgr = [NSFileManager defaultManager];
-	return [filemgr fileExistsAtPath: @"/tmp/WifiSMS" ];
+	return [filemgr fileExistsAtPath: @"/tmp/WifiSMS-ON" ];
 }
 
 // This function is optional and should only be used if it is likely for the toggle to become out of sync

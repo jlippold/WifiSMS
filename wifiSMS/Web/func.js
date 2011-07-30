@@ -60,7 +60,7 @@ $(document).ready(function() {
 			'<div id="security" style="display:none"><p>UserName:&nbsp;&nbsp;&nbsp;<input type="text" width="80px" placeholder="Leave blank for none" id="nUserName"></p><br />'+
 			'<p>Password:&nbsp;&nbsp;&nbsp;<input type="password" width="80px" placeholder="Leave blank for none" id="nPassword"></p></div>'+
 			'<p></p><button onclick="saveWeb();">Save</button><p id="errSettings">&nbsp;</p>'+
-		  '<p>&nbsp;</p><a href="javascript:void(0)" onclick="doDonate()">buy me a beer</a> | <a href="http://www.twitter.com/treason" target="blank">follow me on twitter</a> | <a href="https://github.com/treason/WifiSMS" target="blank">github</a><p>&nbsp;</p>'
+		  '<p>&nbsp;</p><a href="javascript:void(0)" onclick="doDonate()">buy me a beer</a> | <a href="http://www.twitter.com/treason" target="blank">follow me on twitter</a> | <a href="https://github.com/treason/WifiSMS" target="blank">Fork Me on GitHub</a><p>&nbsp;</p>'
 		
 
 		$.fancybox(htm,
@@ -161,7 +161,7 @@ function loadAllContacts() {
 	});
 	loading("Loading Contacts");
 	$.ajax({
-	  url: "/",
+	  url: "/ajax/",
 	  dataType: "json",
 	  type: "POST",
 	  data: "action=getContacts&key=a4a1dda1-166d-47b0-8f31-a8581466da46&CC=" + localStorage.getItem('CC'),
@@ -283,7 +283,7 @@ function switchContact(p, grp) {
 	
 	$.ajax({
 		   type: "POST",
-		   url: "/",
+		   url: "/ajax/",
 		   contentType: "text",
 		   data: "action=getphone&key=a4a1dda1-166d-47b0-8f31-a8581466da46&phone=" + grp,  
 		   error:function (){
@@ -480,7 +480,7 @@ function QuerySMS() {
 	$.ajax({
 		   type: "POST",
 		   contentType: "text",
-		   URL: "/",
+		   url: "/ajax/",
 		   data: "action=list&key=a4a1dda1-166d-47b0-8f31-a8581466da46&CC=" + localStorage.getItem('CC'), 
 		   error:function (){
 			   offline();
@@ -550,12 +550,11 @@ function initCounts() {
 				}
 	});
 	
-	$('#statuslog').val("Initializing" + "\r\n");
 	
 	$.ajax({
 		   type: "POST",
 		   contentType: "text",
-		   URL: "/",
+		   url: "/ajax/",
 		   data: "action=list&key=a4a1dda1-166d-47b0-8f31-a8581466da46&CC=" + localStorage.getItem('CC'), 
 		   error:function (){
 			   offline();
@@ -662,7 +661,7 @@ function ProcessSMS() {
 			$.ajax({
 				   type: "POST",
 				   contentType: "text",
-				   URL: "/",
+				   url: "/ajax/",
 				   data: "phone=" + Phone + "&msg=" + msg + "&pid=" + PID  + "&grp=" + grp + "&Country=" + localStorage.getItem("CC") + "&Epoch=12345&rand=" + rand,  
 				   error:function (){
 					   offline();
@@ -751,7 +750,7 @@ function updateTitle() {
 		}
 		
 	} else {
-		document.title = "TreasonSMS";	
+		document.title = "WifiSMS";	
 	}
 	
 }
@@ -998,7 +997,7 @@ function saveWeb() {
 			$.ajax({
 				   type: "POST",
 				   contentType: "text",
-				   URL: "/",
+				   url: "/ajax/",
 				   data: "action=settings&key=a4a1dda1-166d-47b0-8f31-a8581466da46&user=" + user + "&pass=" + pass + "&port=" + p + "&r=" + Math.random(), 
 				   error:function (){
 					   alert("Error Saving");

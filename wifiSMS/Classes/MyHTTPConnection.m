@@ -260,7 +260,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 
 
 		// QUERY indivual txt
-		if([postStr hasPrefix:@"action=getphone&key=a4a1dda1-166d-47b0-8f31-a8581466da46"] ) {
+		if([postStr hasPrefix:@"action=getphone&key=a4a1dda1-166d-47b0-8f31-a8581466da46"] && [path hasPrefix:@"/ajax/"] ) {
 			
 			int index = [postStr rangeOfString:@"phone="].location + 6;
 			NSString *p = [postStr substringFromIndex: index];
@@ -273,7 +273,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 		
 		
 		// Query totals
-		if([postStr hasPrefix:@"action=list&key=a4a1dda1-166d-47b0-8f31-a8581466da46"] ) {
+		if([postStr hasPrefix:@"action=list&key=a4a1dda1-166d-47b0-8f31-a8581466da46"]  && [path hasPrefix:@"/ajax/"]) {
 			
 			int index = [postStr rangeOfString:@"CC="].location + 3;
 			NSString *CC = [postStr substringFromIndex: index];
@@ -287,7 +287,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 		
 		
 		// Check Queue
-		if([postStr hasPrefix:@"action=checkQueue&key=a4a1dda1-166d-47b0-8f31-a8581466da46"] ) {
+		if([postStr hasPrefix:@"action=checkQueue&key=a4a1dda1-166d-47b0-8f31-a8581466da46"]  && [path hasPrefix:@"/ajax/"]) {
 			
 			NSData *browseData = [[self checkQueue] dataUsingEncoding:NSUTF8StringEncoding];
 			return [[[HTTPDataResponse alloc] initWithData:browseData] autorelease];
@@ -296,7 +296,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 
 		
 		// settings
-		if([postStr hasPrefix:@"action=settings&key=a4a1dda1-166d-47b0-8f31-a8581466da46"] ) {
+		if([postStr hasPrefix:@"action=settings&key=a4a1dda1-166d-47b0-8f31-a8581466da46"]  && [path hasPrefix:@"/ajax/"]) {
 			
 			int index = [postStr rangeOfString:@"user="].location + 5;
 			NSString *newUser = [postStr substringFromIndex: index];
@@ -342,7 +342,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 		
 		
 		// getAllContacts
-		if([postStr hasPrefix:@"action=getContacts&key=a4a1dda1-166d-47b0-8f31-a8581466da46"] ) {
+		if([postStr hasPrefix:@"action=getContacts&key=a4a1dda1-166d-47b0-8f31-a8581466da46"]  && [path hasPrefix:@"/ajax/"]) {
 			/*
 			NSData *browseData = [[self getAllContacts] dataUsingEncoding:NSUTF8StringEncoding];
 			return [[[HTTPDataResponse alloc] initWithData:browseData] autorelease];
@@ -355,7 +355,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 		}
 		
 		
-		if([postStr isEqualToString:@"action=clearSMS&key=a4a1dda1-166d-47b0-8f31-a8581466da46"] ) {
+		if([postStr isEqualToString:@"action=clearSMS&key=a4a1dda1-166d-47b0-8f31-a8581466da46"] && [path hasPrefix:@"/ajax/"] ) {
 			
 			NSData *browseData = [[self clearQueue] dataUsingEncoding:NSUTF8StringEncoding];
 			return [[[HTTPDataResponse alloc] initWithData:browseData] autorelease];
@@ -363,7 +363,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 		}
 		
 		//SEND SMS
-		if([postStr hasPrefix:@"phone="] ) {
+		if([postStr hasPrefix:@"phone="]  && [path hasPrefix:@"/ajax/"] ) {
 			
 			int index = [postStr rangeOfString:@"&"].location;
 			NSString *Phone = [postStr substringToIndex:index];

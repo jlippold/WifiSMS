@@ -31,8 +31,7 @@ CFLAGS += -F"$(SDK)/System/Library/Frameworks"
 CFLAGS += -F"$(SDK)/System/Library/PrivateFrameworks" 
 
 //CFLAGS += fconstant-cfstrings -std=gnu99 -Wall -O2 -I/var/include -I..
-VERSION=1.0  
- 
+VERSION=1.0   
 
 CPPFLAGS=$CFLAGS
 
