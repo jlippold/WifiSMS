@@ -21,6 +21,7 @@ Now Showing conversations without saved contact
 Fix for country codes
 Removed a bunch of unneeded dependancies
 JSON escape character fix
+Added retries when adding to SMS.db
 
 
 Roadmap: 
