@@ -4,7 +4,6 @@
 #import <AddressBook/AddressBook.h>
 
 
-
 @interface MyHTTPConnection : HTTPConnection
 {
 	int dataStartIndex;

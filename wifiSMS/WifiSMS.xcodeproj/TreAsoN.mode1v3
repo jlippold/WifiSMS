@@ -216,10 +216,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>5FA9749D13ED98E5002F9E3E</string>
+						<string>5F7F9A2E13ED9A44001895AE</string>
 						<key>history</key>
 						<array>
-							<string>5FA9746F13ED9837002F9E3E</string>
+							<string>5FA9749D13ED98E5002F9E3E</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -305,12 +305,15 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateExpansionKey</key>
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
+								<string>080E96DDFE201D6D7F000001</string>
 								<string>19C28FACFE9D520D11CA2CBB</string>
 								<string>1C37FBAC04509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
+									<integer>11</integer>
+									<integer>10</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -352,7 +355,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>wifiSMSDelegate.m</string>
+								<string>control</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -360,11 +363,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>wifiSMSDelegate.m</string>
+										<string>control</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>5FA9749A13ED98E5002F9E3E</string>
+										<string>5F7F9A2D13ED9A44001895AE</string>
 										<key>history</key>
 										<array>
 											<string>5F92ED1713C10E8B00B6D9C9</string>
@@ -383,15 +386,11 @@
 											<string>5FC27B4513CAC5B7006C9E0B</string>
 											<string>5FC27B4713CAC5B7006C9E0B</string>
 											<string>5FA2F1A813CBF61100433064</string>
-											<string>5FB5398113DB8B3E00653272</string>
 											<string>5FC257C213DD06B100FE8DF2</string>
 											<string>5FA6A67813E37F7000BD6D52</string>
 											<string>5FA6A67A13E37F7000BD6D52</string>
 											<string>5F84F03513E393C900DF8B56</string>
 											<string>5F84F07113E39D2E00DF8B56</string>
-											<string>5FB935DB13ED9395005CDE48</string>
-											<string>5FB935DC13ED9395005CDE48</string>
-											<string>5FB935DD13ED9395005CDE48</string>
 											<string>5FB935DF13ED9395005CDE48</string>
 											<string>5FB936CE13ED9460005CDE48</string>
 											<string>5FB936CF13ED9460005CDE48</string>
@@ -400,7 +399,13 @@
 											<string>5FB936D213ED9460005CDE48</string>
 											<string>5FB936D313ED9460005CDE48</string>
 											<string>5FA9749713ED98E5002F9E3E</string>
-											<string>5FA9749813ED98E5002F9E3E</string>
+											<string>5F7F9A0313ED99EC001895AE</string>
+											<string>5F7F9A0413ED99EC001895AE</string>
+											<string>5F7F9A0513ED99EC001895AE</string>
+											<string>5F7F9A0613ED99EC001895AE</string>
+											<string>5F7F9A1C13ED9A1C001895AE</string>
+											<string>5F7F9A1D13ED9A1C001895AE</string>
+											<string>5F7F9A1F13ED9A1C001895AE</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -438,7 +443,15 @@
 											<string>5FB936D813ED9460005CDE48</string>
 											<string>5FB936DD13ED9460005CDE48</string>
 											<string>5FB936E113ED9460005CDE48</string>
-											<string>5FA9749913ED98E5002F9E3E</string>
+											<string>5F7F9A0713ED99EC001895AE</string>
+											<string>5F7F9A0813ED99EC001895AE</string>
+											<string>5F7F9A0913ED99EC001895AE</string>
+											<string>5F7F9A0A13ED99EC001895AE</string>
+											<string>5F7F9A0B13ED99EC001895AE</string>
+											<string>5F7F9A0C13ED99EC001895AE</string>
+											<string>5F7F9A0D13ED99EC001895AE</string>
+											<string>5F7F9A2113ED9A1C001895AE</string>
+											<string>5F7F9A2213ED9A1C001895AE</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -496,9 +509,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>5FA9749B13ED98E5002F9E3E</string>
+				<string>5F7F9A0F13ED99EC001895AE</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>5FA9749C13ED98E5002F9E3E</string>
+				<string>5F7F9A1013ED99EC001895AE</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -632,9 +645,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>5F92E78713C1038100B6D9C9</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>5FA6A64E13E3768F00BD6D52</string>
-		<string>5F92E78713C1038100B6D9C9</string>
 		<string>/Users/TreAsoN/WifiSMS/wifiSMS/WifiSMS.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -654,14 +667,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>wifiSMSDelegate.m</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -717,7 +728,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>5F92E78713C1038100B6D9C9</string>
-				<string>5FA9749E13ED98E5002F9E3E</string>
+				<string>5F7F9A1213ED99EC001895AE</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -728,7 +739,7 @@
 			<key>WindowToolGUID</key>
 			<string>5F92E78713C1038100B6D9C9</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
@@ -837,13 +848,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>5FA9749F13ED98E5002F9E3E</string>
+				<string>5F7F9A1313ED99EC001895AE</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>5FA974A013ED98E5002F9E3E</string>
-				<string>5FA974A113ED98E5002F9E3E</string>
-				<string>5FA974A213ED98E5002F9E3E</string>
-				<string>5FA974A313ED98E5002F9E3E</string>
-				<string>5FA974A413ED98E5002F9E3E</string>
+				<string>5F7F9A1413ED99EC001895AE</string>
+				<string>5F7F9A1513ED99EC001895AE</string>
+				<string>5F7F9A1613ED99EC001895AE</string>
+				<string>5F7F9A1713ED99EC001895AE</string>
+				<string>5F7F9A1813ED99EC001895AE</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>

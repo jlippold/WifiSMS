@@ -120,7 +120,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				5FB537FC13DB698F00653272 /* WebServer.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -138,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				5F92EF2113C10F4700B6D9C9 /* SMS.plist */,
+				5FB537FC13DB698F00653272 /* WebServer.plist */,
 				5F92ED0113C10D9000B6D9C9 /* WifiSMS-info.plist */,
 				5F92E86213C1063500B6D9C9 /* libsqlite3.0.dylib */,
 				5F92E8CA13C10B3C00B6D9C9 /* Web */,
