@@ -7,188 +7,17 @@
 #import <sqlite3.h>
 #import "wifiSMSDelegate.h"
 
-#include <stdio.h>
-#include <notify.h>
-#include <unistd.h>
-#include <stdarg.h>
-#include <dlfcn.h>
-
-
 
 //3.0 MsgCenter
 @interface CTMessageCenter : NSObject                                                                                  
 {                                                                                                                      
 }               
 
-+ (id)sharedMessageCenter;
-
-- (id)init;
-- (struct { NSInteger x1; NSInteger x2; })sendSMS:(id)arg1;
-- (struct { NSInteger x1; NSInteger x2; })sendMMSFromData:(id)arg1 messageId:(NSUInteger)arg2;
-- (struct { NSInteger x1; NSInteger x2; })sendMMS:(id)arg1;
-- (struct { NSInteger x1; NSInteger x2; })send:(id)arg1;
-- (id)incomingMessageWithId:(NSUInteger)arg1 telephonyCenter:(struct __CTTelephonyCenter { }*)arg2 isDeferred:(BOOL)arg3;
-- (NSInteger)incomingMessageCount;
-- (id)allIncomingMessages;
-- (void)acknowledgeIncomingMessageWithId:(NSUInteger)arg1;
-- (void)acknowledgeOutgoingMessageWithId:(NSUInteger)arg1;
-- (id)incomingMessageWithId:(NSUInteger)arg1;
-- (id)deferredMessageWithId:(NSUInteger)arg1;
-- (id)statusOfOutgoingMessages;
-- (id)encodeMessage:(id)arg1;
-- (id)decodeMessage:(id)arg1;
-- (BOOL)isMmsEnabled;
-- (BOOL)isMmsConfigured;
 - (BOOL)sendSMSWithText:(id)arg1 serviceCenter:(id)arg2 toAddress:(id)arg3;
 
 @end 
 
-//extern void CTTelephonyCenterAddObserver(void*,id,CFNotificationCallback,NSString*,void*,int);
-
 static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { return ;}
-//static void callback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo)
-
-static void callback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
-	NSString *IncomingNotification = [NSString stringWithFormat:@"%@", name];
-	
-	//NSLog(@"Notification: %@", name);
-	
-	/* this works */
-	/*
-	if ([@"kCTMessageReceivedNotification" isEqualToString:IncomingNotification]) {
-		
-		NSLog(@"Message Got Notification");
-		
-		//NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-		CFShow(userInfo);
-		if (!userInfo) return;
-		
-		NSDictionary *info = (NSDictionary *)userInfo;
-		
-		CFNumberRef msgID = (CFNumberRef)[info objectForKey:@"kCTMessageIdKey"];
-		int result;
-		CFNumberGetValue((CFNumberRef)msgID, kCFNumberSInt32Type, &result);
-		
-		id incMsg; 
-		Class CTMessageCenter = NSClassFromString(@"CTMessageCenter");
-		id mc = [CTMessageCenter sharedMessageCenter];
-		incMsg = [mc incomingMessageWithId: result];
-		int mType = (int)[incMsg messageType];
-		NSString *sender;
-		NSString *smsText;
-		if (mType == 1)
-		{
-			id phonenumber = [incMsg sender];
-			sender = [phonenumber canonicalFormat];
-			id incMsgPart = [[incMsg items] objectAtIndex:0];
-			NSData *smsData = [incMsgPart data];
-			smsText = [[NSString alloc] initWithData:smsData encoding:NSUTF8StringEncoding];
-		}
-		NSLog(@"Sender: %@", sender);
-		NSLog(@"Text: %@", smsText);
-		//[pool drain];
-
-
-	}
-	 */
-	/* end test */
-	
-	if ([@"kCTMessageSentNotification" isEqualToString:IncomingNotification]) {
-
-		NSLog(@"Message Sent Notification");
-
-		NSString *path = [myAppPath stringByAppendingString:@"SMS.plist"];
-        NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
-		NSString *postStr = @"";
-		
-        postStr = [plistDict objectForKey:@"SMSQueue"];
-		
-		
-		if ([postStr isEqualToString:@""]) {
-			NSLog(@"Empty Notifcation");
-			return;
-		}
-		
-		NSLog(@"Adding to SMS.db");
-		
-		int index = [postStr rangeOfString:@"&"].location;
-		NSString *Phone = [postStr substringToIndex:index];
-		Phone = [Phone substringFromIndex:6];
-		
-		index = [postStr rangeOfString:@"msg="].location + 4;
-		NSString *msg = [postStr substringFromIndex: index];
-		index = [msg rangeOfString:@"&"].location;
-		msg = [msg substringToIndex: index];
-		
-		index = [postStr rangeOfString:@"pid="].location + 4;
-		NSString *pid = [postStr substringFromIndex: index];
-		index = [pid rangeOfString:@"&"].location;
-		pid = [pid substringToIndex: index];
-		
-		index = [postStr rangeOfString:@"grp="].location + 4;
-		NSString *grp = [postStr substringFromIndex: index];
-		index = [grp rangeOfString:@"&"].location;
-		grp = [grp substringToIndex: index];
-		
-		index = [postStr rangeOfString:@"Country="].location + 8;
-		NSString *Country = [postStr substringFromIndex: index];
-		index = [Country rangeOfString:@"&"].location;
-		Country = [Country substringToIndex: index];
-		
-		
-		//Send SMS
-		msg = [msg stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-		NSString *DT = @"";
-		
-		DT = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];			
-		
-		NSString *newPhone = @"+";
-		newPhone = [newPhone stringByAppendingString:Country];
-		newPhone = [newPhone stringByAppendingString:Phone];
-		
-		sqlite3 *database;
-		sqlite3_stmt *addStatement;
-		
-		if ([grp isEqualToString:@"0"] || [Phone isEqualToString:@""]) {
-			return;
-		}
-		
-		
-		if(sqlite3_open([@"/private/var/mobile/Library/SMS/sms.db" UTF8String], &database) == SQLITE_OK) {
-			
-			const char *fn_name = "read"; 
-			sqlite3_create_function(database, fn_name, 1, SQLITE_INTEGER, nil, readF, nil, nil); 
-			const char *sql = "INSERT INTO message (address,date,text,flags,replace,svc_center,group_id,association_id,height,UIFlags,version,subject,country,headers,recipients,read) VALUES (?,?,?,'3','0',NULL,?,'0','0','0','0',NULL,?,NULL,NULL,'1')";
-			if(sqlite3_prepare_v2(database, sql, -1, &addStatement, NULL) != SQLITE_OK)
-				NSLog(@"Error while creating add statement: %s", sqlite3_errmsg(database));
-			
-			sqlite3_bind_text(addStatement, 1, [pid UTF8String], -1, SQLITE_TRANSIENT);
-			sqlite3_bind_text(addStatement, 2, [DT UTF8String], -1, SQLITE_TRANSIENT);
-			sqlite3_bind_text(addStatement, 3, [msg UTF8String], -1, SQLITE_TRANSIENT);
-			sqlite3_bind_text(addStatement, 4, [grp UTF8String], -1, SQLITE_TRANSIENT);
-			sqlite3_bind_text(addStatement, 5, [Country UTF8String], -1, SQLITE_TRANSIENT);
-			
-			if(SQLITE_DONE != sqlite3_step(addStatement)) {
-				NSLog(@"Error while inserting data: %s", sqlite3_errmsg(database));
-				sqlite3_reset(addStatement);
-			} else {
-				sqlite3_finalize(addStatement); //is needed i dunno...
-			}
-			
-		}
-		sqlite3_close(database);
-		
-		[plistDict setValue:@"" forKey:@"SMSQueue"];
-		[plistDict writeToFile:path atomically: YES];
-		[plistDict release];
-		
-	}
-    return;
-}
-
-
-
-
 
 @implementation MyHTTPConnection
 
@@ -396,15 +225,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 			NSString *DT = @"";
 			
 			DT = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];			
-	
-			NSString *newPhone = @"+";
-			newPhone = [newPhone stringByAppendingString:Country];
-			newPhone = [newPhone stringByAppendingString:Phone];
-			
-			id ct = CTTelephonyCenterGetDefault();
-			CTTelephonyCenterAddObserver(ct, NULL, callback, NULL, NULL, CFNotificationSuspensionBehaviorHold);		
-			//CTTelephonyCenterAddObserver(ct, NULL, callback, NULL, NULL, 4);		NEW
-			
+				
 			
 			NSString *path = [myAppPath stringByAppendingString:@"SMS.plist"];
 			NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
@@ -423,7 +244,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 				} else {
 					response = [@"Not Sent!" dataUsingEncoding:NSUTF8StringEncoding];
 				}
-				NSLog(@"Sending SMS: %@ to: %@", msg, newPhone);
+				NSLog(@"Sending SMS: %@ to: %@", msg, pid);
 			} else {
 				response = [SMSQueue dataUsingEncoding:NSUTF8StringEncoding];
 			}
@@ -664,7 +485,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 		/*This was to mark as read, but although the DB tables are marked as read with this call, other SMS apps were acting screwy */
 		/*there's prolly a hook we have to call to let other SMS apps know it was read... I dunno how to hook it properly */
 		
-		/* 
+		/*
 		NSLog(@"Marking messages as read");
 		sqlite3_stmt *updateStatement;
 		const char *fn_name = "read"; 
@@ -685,6 +506,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 		}
 		
 		NSLog(@"Marking group as read");
+		
 		sqlite3_stmt *updategrpStatement;
 		
 		const char *sql4 = "UPDATE msg_group SET unread_count = 0 where ROWID = ?";
@@ -700,8 +522,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 		} else {
 			NSLog(@"Error while marking as read: %s", sqlite3_errmsg(database));
 		}
-		 
-		*/
+		 */
 		
 		
 	}
@@ -754,13 +575,14 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 			phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@"-" withString:@""];
 			phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@"+" withString:@""];
 			
+			if ([phoneNoFormat hasPrefix:@"0"]){
+				phoneNoFormat = [phoneNoFormat substringFromIndex:1];
+			}
 			if ([phoneNoFormat hasPrefix:CC]){
 				phoneNoFormat = [phoneNoFormat substringFromIndex:[CC length]];
 			}
 			
-			//if ([phoneNoFormat hasPrefix:@"0"]){
-			//	phoneNoFormat = [phoneNoFormat substringFromIndex:1];
-			//}
+
 			
 			
 			if ([phoneNoFormat length] > 1) {
@@ -813,13 +635,12 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 				phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@"-" withString:@""];
 				phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@"+" withString:@""];
 				
+				if ([phoneNoFormat hasPrefix:@"0"]){
+					phoneNoFormat = [phoneNoFormat substringFromIndex:1];
+				}
 				if ([phoneNoFormat hasPrefix:CC]){
 					phoneNoFormat = [phoneNoFormat substringFromIndex:[CC length]];
 				}
-				
-				//if ([phoneNoFormat hasPrefix:@"0"]){
-				//	phoneNoFormat = [phoneNoFormat substringFromIndex:1];
-				//}
 			
 				
 				[outdata appendString:[NSString stringWithFormat:@", { \"%@\" : \"%@||?||%@\" } ", phoneNoFormat, DT, grp]];
