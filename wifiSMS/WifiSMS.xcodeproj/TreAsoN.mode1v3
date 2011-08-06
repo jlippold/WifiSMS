@@ -216,10 +216,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>5FB936EB13ED9514005CDE48</string>
+						<string>5FA9749D13ED98E5002F9E3E</string>
 						<key>history</key>
 						<array>
-							<string>5F21FD4F13ED11D9001FEF66</string>
+							<string>5FA9746F13ED9837002F9E3E</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -352,7 +352,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>main.m</string>
+								<string>wifiSMSDelegate.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -360,11 +360,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>main.m</string>
+										<string>wifiSMSDelegate.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>5FB936EA13ED9514005CDE48</string>
+										<string>5FA9749A13ED98E5002F9E3E</string>
 										<key>history</key>
 										<array>
 											<string>5F92ED1713C10E8B00B6D9C9</string>
@@ -384,7 +384,6 @@
 											<string>5FC27B4713CAC5B7006C9E0B</string>
 											<string>5FA2F1A813CBF61100433064</string>
 											<string>5FB5398113DB8B3E00653272</string>
-											<string>5FC254F413DC790900FE8DF2</string>
 											<string>5FC257C213DD06B100FE8DF2</string>
 											<string>5FA6A67813E37F7000BD6D52</string>
 											<string>5FA6A67A13E37F7000BD6D52</string>
@@ -394,18 +393,17 @@
 											<string>5FB935DC13ED9395005CDE48</string>
 											<string>5FB935DD13ED9395005CDE48</string>
 											<string>5FB935DF13ED9395005CDE48</string>
-											<string>5FB936CD13ED9460005CDE48</string>
 											<string>5FB936CE13ED9460005CDE48</string>
 											<string>5FB936CF13ED9460005CDE48</string>
 											<string>5FB936D013ED9460005CDE48</string>
 											<string>5FB936D113ED9460005CDE48</string>
 											<string>5FB936D213ED9460005CDE48</string>
 											<string>5FB936D313ED9460005CDE48</string>
-											<string>5FB936D413ED9460005CDE48</string>
+											<string>5FA9749713ED98E5002F9E3E</string>
+											<string>5FA9749813ED98E5002F9E3E</string>
 										</array>
 										<key>prevStack</key>
 										<array>
-											<string>5F92E7FA13C1057C00B6D9C9</string>
 											<string>5F92E80113C1057C00B6D9C9</string>
 											<string>5F92E80213C1057C00B6D9C9</string>
 											<string>5F92ED1B13C10E8B00B6D9C9</string>
@@ -437,52 +435,10 @@
 											<string>5FA6A68913E37F7000BD6D52</string>
 											<string>5F84F03E13E393C900DF8B56</string>
 											<string>5F84F04013E393C900DF8B56</string>
-											<string>5FB935E113ED9395005CDE48</string>
-											<string>5FB935E213ED9395005CDE48</string>
-											<string>5FB935E313ED9395005CDE48</string>
-											<string>5FB935E413ED9395005CDE48</string>
-											<string>5FB935E513ED9395005CDE48</string>
-											<string>5FB935E613ED9395005CDE48</string>
-											<string>5FB935E713ED9395005CDE48</string>
-											<string>5FB935E813ED9395005CDE48</string>
-											<string>5FB935E913ED9395005CDE48</string>
-											<string>5FB935EA13ED9395005CDE48</string>
-											<string>5FB935EB13ED9395005CDE48</string>
-											<string>5FB935EC13ED9395005CDE48</string>
-											<string>5FB935ED13ED9395005CDE48</string>
-											<string>5FB935EE13ED9395005CDE48</string>
-											<string>5FB935EF13ED9395005CDE48</string>
-											<string>5FB935F013ED9395005CDE48</string>
-											<string>5FB935F113ED9395005CDE48</string>
-											<string>5FB935F213ED9395005CDE48</string>
-											<string>5FB935F313ED9395005CDE48</string>
-											<string>5FB935F413ED9395005CDE48</string>
-											<string>5FB935F513ED9395005CDE48</string>
-											<string>5FB935F613ED9395005CDE48</string>
-											<string>5FB935F713ED9395005CDE48</string>
-											<string>5FB935F813ED9395005CDE48</string>
-											<string>5FB935F913ED9395005CDE48</string>
-											<string>5FB935FA13ED9395005CDE48</string>
-											<string>5FB935FB13ED9395005CDE48</string>
-											<string>5FB935FC13ED9395005CDE48</string>
-											<string>5FB935FD13ED9395005CDE48</string>
-											<string>5FB935FE13ED9395005CDE48</string>
-											<string>5FB935FF13ED9395005CDE48</string>
-											<string>5FB9360013ED9395005CDE48</string>
-											<string>5FB936D513ED9460005CDE48</string>
-											<string>5FB936D613ED9460005CDE48</string>
-											<string>5FB936D713ED9460005CDE48</string>
 											<string>5FB936D813ED9460005CDE48</string>
-											<string>5FB936D913ED9460005CDE48</string>
-											<string>5FB936DA13ED9460005CDE48</string>
-											<string>5FB936DB13ED9460005CDE48</string>
-											<string>5FB936DC13ED9460005CDE48</string>
 											<string>5FB936DD13ED9460005CDE48</string>
-											<string>5FB936DE13ED9460005CDE48</string>
-											<string>5FB936DF13ED9460005CDE48</string>
-											<string>5FB936E013ED9460005CDE48</string>
 											<string>5FB936E113ED9460005CDE48</string>
-											<string>5FB936E213ED9460005CDE48</string>
+											<string>5FA9749913ED98E5002F9E3E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -540,9 +496,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>5FB9360213ED9395005CDE48</string>
+				<string>5FA9749B13ED98E5002F9E3E</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>5FB9360313ED9395005CDE48</string>
+				<string>5FA9749C13ED98E5002F9E3E</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -698,12 +654,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>MyHTTPConnection.m</string>
+								<string>wifiSMSDelegate.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -720,8 +678,6 @@
 							<string>332pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -761,7 +717,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>5F92E78713C1038100B6D9C9</string>
-				<string>5FB9360513ED9395005CDE48</string>
+				<string>5FA9749E13ED98E5002F9E3E</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -881,13 +837,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>5FB9360613ED9395005CDE48</string>
+				<string>5FA9749F13ED98E5002F9E3E</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>5FB9360713ED9395005CDE48</string>
-				<string>5FB9360813ED9395005CDE48</string>
-				<string>5FB9360913ED9395005CDE48</string>
-				<string>5FB9360A13ED9395005CDE48</string>
-				<string>5FB9360B13ED9395005CDE48</string>
+				<string>5FA974A013ED98E5002F9E3E</string>
+				<string>5FA974A113ED98E5002F9E3E</string>
+				<string>5FA974A213ED98E5002F9E3E</string>
+				<string>5FA974A313ED98E5002F9E3E</string>
+				<string>5FA974A413ED98E5002F9E3E</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>

@@ -2,7 +2,6 @@
 #import "wifiSMSDelegate.h"
 #import "HTTPServer.h"
 #import "MyHTTPConnection.h"
-#import "localhostAddresses.h"
 
 
 @implementation wifiSMSDelegate
