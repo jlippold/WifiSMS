@@ -1,0 +1,5 @@
+#!/bin/bash
+
+killall WifiSMS
+
+exit 0
