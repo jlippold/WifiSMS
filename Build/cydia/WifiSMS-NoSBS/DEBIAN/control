@@ -1,0 +1,14 @@
+Package: org.thebigboss.wifisms
+Name: WifiSMS
+Version: 1.0.4
+Architecture: iphoneos-arm 
+Description: Send and receive SMS from your computer over WIFI
+Homepage: http://nowhere.com/WifiSMS.html
+Depiction: http://nowhere.com/WifiSMS.html
+Maintainer: treAson <shitburg@yahoo.com> 
+Author: treAson <shitburg@yahoo.com> 
+Sponsor: treAson <shitburg@yahoo.com> 
+Section: Applications
+Depends: shell-cmds, sudo, coreutils-bin, coreutils
+
+

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+declare -a cydia
+cydia=($CYDIA)
+
+
+chmod -R 755 /private/var/mobile/Library/WifiSMS
+chmod -R 755 /private/var/mobile/Library/SBSettings/Commands/com.WifiSMS.enable
+chmod -R 755 /private/var/mobile/Library/SBSettings/Toggles/WifiSMS/Toggle.dylib
+
+chown -R mobile:mobile /private/var/mobile/Library/WifiSMS
+chown mobile:mobile /private/var/mobile/Library/SBSettings/Commands/com.WifiSMS.enable
+chown mobile:mobile /private/var/mobile/Library/SBSettings/Toggles/WifiSMS/Toggle.dylib
+
+killall sbsettingsd
+
+if [[ ${CYDIA+@} ]]; then
+  eval "echo 'finish:restart' >&${cydia[0]}"
+fi
+exit 0
