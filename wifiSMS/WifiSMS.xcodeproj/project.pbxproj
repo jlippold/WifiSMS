@@ -12,7 +12,6 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		5F92E7A513C103CB00B6D9C9 /* MyHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7A113C103CB00B6D9C9 /* MyHTTPConnection.m */; };
-		5F92E7A613C103CB00B6D9C9 /* localhostAddresses.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7A313C103CB00B6D9C9 /* localhostAddresses.m */; };
 		5F92E7B913C103F900B6D9C9 /* HTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7A813C103F900B6D9C9 /* HTTPConnection.m */; };
 		5F92E7BA13C103F900B6D9C9 /* HTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7A913C103F900B6D9C9 /* HTTPAuthenticationRequest.m */; };
 		5F92E7BB13C103F900B6D9C9 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7AA13C103F900B6D9C9 /* AsyncSocket.m */; };
@@ -30,12 +29,8 @@
 		5F92EF2213C10F4700B6D9C9 /* SMS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F92EF2113C10F4700B6D9C9 /* SMS.plist */; };
 		5FACA0D713C52B21002CDC76 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FACA0D613C52B21002CDC76 /* AddressBook.framework */; };
 		5FB537FD13DB698F00653272 /* WebServer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FB537FC13DB698F00653272 /* WebServer.plist */; };
-		D20800AE0FEEA2CB00C2714C /* CAPowerManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = D20800AD0FEEA2CB00C2714C /* CAPowerManagement.m */; };
-		D2940F880FEE032400920DF0 /* CALocationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2940F870FEE032400920DF0 /* CALocationDelegate.m */; };
+		D2940F880FEE032400920DF0 /* wifiSMSDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2940F870FEE032400920DF0 /* wifiSMSDelegate.m */; };
 		D2940F990FEE034100920DF0 /* AppSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2940F980FEE034100920DF0 /* AppSupport.framework */; };
-		D2940F9B0FEE034800920DF0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2940F9A0FEE034800920DF0 /* CoreLocation.framework */; };
-		D294104B0FEE034E00920DF0 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29410490FEE034E00920DF0 /* IOKit.framework */; };
-		D294104C0FEE034E00920DF0 /* Celestial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D294104A0FEE034E00920DF0 /* Celestial.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,8 +41,6 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* WifiSMS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiSMS_Prefix.pch; sourceTree = "<group>"; };
 		5F92E7A113C103CB00B6D9C9 /* MyHTTPConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHTTPConnection.m; sourceTree = "<group>"; };
-		5F92E7A213C103CB00B6D9C9 /* localhostAddresses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = localhostAddresses.h; sourceTree = "<group>"; };
-		5F92E7A313C103CB00B6D9C9 /* localhostAddresses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = localhostAddresses.m; sourceTree = "<group>"; };
 		5F92E7A713C103F900B6D9C9 /* HTTPAuthenticationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPAuthenticationRequest.h; sourceTree = "<group>"; };
 		5F92E7A813C103F900B6D9C9 /* HTTPConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPConnection.m; sourceTree = "<group>"; };
 		5F92E7A913C103F900B6D9C9 /* HTTPAuthenticationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPAuthenticationRequest.m; sourceTree = "<group>"; };
@@ -75,14 +68,9 @@
 		5F92F00C13C1235500B6D9C9 /* MyHTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHTTPConnection.h; sourceTree = "<group>"; };
 		5FACA0D613C52B21002CDC76 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		5FB537FC13DB698F00653272 /* WebServer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WebServer.plist; sourceTree = "<group>"; };
-		D20800AC0FEEA2CB00C2714C /* CAPowerManagement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAPowerManagement.h; sourceTree = "<group>"; };
-		D20800AD0FEEA2CB00C2714C /* CAPowerManagement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAPowerManagement.m; sourceTree = "<group>"; };
-		D2940F860FEE032400920DF0 /* CALocationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CALocationDelegate.h; sourceTree = "<group>"; };
-		D2940F870FEE032400920DF0 /* CALocationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CALocationDelegate.m; sourceTree = "<group>"; };
+		D2940F860FEE032400920DF0 /* wifiSMSDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wifiSMSDelegate.h; sourceTree = "<group>"; };
+		D2940F870FEE032400920DF0 /* wifiSMSDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wifiSMSDelegate.m; sourceTree = "<group>"; };
 		D2940F980FEE034100920DF0 /* AppSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppSupport.framework; path = System/Library/PrivateFrameworks/AppSupport.framework; sourceTree = SDKROOT; };
-		D2940F9A0FEE034800920DF0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		D29410490FEE034E00920DF0 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
-		D294104A0FEE034E00920DF0 /* Celestial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Celestial.framework; path = System/Library/PrivateFrameworks/Celestial.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,9 +82,6 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				D2940F990FEE034100920DF0 /* AppSupport.framework in Frameworks */,
-				D2940F9B0FEE034800920DF0 /* CoreLocation.framework in Frameworks */,
-				D294104B0FEE034E00920DF0 /* IOKit.framework in Frameworks */,
-				D294104C0FEE034E00920DF0 /* Celestial.framework in Frameworks */,
 				5F92E86313C1063500B6D9C9 /* libsqlite3.0.dylib in Frameworks */,
 				5F92E89113C1072F00B6D9C9 /* CoreTelephony.framework in Frameworks */,
 				5F92E8AC13C1078C00B6D9C9 /* CFNetwork.framework in Frameworks */,
@@ -112,12 +97,8 @@
 			children = (
 				5F92F00C13C1235500B6D9C9 /* MyHTTPConnection.h */,
 				5F92E7A113C103CB00B6D9C9 /* MyHTTPConnection.m */,
-				5F92E7A213C103CB00B6D9C9 /* localhostAddresses.h */,
-				5F92E7A313C103CB00B6D9C9 /* localhostAddresses.m */,
-				D20800AC0FEEA2CB00C2714C /* CAPowerManagement.h */,
-				D20800AD0FEEA2CB00C2714C /* CAPowerManagement.m */,
-				D2940F860FEE032400920DF0 /* CALocationDelegate.h */,
-				D2940F870FEE032400920DF0 /* CALocationDelegate.m */,
+				D2940F860FEE032400920DF0 /* wifiSMSDelegate.h */,
+				D2940F870FEE032400920DF0 /* wifiSMSDelegate.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -133,26 +114,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				5F92EF2113C10F4700B6D9C9 /* SMS.plist */,
-				5F92ED0113C10D9000B6D9C9 /* WifiSMS-info.plist */,
-				5F92E7A713C103F900B6D9C9 /* HTTPAuthenticationRequest.h */,
-				5F92E7A813C103F900B6D9C9 /* HTTPConnection.m */,
-				5F92E7A913C103F900B6D9C9 /* HTTPAuthenticationRequest.m */,
-				5F92E7AA13C103F900B6D9C9 /* AsyncSocket.m */,
-				5F92E7AB13C103F900B6D9C9 /* DDRange.h */,
-				5F92E7AC13C103F900B6D9C9 /* HTTPAsyncFileResponse.m */,
-				5F92E7AD13C103F900B6D9C9 /* HTTPResponse.h */,
-				5F92E7AE13C103F900B6D9C9 /* HTTPServer.m */,
-				5F92E7AF13C103F900B6D9C9 /* AsyncSocket.h */,
-				5F92E7B013C103F900B6D9C9 /* HTTPConnection.h */,
-				5F92E7B113C103F900B6D9C9 /* HTTPAsyncFileResponse.h */,
-				5F92E7B213C103F900B6D9C9 /* HTTPServer.h */,
-				5F92E7B313C103F900B6D9C9 /* DDNumber.m */,
-				5F92E7B413C103F900B6D9C9 /* DDRange.m */,
-				5F92E7B513C103F900B6D9C9 /* HTTPResponse.m */,
-				5F92E7B613C103F900B6D9C9 /* DDData.h */,
-				5F92E7B713C103F900B6D9C9 /* DDNumber.h */,
-				5F92E7B813C103F900B6D9C9 /* DDData.m */,
+				5FB936C913ED9439005CDE48 /* cocoaHTTPServer */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -175,6 +137,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5F92EF2113C10F4700B6D9C9 /* SMS.plist */,
+				5F92ED0113C10D9000B6D9C9 /* WifiSMS-info.plist */,
 				5F92E86213C1063500B6D9C9 /* libsqlite3.0.dylib */,
 				5F92E8CA13C10B3C00B6D9C9 /* Web */,
 			);
@@ -187,15 +151,37 @@
 				5FACA0D613C52B21002CDC76 /* AddressBook.framework */,
 				5F92E8AB13C1078C00B6D9C9 /* CFNetwork.framework */,
 				5F92E89013C1072F00B6D9C9 /* CoreTelephony.framework */,
-				D29410490FEE034E00920DF0 /* IOKit.framework */,
-				D294104A0FEE034E00920DF0 /* Celestial.framework */,
-				D2940F9A0FEE034800920DF0 /* CoreLocation.framework */,
 				D2940F980FEE034100920DF0 /* AppSupport.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5FB936C913ED9439005CDE48 /* cocoaHTTPServer */ = {
+			isa = PBXGroup;
+			children = (
+				5F92E7A713C103F900B6D9C9 /* HTTPAuthenticationRequest.h */,
+				5F92E7A813C103F900B6D9C9 /* HTTPConnection.m */,
+				5F92E7A913C103F900B6D9C9 /* HTTPAuthenticationRequest.m */,
+				5F92E7AA13C103F900B6D9C9 /* AsyncSocket.m */,
+				5F92E7AB13C103F900B6D9C9 /* DDRange.h */,
+				5F92E7AC13C103F900B6D9C9 /* HTTPAsyncFileResponse.m */,
+				5F92E7AD13C103F900B6D9C9 /* HTTPResponse.h */,
+				5F92E7AE13C103F900B6D9C9 /* HTTPServer.m */,
+				5F92E7AF13C103F900B6D9C9 /* AsyncSocket.h */,
+				5F92E7B013C103F900B6D9C9 /* HTTPConnection.h */,
+				5F92E7B113C103F900B6D9C9 /* HTTPAsyncFileResponse.h */,
+				5F92E7B213C103F900B6D9C9 /* HTTPServer.h */,
+				5F92E7B313C103F900B6D9C9 /* DDNumber.m */,
+				5F92E7B413C103F900B6D9C9 /* DDRange.m */,
+				5F92E7B513C103F900B6D9C9 /* HTTPResponse.m */,
+				5F92E7B613C103F900B6D9C9 /* DDData.h */,
+				5F92E7B713C103F900B6D9C9 /* DDNumber.h */,
+				5F92E7B813C103F900B6D9C9 /* DDData.m */,
+			);
+			name = cocoaHTTPServer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,10 +241,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				D2940F880FEE032400920DF0 /* CALocationDelegate.m in Sources */,
-				D20800AE0FEEA2CB00C2714C /* CAPowerManagement.m in Sources */,
+				D2940F880FEE032400920DF0 /* wifiSMSDelegate.m in Sources */,
 				5F92E7A513C103CB00B6D9C9 /* MyHTTPConnection.m in Sources */,
-				5F92E7A613C103CB00B6D9C9 /* localhostAddresses.m in Sources */,
 				5F92E7B913C103F900B6D9C9 /* HTTPConnection.m in Sources */,
 				5F92E7BA13C103F900B6D9C9 /* HTTPAuthenticationRequest.m in Sources */,
 				5F92E7BB13C103F900B6D9C9 /* AsyncSocket.m in Sources */,

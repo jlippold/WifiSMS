@@ -1,20 +1,12 @@
-//
-//  main.m
-//  CALocationDemon
-//
-//  Created by Chris Alvares on 6/21/09.
-//  Copyright Chris Alvares 2009. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
-#import "CALocationDelegate.h"
+#import "wifiSMSDelegate.h"
 
 
 int main(int argc, char *argv[]) {
     
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	
-	CALocationDelegate *obj = [[CALocationDelegate alloc] init];
+	wifiSMSDelegate *obj = [[wifiSMSDelegate alloc] init];
 	[obj start];
 	
 	NSDate *now = [[NSDate alloc] init];

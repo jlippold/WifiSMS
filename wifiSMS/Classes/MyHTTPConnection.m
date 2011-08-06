@@ -5,7 +5,7 @@
 #import "HTTPResponse.h"
 #import "AsyncSocket.h"
 #import <sqlite3.h>
-#import "CALocationDelegate.h"
+#import "wifiSMSDelegate.h"
 
 #include <stdio.h>
 #include <notify.h>
@@ -162,7 +162,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 			if(sqlite3_prepare_v2(database, sql, -1, &addStatement, NULL) != SQLITE_OK)
 				NSLog(@"Error while creating add statement: %s", sqlite3_errmsg(database));
 			
-			sqlite3_bind_text(addStatement, 1, [newPhone UTF8String], -1, SQLITE_TRANSIENT);
+			sqlite3_bind_text(addStatement, 1, [pid UTF8String], -1, SQLITE_TRANSIENT);
 			sqlite3_bind_text(addStatement, 2, [DT UTF8String], -1, SQLITE_TRANSIENT);
 			sqlite3_bind_text(addStatement, 3, [msg UTF8String], -1, SQLITE_TRANSIENT);
 			sqlite3_bind_text(addStatement, 4, [grp UTF8String], -1, SQLITE_TRANSIENT);
@@ -415,7 +415,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 			NSData *response = nil;
 
 			if ( [ SMSQueue isEqualToString:@""]) {
-				BOOL success = [[CTMessageCenter sharedMessageCenter]  sendSMSWithText:msg serviceCenter:nil toAddress:newPhone];	
+				BOOL success = [[CTMessageCenter sharedMessageCenter]  sendSMSWithText:msg serviceCenter:nil toAddress:pid];	
 				if (success) {
 					[plistDict setValue:toBeQueue forKey:@"SMSQueue"];
 					[plistDict writeToFile:path atomically: YES];
@@ -892,6 +892,11 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
  string = [string stringByReplacingOccurrencesOfString:@"\\" withString:@"&#92;"];
  string = [string stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
  string = [string stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+ string = [string stringByReplacingOccurrencesOfString:@"\b" withString:@""];
+ string = [string stringByReplacingOccurrencesOfString:@"\f" withString:@""];
+ string = [string stringByReplacingOccurrencesOfString:@"\t" withString:@" "];
+ string = [string stringByReplacingOccurrencesOfString:@"\v" withString:@" "];
+ string = [string stringByReplacingOccurrencesOfString:@"\v" withString:@""];
  return string;
 }				   
 

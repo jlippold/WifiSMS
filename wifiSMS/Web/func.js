@@ -152,7 +152,6 @@ $(window).resize(function() {
 });
 
 
-
 function loadAllContacts() {
 	$.ajaxSetup({
 	    'beforeSend' : function(xhr) {
@@ -170,34 +169,55 @@ function loadAllContacts() {
 		   return;
 	   }, 
 	  success: function(json){ 
+	  	
 	  	online();
 			var AB = json["AddressBook"];
 			var totAB = json["AddressBook"].length;
 			var SMS = json["WithSMS"];
 			var totSMS = json["WithSMS"].length;
 			
-	  	for (i=1;i<=totAB;i++) {
+	  	for (var i=1;i<=totAB;i++) {
 	  			y = AB[i];
 			    for(x in y){
-			        Phone = x;
-			        Contact = y[x];
+			        var Phone = x;
+			        var Contact = y[x];
 
-			        for (ii=1;ii<=totSMS;ii++) {
-			        	b = SMS[ii];
-			        	for(a in b){
+			        for (var ii=1;ii<=totSMS;ii++) {
+			        	var b = SMS[ii];
+			        	for(var a in b){
 			        		if (Phone == a) {
+			        			SMS[ii] = "";
 			        			createContact(Phone, Contact, b[a]);
 			        		}
 			        	}
 			        }
 			    }
 	  	}
-	  	
+
+			var i=1;
+	  	//numbers not in Address book
+      for (var ii=1;ii<=totSMS;ii++) {
+      	//console.log(SMS[ii]);
+      	var b = SMS[ii];
+      	for(var a in b){
+	  			if (SMS[ii] != "") {
+	  				createContact(a, a, b[a]);	
+	  				i = i + 1;
+	  			}
+      	}
+      }
+      
 	  	sortContacts();
 			$('#ContactList li').bind('click', function() {
 				$("#Contact img:first").attr("src", $(this).attr("data-phone")+".jpg")
-			  $("#Sender").html( "<div>" + $(this).find("div.desc").html() + "</div><div>" + $(this).attr("data-phone") + "</div>" );
-
+				
+				var cName = $(this).find("div.desc").html();
+				var cPhone = $(this).attr("data-phone");
+				if (cName == cPhone) {
+					$("#Sender").html( "<div>Unknown Contact</div><div>" + cPhone + "</div>" );
+				} else {
+					$("#Sender").html( "<div>" + cName+ "</div><div>" + cPhone + "</div>" );	
+				}
 				
 			  if ( $("#Phone").val() != $(this).attr("data-phone") ) {
 			  	$(".topContactContainer").hide();
