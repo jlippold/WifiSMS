@@ -570,10 +570,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 			mobile=(NSString*)ABMultiValueCopyValueAtIndex(name1,i);
             
             
-            phoneNoFormat = mobile;
-            
-            
-            phoneNoFormat = [[phoneNoFormat componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+            phoneNoFormat = [[mobile componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
 
 			
 			if ([phoneNoFormat hasPrefix:@"0"]){
