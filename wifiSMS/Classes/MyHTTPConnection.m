@@ -568,12 +568,10 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 		{
 			
 			mobile=(NSString*)ABMultiValueCopyValueAtIndex(name1,i);
-			
-			phoneNoFormat = [mobile stringByReplacingOccurrencesOfString:@" " withString:@""];
-			phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@")" withString:@""];
-			phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@"(" withString:@""];
-			phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@"-" withString:@""];
-			phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@"+" withString:@""];
+            
+            
+            phoneNoFormat = [[phoneNoFormat componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+
 			
 			if ([phoneNoFormat hasPrefix:@"0"]){
 				phoneNoFormat = [phoneNoFormat substringFromIndex:1];
@@ -581,8 +579,6 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 			if ([phoneNoFormat hasPrefix:CC]){
 				phoneNoFormat = [phoneNoFormat substringFromIndex:[CC length]];
 			}
-			
-
 			
 			
 			if ([phoneNoFormat length] > 1) {
