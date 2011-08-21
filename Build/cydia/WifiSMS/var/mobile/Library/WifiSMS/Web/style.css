@@ -389,20 +389,20 @@ li div.badge {
 		
 		#submit
 		{		
-            background: #6cbb6b;
-            background-image: -moz-linear-gradient(#95d788, #6cbb6b);
-            background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #6cbb6b),color-stop(1, #95d788));
-            
-            -moz-border-radius: 3px 50px 50px 3px;
-            border-radius: 3px 50px 50px 3px;
-            
-            border-width: 1px;
-            border-style: solid;
-            border-color: #7eba7c #578e57 #447d43;
-            
-             -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
-             -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
-             box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;   		
+          background: #6cbb6b;
+          background-image: -moz-linear-gradient(#95d788, #6cbb6b);
+          background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #6cbb6b),color-stop(1, #95d788));
+          
+          -moz-border-radius: 3px 50px 50px 3px;
+          border-radius: 3px 50px 50px 3px;
+          
+          border-width: 1px;
+          border-style: solid;
+          border-color: #7eba7c #578e57 #447d43;
+          
+           -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+           -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+           box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;   		
 
 			height: 35px;
 			margin: 0 0 0 10px;
@@ -505,8 +505,10 @@ li div.badge {
 	div.btnemoji.optButton img {
 		margin-top: 2px;
 	}
-
-
+	
+	div.btnNew.optButton img {
+		 margin-top: 4px;
+	}
 
 
 
@@ -719,4 +721,15 @@ a.attachment img {
 #fancybox-content hr {
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+#NewMessage {
+	width: 490px;
+	height: 150px;
+}
+
+#NewContact {
+	float: none !important;
+	margin-right: 0 !important;
+	width: 490px !important;
 }

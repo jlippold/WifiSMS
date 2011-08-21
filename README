@@ -16,6 +16,14 @@ Umm I'm sure there's some other stuff I am forgetting to mention but yea install
 
 
 Change Log:
+
+1.0.5
+Added Start new conversation button
+Fixed more JSON issues
+Better Number formatting
+Sorting by row id instead of date
+Better SMS sending thanks to @johoja1
+
 1.0.4
 Now Showing conversations without saved contact
 Fix for country codes

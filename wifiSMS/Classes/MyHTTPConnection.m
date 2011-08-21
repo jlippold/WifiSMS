@@ -8,16 +8,13 @@
 #import "wifiSMSDelegate.h"
 
 
-//3.0 MsgCenter
-@interface CTMessageCenter : NSObject                                                                                  
-{                                                                                                                      
-}               
 
-- (BOOL)sendSMSWithText:(id)arg1 serviceCenter:(id)arg2 toAddress:(id)arg3;
 
-@end 
+extern id CTTelephonyCenterGetDefault();
+
 
 static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { return ;}
+
 
 @implementation MyHTTPConnection
 
@@ -184,6 +181,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 		}
 		
 		
+		
 		if([postStr isEqualToString:@"action=clearSMS&key=a4a1dda1-166d-47b0-8f31-a8581466da46"] && [path hasPrefix:@"/ajax/"] ) {
 			
 			NSData *browseData = [[self clearQueue] dataUsingEncoding:NSUTF8StringEncoding];
@@ -219,8 +217,30 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 			index = [Country rangeOfString:@"&"].location;
 			Country = [Country substringToIndex: index];
 						
-			//Send SMS
 			msg = [msg stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+			
+			
+			id ct = CTTelephonyCenterGetDefault();
+			void* address = CKSMSAddressCreateWithString(pid); 
+
+			NSLog(@"SMS Sent ogroup: %@", grp ); 
+			int group = [grp intValue];			
+			
+			if (group <= 0) {
+					group = CKSMSRecordCreateGroupWithMembers([NSArray arrayWithObject:address]);		
+			}
+			
+			void *msg_to_send = _CKSMSRecordCreateWithGroupAndAssociation(NULL, address, msg, group, 0);	
+			CKSMSRecordSend(ct, msg_to_send);
+			
+			NSLog(@"Sending SMS %@ to %@ in group %d", msg, pid, group);
+		 
+			NSData *response = nil;
+			response = [@"SMS Sent!" dataUsingEncoding:NSUTF8StringEncoding];
+			
+			//Send SMS old
+			/*
+			
 
 			NSString *DT = @"";
 			
@@ -250,6 +270,8 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 			}
 				
 			[plistDict release];
+			*/
+			
 			return [[[HTTPDataResponse alloc] initWithData:response] autorelease];
 			
 		}
@@ -410,7 +432,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 	sqlite3 *database;
 	if(sqlite3_open([@"/private/var/mobile/Library/SMS/sms.db" UTF8String], &database) == SQLITE_OK) {
 		sqlite3_stmt *addStatement;
-		const char *sqlStatement2 = "SELECT * FROM ( select message.text, message.flags, message.date as DT, message.address, message.group_ID, msg_pieces.content_type, msg_pieces.content_loc, msg_pieces.data, msg_pieces.message_id from message left join msg_pieces ON message.rowid=msg_pieces.message_id WHERE ((text is null AND content_type is not null AND content_loc is not null) OR (text is not null)) AND group_id = ? ORDER BY date desc limit 100) Order by DT ASC";
+		const char *sqlStatement2 = "SELECT * FROM ( select message.text, message.flags, message.date as DT, message.address, message.group_ID, msg_pieces.content_type, msg_pieces.content_loc, msg_pieces.data, msg_pieces.message_id from message left join msg_pieces ON message.rowid=msg_pieces.message_id WHERE ((text is null AND content_type is not null AND content_loc is not null) OR (text is not null)) AND group_id = ? ORDER BY message.rowid desc limit 100) Order by DT ASC";
 		if(sqlite3_prepare_v2(database, sqlStatement2, -1, &addStatement, NULL) == SQLITE_OK) {
 			sqlite3_bind_text(addStatement, 1, [phone UTF8String], -1, SQLITE_TRANSIENT);
 			[outdata appendString:@"||-||"];
@@ -568,12 +590,8 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 		{
 			
 			mobile=(NSString*)ABMultiValueCopyValueAtIndex(name1,i);
-			
-			phoneNoFormat = [mobile stringByReplacingOccurrencesOfString:@" " withString:@""];
-			phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@")" withString:@""];
-			phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@"(" withString:@""];
-			phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@"-" withString:@""];
-			phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@"+" withString:@""];
+
+			phoneNoFormat = [[mobile componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
 			
 			if ([phoneNoFormat hasPrefix:@"0"]){
 				phoneNoFormat = [phoneNoFormat substringFromIndex:1];
@@ -629,11 +647,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 				NSString *DT = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(compiledStatement, 1)];	
 				NSString *grp = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(compiledStatement, 2)];	
 				
-				phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@" " withString:@""];
-				phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@")" withString:@""];
-				phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@"(" withString:@""];
-				phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@"-" withString:@""];
-				phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@"+" withString:@""];
+				phoneNoFormat = [[phoneNoFormat componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
 				
 				if ([phoneNoFormat hasPrefix:@"0"]){
 					phoneNoFormat = [phoneNoFormat substringFromIndex:1];
@@ -675,11 +689,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 				NSString *message = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(compiledStatement, 3)];
 				NSString *from = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(compiledStatement, 4)];
 				
-				phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@" " withString:@""];
-				phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@")" withString:@""];
-				phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@"(" withString:@""];
-				phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@"-" withString:@""];
-				phoneNoFormat = [phoneNoFormat stringByReplacingOccurrencesOfString:@"+" withString:@""];
+				phoneNoFormat = [[phoneNoFormat componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
 				
 				if ([phoneNoFormat hasPrefix:CC]){
 					phoneNoFormat = [phoneNoFormat substringFromIndex:[CC length]];
@@ -720,6 +730,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
  string = [string stringByReplacingOccurrencesOfString:@"\v" withString:@""];
  return string;
 }				   
+
 
 - (NSString *) checkQueue {
 	NSMutableString *outdata = [[NSMutableString alloc] initWithString:@""];

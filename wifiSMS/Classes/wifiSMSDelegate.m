@@ -8,7 +8,6 @@
 {                                                                                                                      
 }               
 
-- (BOOL)sendSMSWithText:(id)arg1 serviceCenter:(id)arg2 toAddress:(id)arg3;
 
 @end 
 
@@ -21,8 +20,8 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 	//NSLog(@"Notification: %@", name);
 	
 	/* this works */
-	/*
-	 if ([@"kCTMessageReceivedNotification" isEqualToString:IncomingNotification]) {
+/*
+	 if ([@"kCTMessageReceivedNotification" isEqualToString:IncomingNotification] || [@"kCTMessageSentNotification" isEqualToString:IncomingNotification]) {
 	 
 	 NSLog(@"Message Got Notification");
 	 
@@ -54,12 +53,13 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 	 NSLog(@"Sender: %@", sender);
 	 NSLog(@"Text: %@", smsText);
 	 //[pool drain];
-	 
-	 
+
 	 }
-	 */
+*/
 	/* end test */
 	
+	
+	/* This will be web socket shit */
 	if ([@"kCTMessageSentNotification" isEqualToString:IncomingNotification]) {
 		
 		NSLog(@"Message Sent Notification");
@@ -75,6 +75,8 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 			NSLog(@"Empty Notifcation");
 			return;
 		}
+		
+		return;
 				
 		int index = [postStr rangeOfString:@"&"].location;
 		NSString *Phone = [postStr substringToIndex:index];
@@ -105,13 +107,88 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 		msg = [msg stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 		NSString *DT = @"";
 		
-		DT = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];			
+		//DT = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];			
+		DT = [NSString stringWithFormat:@"%d", (long)[[NSDate date] timeIntervalSince1970]];			
 		
-
+		//if ([grp isEqualToString:@"0"] || [pid isEqualToString:@""]) {
+		//	return;
+		//}
 		
-		if ([grp isEqualToString:@"0"] || [pid isEqualToString:@""]) {
+		if ([pid isEqualToString:@""])  {
 			return;
 		}
+			
+		if ([grp isEqualToString:@"0"])  {
+			
+			BOOL createdGroup = NO;
+			
+			//insert into msg_group
+			sqlite3 *database;
+			if(sqlite3_open([@"/private/var/mobile/Library/SMS/sms.db" UTF8String], &database) == SQLITE_OK) {
+				sqlite3_stmt *newgrp;
+				const char *sqlnewgrp = "INSERT INTO msg_group (type,newest_message,unread_count,hash) VALUES (0,0,0,?)";
+				
+				if(sqlite3_prepare_v2(database, sqlnewgrp, -1, &newgrp, NULL) != SQLITE_OK) {
+					NSLog(@"Error while inserting into msg_group: %s", sqlite3_errmsg(database));
+				} else {
+					sqlite3_bind_text(newgrp, 1, [DT UTF8String], -1, SQLITE_TRANSIENT);
+					
+					if(SQLITE_DONE != sqlite3_step(newgrp)) {
+						NSLog(@"Error while inserting data: %s", sqlite3_errmsg(database));
+					} else {
+						sqlite3_reset(newgrp);
+						createdGroup = YES;
+					}
+				}
+			}
+			sqlite3_close(database);
+			
+			if (createdGroup) {
+				//get newly created group id
+				createdGroup = NO;
+				if(sqlite3_open([@"/private/var/mobile/Library/SMS/sms.db" UTF8String], &database) == SQLITE_OK) {
+					const char *sqlgetgroup = "SELECT rowid FROM msg_group WHERE newest_message = 0 AND hash = ?";
+					sqlite3_stmt *getgroup;
+					if(sqlite3_prepare_v2(database, sqlgetgroup, -1, &getgroup, NULL) == SQLITE_OK) {
+						sqlite3_bind_text(getgroup, 1, [DT UTF8String], -1, SQLITE_TRANSIENT);
+						while(sqlite3_step(getgroup) == SQLITE_ROW) {
+							grp = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(getgroup, 0)];
+							createdGroup = YES;
+						}
+					}
+					sqlite3_finalize(getgroup);
+				}
+				sqlite3_close(database);
+			}
+			
+			if (createdGroup) {
+				//insert into group_members
+				if(sqlite3_open([@"/private/var/mobile/Library/SMS/sms.db" UTF8String], &database) == SQLITE_OK) {
+					sqlite3_stmt *groupmem;
+					const char *sqlgroupmem = "INSERT INTO group_member (group_id,address,country) VALUES (?,?,'us')";
+					
+					if(sqlite3_prepare_v2(database, sqlgroupmem, -1, &groupmem, NULL) != SQLITE_OK) {
+						NSLog(@"Error while inserting into msg_group: %s", sqlite3_errmsg(database));
+					} else {
+						sqlite3_bind_text(groupmem, 1, [grp UTF8String], -1, SQLITE_TRANSIENT);
+						sqlite3_bind_text(groupmem, 2, [pid UTF8String], -1, SQLITE_TRANSIENT);
+						
+						if(SQLITE_DONE != sqlite3_step(groupmem)) {
+							NSLog(@"Error while inserting data: %s", sqlite3_errmsg(database));
+						} else {
+							sqlite3_reset(groupmem);
+							createdGroup = YES;
+						}
+					}
+				}
+				sqlite3_close(database);
+				
+			}
+			
+			
+			
+			
+		}	
 		
 		BOOL wasAddedToDB = NO;
 		int Attempt = 0;
@@ -126,7 +203,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 				sqlite3_stmt *addStatement;
 				
 				sqlite3_create_function(database, fn_name, 1, SQLITE_INTEGER, nil, readF, nil, nil); 
-				const char *sql = "INSERT INTO message (address,date,text,flags,replace,svc_center,group_id,association_id,height,UIFlags,version,subject,country,headers,recipients,read) VALUES (?,?,?,'3','0',NULL,?,'0','0','0','0',NULL,?,NULL,NULL,'1')";
+				const char *sql = "INSERT INTO message (address,date,text,flags,replace,svc_center,group_id,association_id,height,UIFlags,version,subject,country,headers,recipients,read,smsc_ref, dr_date) VALUES (?,?,?,'3','0',NULL,?,'0','0','0','0',NULL,?,NULL,NULL,'1','0','0')";
 				
 				if(sqlite3_prepare_v2(database, sql, -1, &addStatement, NULL) != SQLITE_OK) {
 					NSLog(@"Error while creating add statement: %s", sqlite3_errmsg(database));

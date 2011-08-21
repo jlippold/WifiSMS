@@ -21,6 +21,27 @@ $(document).ready(function() {
 		QuerySMS();
 	});
 	
+	$("#SendNew").live('click', function() {
+		
+		if ( $("#NewContact").val() == "" || $("#NewMessage").val() == ""  ) {
+			alert("Please enter a contact and a message");
+			return;
+		}
+		
+		ProcessSMS($("#NewContact").val(), $("#NewContact").val(), "0", $("#NewMessage").val(), Math.random());
+		closeFB();
+				
+	});
+	
+
+	$('#NewContact').live('change', function() {
+		if ( $(this).val() == "Other" ) {
+			$('#NewContact').remove();
+			$("#fancybox-outer p:first").next().after('<input id="NewContact" type="text">');
+		}
+	});
+		
+		
 	$('#msg').bind('keyup', function(e) {
 			if (e.shiftKey && e.keyCode == 13) {
 	      //$(this).val( $(this).val() + "\r\n" ) //well, that didnt work
@@ -88,6 +109,26 @@ $(document).ready(function() {
 		$(this).hide();
 	});
 	
+
+	$("div.btnNew").click(function() {
+		var htm = "<h2>New Message</h2><br /><p>To:</p><br /><select id='NewContact'>" + $("#OtherContacts").html() + "</select><p><br /></p><p>Message:</p><br /><textarea id='NewMessage'></textarea><p><br /></p><button id='SendNew'>Send</button>";
+
+		$.fancybox(htm,{
+					'titleShow' : false,
+					'transitionIn'	: 'elastic',
+					'transitionOut'	: 'elastic',
+					'easingIn'      : 'easeOutBack',
+					'easingOut'     : 'easeInBack',
+		      'autoDimensions'	: false,
+					'width'         		: 500,
+					'height'        		: 400
+		});
+	});
+	
+
+
+
+	
 	$("div.btnemoji").click(function() {
 		if ( $("#allEmoji").attr("data-loaded") == "no") {
 			$("#allEmoji").attr("data-loaded",  "yes");
@@ -152,6 +193,7 @@ $(window).resize(function() {
 });
 
 
+
 function loadAllContacts() {
 	$.ajaxSetup({
 	    'beforeSend' : function(xhr) {
@@ -181,16 +223,22 @@ function loadAllContacts() {
 			    for(x in y){
 			        var Phone = x;
 			        var Contact = y[x];
-
+							var found = false;
 			        for (var ii=1;ii<=totSMS;ii++) {
 			        	var b = SMS[ii];
 			        	for(var a in b){
 			        		if (Phone == a) {
 			        			SMS[ii] = "";
 			        			createContact(Phone, Contact, b[a]);
+			        			found = true;
 			        		}
 			        	}
 			        }
+			        
+			        if (!found) {
+			        	$("#OtherContacts").append("<option value='" + Phone + "'>" + jQuery.trim( Contact + " " + Phone ) + "</option>")
+			        }
+			        
 			    }
 	  	}
 
@@ -208,7 +256,7 @@ function loadAllContacts() {
       }
       
 	  	sortContacts();
-			$('#ContactList li').bind('click', function() {
+			$('#ContactList li').live('click', function() {
 				$("#Contact img:first").attr("src", $(this).attr("data-phone")+".jpg")
 				
 				var cName = $(this).find("div.desc").html();
@@ -230,10 +278,18 @@ function loadAllContacts() {
 			
 			$('#ContactList li:first').trigger("click");
 			
+			
 	  }
 	});
 }
 
+			function formatItem(row) {
+				return row[0] + " (<strong>id: " + row[1] + "</strong>)";
+			}
+			function formatResult(row) {
+				return row[0].replace(/(<.+?>)/gi, '');
+			}
+			
 function sortContacts() {
 	var mylist = $('#ContactList');
 	var listitems = mylist.children('li').get();
@@ -280,7 +336,7 @@ function resize(blnOnlyChat) {
 		}
 			
 		$(".footer").width( $(".topContactContainer").width()-250 );
-		$("#submit").width( ($("#SMSbox").outerWidth() - $("#msg").outerWidth() - ( $(".btnconfig").outerWidth()*2)  )-50 );
+		$("#submit").width( ($("#SMSbox").outerWidth() - $("#msg").outerWidth() - ( $(".btnconfig").outerWidth()*3)  )-50 );
 	}
 	scrollBottom();
 }
@@ -531,33 +587,34 @@ function QuerySMS() {
 					   return;
 				   } else {
 					   	counts = resp;
-					   	//try {
-						   		var json = jQuery.parseJSON(resp);
-									var tot = json.messages.length-1;
-									
-									for(var i = 1; i <= tot; i++) {
-										var Phone = json.messages[i].Phone;
-										var SMS = json.messages[i].Text;
-										var flags = json.messages[i].flags;
-										var group = json.messages[i].group;
-										var lastMessageID = json.messages[i].lastMessageID;
+				   		var json = jQuery.parseJSON(resp);
+							var tot = json.messages.length-1;
 							
-										if ( $("#PN" + Phone).attr("data-lastMessageID") != lastMessageID ) {
-											//New Message here
-											var Sender = $("#PN" + Phone + " div.desc:first").text();
-											$("#PN" + Phone).attr("data-lastMessageID", lastMessageID);
-											shownotify(Phone, Sender, flags, SMS); 
-										}
-									}
-									
-					    //} catch (e) {
-					    //	alert("Error: Invalid JSON!");
-					    //}
-					   }
-					   
-					   return;
-				   }
-		   });	
+							for(var i = 1; i <= tot; i++) {
+								var Phone = json.messages[i].Phone;
+								var SMS = json.messages[i].Text;
+								var flags = json.messages[i].flags;
+								var group = json.messages[i].group;
+								var lastMessageID = json.messages[i].lastMessageID;
+								
+								var Sender = "";
+								if ( $("#PN" + Phone).attr("data-lastMessageID") != lastMessageID ) {
+									//New Message here
+									console.log("new1: "+ Phone);
+									$("#PN" + Phone).attr("data-lastMessageID", lastMessageID);
+									Sender = $("#PN" + Phone + " div.desc:first").text();
+									shownotify(Phone, Sender, flags, SMS, lastMessageID, group);
+									break;
+								} else {
+									console.log("new21: "+ Phone);
+									shownotify(Phone, Sender, flags, SMS, lastMessageID, group);
+									break;
+								}
+							}
+					 }
+
+			 }
+	});	
 }
 
 var timer;
@@ -626,129 +683,74 @@ function SendSMS() {
 	$("#chatWindow").append('<div class="bubble right" title="Sending Message..."><p>' + check4emoji(msg) + '</p><div class="spinner"></div></div>');
 	scrollBottom();
 	
-
-	if (toQueue == "") {
-		toQueue = $("#grp").val() + "||-||" + $("#Phone").val() + "||-||" + msg + "||-||" + $("#pid").val() + "||-||" + Math.random() + "||?||";
-		ProcessSMS();
-	}	else {
-		toQueue = toQueue + $("#grp").val() + "||-||" + $("#Phone").val() + "||-||" + msg + "||-||" + $("#pid").val() + "||-||" + Math.random() + "||?||";
-	}
-	
-	
+	ProcessSMS($("#Phone").val(), $("#pid").val(), $("#grp").val(), msg, Math.random());
 }
 
 function showSMSQueue() {
-	
-	var nowSending = 0;
-	
-	if (toQueue != "") {
-		nowSending = toQueue.split("||?||").length-1;
-	}
-	
-	
-	if ( nowSending == 0 ) {
-		$("#SMSSendStatus").hide().html("");
-	} else {
-		if ( nowSending == 1 ) {
-			$("#SMSSendStatus").show().html( "Sending 1 SMS message");
-		} else {
-			$("#SMSSendStatus").show().html( "Sending " + nowSending + " SMS messages");	
-		}
-	}
-	
-	if (  parseInt( $("#SMSSendStatus").attr("data-sending") ) > nowSending  ) {
-		if (localStorage.getItem("Audio") == "1") {
-			document.getElementById("sentSMS").play();	
-		}	 		
-	}
-	$("#SMSSendStatus").attr("data-sending", nowSending.toString() );
+
 }
 
-function ProcessSMS() {
-	showSMSQueue();
-	if (toQueue != "") {
-		var curItem = toQueue.substring(0, (toQueue.indexOf("||?||")) );
-		var SMSPieces = curItem.split("||-||");
-		if (SMSPieces.length == 5) {
-			var rand = SMSPieces[4]
-			var Phone = SMSPieces[1]
-			var msg = SMSPieces[2]
-			var PID = SMSPieces[3]
-			var grp = SMSPieces[0]
-			
+function ProcessSMS(Phone, PID, grp, msg, rand) {
 
-			//Send the SMS 
-			$.ajax({
-				   type: "POST",
-				   contentType: "text",
-				   url: "/ajax/",
-				   data: "phone=" + Phone + "&msg=" + msg + "&pid=" + PID  + "&grp=" + grp + "&Country=" + localStorage.getItem("CC") + "&Epoch=12345&rand=" + rand,  
-				   error:function (){
-					   offline();
-					   alert("Error Sending SMS:" + msg );
-				   },
-				   success: function(resp){
-				   	online();
-						   if (resp == "Not Sent!") {
-							   alert("Error Sending SMS:" + msg );
-							   doNextInQueue(true);
-						   } else if ( resp == "SMS in Queue!") {
-						   	//Was Sent	
-						   	doNextInQueue(true);
-						   } else {
-						  	//not sent... keep in queue
-						  	doNextInQueue(false);
-						   }	
-					 }
-			});	
-			
-		} else {
-			console.log("Bad Array length: " + SMSPieces.length + " " + SMSQueued[i]);
-			doNextInQueue(true);
-		}
+		//Send the SMS 
+		$.ajax({
+			   type: "POST",
+			   contentType: "text",
+			   url: "/ajax/",
+			   data: "phone=" + Phone + "&msg=" + escape(msg) + "&pid=" + PID  + "&grp=" + grp + "&Country=" + localStorage.getItem("CC") + "&Epoch=12345&rand=" + rand,  
+			   error:function (){
+				   offline();
+				   alert("Error Sending SMS:" + msg );
+			   },
+			   success: function(resp){
+			   	online();
+					   if (resp != "SMS Sent!") {
+						  	alert("Error Sending SMS:" + msg );
+					   }	else {
+					   	document.getElementById("sentSMS").play();	
+							$("#Contact img:first").trigger("click");
+					  }
+				 }
+		});	
 
-	}
-}
-
-function doNextInQueue(wipe) {
-	
-	if (wipe) {
-		//console.log("Old Queue: " + toQueue);
-   	toQueue = toQueue.substring( toQueue.indexOf("||?||")+5);
-   	//console.log("New Queue: " + toQueue);
-	}
-
-	if ( toQueue != "" ) {
-			setTimeout(function(){  ProcessSMS() }, 1000); //Do next item	
-	}	
 }
 
 
-function shownotify(Phone, Sender, flags, SMS) {
-
-	if ($("#PN" + Phone).size() == 1) {
+function shownotify(Phone, Sender, flags, SMS, lastMessage, group) {
+	
+	if ($("#PN" + Phone).size() > 0) {
 		//new message came in!
-		
 		if (Phone == $("#Phone").val() ) {
+			console.log("inner refresh")
 		 switchContact($("#Phone").val(), $("#grp").val() );	//Update onscreen Conversation
-		 //console.log("inner refresh")
 		} else {
-			var curBadge = $("#PN" + Phone + " div.badge").text();
-			if ( isNumber(curBadge) ) {
-				curBadge = parseInt(curBadge);
-				curBadge = curBadge + 1;
-				$("#PN" + Phone + " div.badge").html(curBadge).fadeIn();
-			}
+			//update badge
+			console.log("update badge" + Phone)
+			var curBadge = $("#PN" + Phone + " div.badge:first").text();
+				if ( isNumber(curBadge) ) {
+					curBadge = parseInt(curBadge);
+					curBadge = curBadge + 1;
+					$("#PN" + Phone + " div.badge:first").html(curBadge).show();
+					// Move to top of list
+					var para = $("#PN" + Phone);
+	  			para.prependTo( '#ContactList' );
+				}
 		}
-		
-		if ( localStorage.getItem("Audio") == "1" && flags == "toMe" ) {
-			document.getElementById("newSMS").play();	
-			//console.log(SMS + Sender + flags + Phone)
-		}
-		
-		updateTitle();
-		showSMSQueue();
+				
+	} else {
+		//Contact is not in list, create it
+		console.log("New " + Phone);
+		var lmDate = new Date();
+		$("<li id='PN" + Phone + "' data-groupid='" + group + "' data-lastMessageEpoch='" + lastMessage + "' data-phone='" + Phone + "'><div class='pic'><img src='" + Phone + ".jpg'></div><div class='desc'>" + Phone + "</div><div class='lastMessage'>" + lmDate.toLocaleString() + "</div><div class='badge' style='display:block'>1</div></li>").prependTo( '#ContactList' );
 	}
+	
+	updateTitle();
+	
+	if ( localStorage.getItem("Audio") == "1" && flags == "toMe" ) {
+		document.getElementById("newSMS").play();	
+		//console.log(SMS + Sender + flags + Phone)
+	}
+	
 
 }
 
