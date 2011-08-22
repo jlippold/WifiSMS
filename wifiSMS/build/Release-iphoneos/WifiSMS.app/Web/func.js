@@ -17,6 +17,19 @@ $(document).ready(function() {
 		switchContact( $("#Phone").val(), $("#grp").val() );
 	});
 	
+	$("#Sender").live("mouseenter", function() {
+		$(this).find("span.download").fadeIn("fast");
+	}).live("mouseleave", function() {
+		$(this).find("span.download").stop().hide();
+	});
+	
+	$("#Sender span.download").live("click", function() {
+		if ( $("#grp").val() != "" ) {
+			$("#download").find("input[name='phone']").val( $("#grp").val() );
+			$("#download").submit();	
+		}
+	});
+	
 	$(".loadingContainer").click(function() {
 		QuerySMS();
 	});
@@ -32,15 +45,69 @@ $(document).ready(function() {
 		closeFB();
 				
 	});
-	
-
-	$('#NewContact').live('change', function() {
-		if ( $(this).val() == "Other" ) {
-			$('#NewContact').remove();
-			$("#fancybox-outer p:first").next().after('<input id="NewContact" type="text">');
+	$('div.btnDelete').live("click", function(event) {
+		
+		event.stopPropagation();
+		if ( confirm("Are you sure you want to delete this conversation? There is no undo.") ) {
+				var pa = $(this).parent()
+				var grp = $(pa).attr("data-groupid");
+				$.ajaxSetup({'beforeSend': function(xhr){
+						if (xhr.overrideMimeType)
+							xhr.overrideMimeType("text/plain");
+						}
+				});
+				
+				$.ajax({
+					   type: "POST",
+					   contentType: "text",
+					   url: "/ajax/",
+					   data: "action=deleteSMS&key=a4a1dda1-166d-47b0-8f31-a8581466da46&grp=" + grp, 
+					   error:function (){
+						   offline();
+						   return;
+					   },
+					   success: function(resp){
+					   	if (resp == "Deleted" ) {
+								$(pa).remove();
+								$("#grp").val("");
+							  $('#ContactList li:first').trigger("click");
+					   	} else {
+					   		alert("Error deleting conversation");
+					   	}
+						 }
+				});	
 		}
 	});
 		
+		
+	$('#ContactList li').live("mouseenter", function() {
+		$(this).find("div.btnDelete").delay(500).fadeIn();
+	}).live("mouseleave", function() {
+		$(this).find("div.btnDelete").stop().hide();
+	});
+			
+		
+	$('#ContactList li').live('click', function() {
+		$("#Contact img:first").attr("src", $(this).attr("data-phone")+".jpg")
+		
+		var cName = $(this).find("div.desc").html();
+		var cPhone = $(this).attr("data-phone");
+		if (cName == cPhone) {
+			$("#Sender").html( "<div>Unknown Contact</div><div>" + cPhone + "&nbsp;&nbsp;&nbsp;<span class='download' title='Download Conversation' style='display:none'></span></div>'" );
+		} else {
+			$("#Sender").html( "<div>" + cName+ "</div><div>" + cPhone + "&nbsp;&nbsp;&nbsp;<span class='download' title='Download Conversation' style='display:none'></span></div>" );	
+		}
+		
+	  if ( $("#Phone").val() != $(this).attr("data-phone") ) {
+	  	$(".topContactContainer").hide();
+		}
+	  
+	  switchContact($(this).attr("data-phone"), $(this).attr("data-groupid") );
+	  $("#Phone").val( $(this).attr("data-phone") ) ;
+	  $("#grp").val( $(this).attr("data-groupid") );
+	});
+	
+	
 		
 	$('#msg').bind('keyup', function(e) {
 			if (e.shiftKey && e.keyCode == 13) {
@@ -111,7 +178,7 @@ $(document).ready(function() {
 	
 
 	$("div.btnNew").click(function() {
-		var htm = "<h2>New Message</h2><br /><p>To:</p><br /><select id='NewContact'>" + $("#OtherContacts").html() + "</select><p><br /></p><p>Message:</p><br /><textarea id='NewMessage'></textarea><p><br /></p><button id='SendNew'>Send</button>";
+		var htm = "<h2>New Message</h2><br /><p>To:</p><br /><input id='NewContact' type='text'><p><br /></p><p>Message:</p><br /><textarea id='NewMessage'></textarea><p><br /></p><button id='SendNew'>Send</button>";
 
 		$.fancybox(htm,{
 					'titleShow' : false,
@@ -121,15 +188,51 @@ $(document).ready(function() {
 					'easingOut'     : 'easeInBack',
 		      'autoDimensions'	: false,
 					'width'         		: 500,
-					'height'        		: 400
+					'height'        		: 400,
+					'onComplete'		: function() {
+						$("#NewContact").autocomplete(myContacts , {
+							minChars: 0,
+							width: 310,
+							matchContains: "word",
+							autoFill: false,
+							formatItem: function(row, i, max) {
+								return i + "/" + max + ": \"" + row.name + "\" [" + row.to + "]";
+							},
+							formatMatch: function(row, i, max) {
+								return row.name + " " + row.to;
+							},
+							formatResult: function(row) {
+								return row.to;
+							}
+						});
+					}
 		});
 	});
 	
 
 
 
+
+	$("div.btnemoji").hover(
+	  function () {
+	    $("#QuickEmoji").css({"left": ($(this).offset().left - 50) + "px" }).fadeIn();
+	  },
+	  function () {
+	    //$("#QuickEmoji").fadeOut();
+	  }
+	);
 	
+	$("#QuickEmoji").hover(
+	  function () {
+	    
+	  },
+	  function () {
+	    $(this).fadeOut();
+	  }
+	);
+
 	$("div.btnemoji").click(function() {
+		$("#QuickEmoji").fadeOut();
 		if ( $("#allEmoji").attr("data-loaded") == "no") {
 			$("#allEmoji").attr("data-loaded",  "yes");
 			for( var j = 0; j < replacements.length; j++)
@@ -157,7 +260,10 @@ $(document).ready(function() {
 	
 	$("#SMSSendStatus").attr("data-sending", "0");
 	
-	setTimeout("loadAllContacts()", 100);
+ 	$(".footer").fadeIn("slow", function() {
+		resize(false);
+	});
+	setTimeout("loadAllContacts()", 500);
 	
 });
 
@@ -192,7 +298,64 @@ $(window).resize(function() {
   resize(false);
 });
 
+function cleanPhone(s) {
+	
+	 s = s.replace(/[^\d.]/g, "");
+	 
+	 if (s.substring(0, 1) == "0") {
+	 	s = s.substring(1);
+	 }
+	 
+	 if (s.substring(0, 1) == localStorage.getItem("CC")) {
+	 	s = s.substring(1);
+	 }
+	 
+	return s;
+}
 
+var myContacts;
+
+function LoadFullAddressBook() {
+	$.ajaxSetup({
+	    'beforeSend' : function(xhr) {
+	        xhr.overrideMimeType('application/json; ; charset="utf-8"');
+	    },
+	});
+	
+	$.ajax({
+	  url: "/ajax/",
+	  dataType: "json",
+	  type: "POST",
+	  data: "action=LoadFullAddressBook&key=a4a1dda1-166d-47b0-8f31-a8581466da46&CC=" + localStorage.getItem('CC'),
+	   error:function (){
+		   offline();
+		   return;
+	   }, 
+	  success: function(json){ 
+	  	
+			var AB = json["AddressBook"];
+			var totAB = json["AddressBook"].length - 1;
+			var jsonString = "["
+	  	for (var i=1;i<=totAB;i++) {
+	        var Contact = AB[i].Name;
+	        var Phone = AB[i].Phone;
+	        var CleanedPhone = AB[i].CleanedPhone;
+	        if ( Contact != "" && CleanedPhone != ""&& Phone != "" ) {
+	        	if ( !document.getElementById("PN" + CleanedPhone) ) {
+		        	jsonString = jsonString + '{ "name": "' + Contact + '", "to": "' + Phone + '" },';
+	        	}
+	        }
+	  	}
+			
+	  	if (jsonString != "[") {
+	  		jsonString = jsonString.substring( 0, jsonString.length - 1 ) ; //remove trailing comma
+	  	}
+	  	
+	  	jsonString = jsonString + "]";
+	  	myContacts = jQuery.parseJSON(jsonString);	  	
+	  }
+	});
+}
 
 function loadAllContacts() {
 	$.ajaxSetup({
@@ -214,31 +377,24 @@ function loadAllContacts() {
 	  	
 	  	online();
 			var AB = json["AddressBook"];
-			var totAB = json["AddressBook"].length;
+			var totAB = json["AddressBook"].length- 1;
 			var SMS = json["WithSMS"];
-			var totSMS = json["WithSMS"].length;
+			var totSMS = json["WithSMS"].length- 1;
 			
 	  	for (var i=1;i<=totAB;i++) {
 	  			y = AB[i];
 			    for(x in y){
 			        var Phone = x;
 			        var Contact = y[x];
-							var found = false;
 			        for (var ii=1;ii<=totSMS;ii++) {
 			        	var b = SMS[ii];
 			        	for(var a in b){
 			        		if (Phone == a) {
 			        			SMS[ii] = "";
 			        			createContact(Phone, Contact, b[a]);
-			        			found = true;
 			        		}
 			        	}
-			        }
-			        
-			        if (!found) {
-			        	$("#OtherContacts").append("<option value='" + Phone + "'>" + jQuery.trim( Contact + " " + Phone ) + "</option>")
-			        }
-			        
+			        }			        
 			    }
 	  	}
 
@@ -256,39 +412,25 @@ function loadAllContacts() {
       }
       
 	  	sortContacts();
-			$('#ContactList li').live('click', function() {
-				$("#Contact img:first").attr("src", $(this).attr("data-phone")+".jpg")
-				
-				var cName = $(this).find("div.desc").html();
-				var cPhone = $(this).attr("data-phone");
-				if (cName == cPhone) {
-					$("#Sender").html( "<div>Unknown Contact</div><div>" + cPhone + "</div>" );
-				} else {
-					$("#Sender").html( "<div>" + cName+ "</div><div>" + cPhone + "</div>" );	
-				}
-				
-			  if ( $("#Phone").val() != $(this).attr("data-phone") ) {
-			  	$(".topContactContainer").hide();
-				}
-			  
-			  switchContact($(this).attr("data-phone"), $(this).attr("data-groupid") );
-			  $("#Phone").val( $(this).attr("data-phone") ) ;
-			  $("#grp").val( $(this).attr("data-groupid") );
-			});
+			
+			if ( $('#ContactList li').size() == 0 ) {
+				initCounts();
+			}
 			
 			$('#ContactList li:first').trigger("click");
 			
+			setTimeout("LoadFullAddressBook()", 1000);
 			
 	  }
 	});
 }
 
-			function formatItem(row) {
-				return row[0] + " (<strong>id: " + row[1] + "</strong>)";
-			}
-			function formatResult(row) {
-				return row[0].replace(/(<.+?>)/gi, '');
-			}
+function formatItem(row) {
+	return row[0] + " (<strong>id: " + row[1] + "</strong>)";
+}
+function formatResult(row) {
+	return row[0].replace(/(<.+?>)/gi, '');
+}
 			
 function sortContacts() {
 	var mylist = $('#ContactList');
@@ -310,7 +452,7 @@ function createContact(Phone, Contact, lastMessage) {
 		
 		var lmDate = new Date( arr[0] *1000);
 		var grp = arr[1];
-		$("#ContactList").prepend("<li id='PN" + Phone + "' data-groupid='" + grp + "' data-lastMessageEpoch='" + lastMessage + "' data-phone='" + Phone + "'><div class='pic'><img src='" + Phone + ".jpg'></div><div class='desc'>" + check4emoji(Contact) + "</div><div class='lastMessage'>" + lmDate.toLocaleString() + "</div><div class='badge' style='display:none'>0</div></li>");
+		$("#ContactList").prepend("<li id='PN" + Phone + "' data-groupid='" + grp + "' data-lastMessageEpoch='" + lastMessage + "' data-phone='" + Phone + "'><div class='pic'><img src='" + Phone + ".jpg'></div><div class='desc'>" + check4emoji(Contact) + "</div><div class='lastMessage'>" + lmDate.toLocaleString() + "</div><div class='badge' style='display:none'>0</div><div class='btnDelete' title='Delete Conversation' style='display:none'></div></li>");
 	}
 }
 
@@ -327,9 +469,12 @@ var dCount = 0;
 
 function resize(blnOnlyChat) {
 	$("#chatWindow").width( $(".topContactContainer").width()-250 );
-	
+
 	if ( !(blnOnlyChat) ) {
-		if ( $(document).width() < 1100) {
+		
+		if ( $(document).width() < 900) {
+			$("#msg").width("40%");
+		} else if ( $(document).width() < 1300) {
 			$("#msg").width("60%");
 		} else {
 			$("#msg").width("80%");
@@ -375,7 +520,7 @@ function switchContact(p, grp) {
 			   var out = "";
 		   
 			   if (resp == "||-||") {
-				   $("#chatWindow").html("No SMS Messages Found");
+				   $("#chatWindow").html('<p style="text-align:center; padding-top: 20px">No SMS Messages Found</p>');
 				   $("#pid").val(p);
 				   $('#msg').focus();
 				   return;
@@ -600,13 +745,11 @@ function QuerySMS() {
 								var Sender = "";
 								if ( $("#PN" + Phone).attr("data-lastMessageID") != lastMessageID ) {
 									//New Message here
-									console.log("new1: "+ Phone);
 									$("#PN" + Phone).attr("data-lastMessageID", lastMessageID);
 									Sender = $("#PN" + Phone + " div.desc:first").text();
 									shownotify(Phone, Sender, flags, SMS, lastMessageID, group);
 									break;
 								} else {
-									console.log("new21: "+ Phone);
 									shownotify(Phone, Sender, flags, SMS, lastMessageID, group);
 									break;
 								}
@@ -626,8 +769,7 @@ function initCounts() {
 				xhr.overrideMimeType("text/plain");
 				}
 	});
-	
-	
+
 	$.ajax({
 		   type: "POST",
 		   contentType: "text",
@@ -640,9 +782,13 @@ function initCounts() {
 		   },
 		   success: function(resp){
 		   	 online();
-		   	 $(".footer").fadeIn("slow", function() {
-        		resize(false);
-      		});
+					
+					timer = setInterval(QuerySMS, localStorage.getItem('timer'));
+					
+					if ( resp == "") {
+						return;
+					}
+					
 			    counts = resp;
 			    try {
 				   	var firstJSON = jQuery.parseJSON(resp);
@@ -656,7 +802,7 @@ function initCounts() {
 			    } catch (e) {
 			    	alert("Error: Invalid JSON!");
 			    }
-			    timer = setInterval(QuerySMS, localStorage.getItem('timer'));
+			    
 		  }
 		});	
 }
@@ -674,36 +820,39 @@ function SendSMS() {
 	
 	$('#msg').focus();
 	var msg = $('#msg').val();
-	if (msg == "") {
+	var grp = $("#grp").val();
+	var pid = $("#pid").val();
+	if (msg == "" || grp == "" || pid == "") {
 		return false;
 	}
 	$('#msg').val("");
+	
 	
 	//add waiting bubble 
 	$("#chatWindow").append('<div class="bubble right" title="Sending Message..."><p>' + check4emoji(msg) + '</p><div class="spinner"></div></div>');
 	scrollBottom();
 	
-	ProcessSMS($("#Phone").val(), $("#pid").val(), $("#grp").val(), msg, Math.random());
+	ProcessSMS($("#Phone").val(), pid, grp, msg, Math.random());
 }
 
-function showSMSQueue() {
-
+function customEncode(s) {
+	s = s.replace(/=/gi, escape("="));
+	s = s.replace(/\+/gi,encodeURIComponent("+"));
+	s = s.replace(/&/gi, escape("&"));
+	s = s.replace(/%/gi, encodeURIComponent("%"));
+	return s;
 }
 
 function ProcessSMS(Phone, PID, grp, msg, rand) {
+		
 
 		//Send the SMS 
 		$.ajax({
 			   type: "POST",
 			   contentType: "text",
 			   url: "/ajax/",
-			   data: "phone=" + Phone + "&msg=" + escape(msg) + "&pid=" + PID  + "&grp=" + grp + "&Country=" + localStorage.getItem("CC") + "&Epoch=12345&rand=" + rand,  
-			   error:function (){
-				   offline();
-				   alert("Error Sending SMS:" + msg );
-			   },
+			   data: "phone=" + Phone + "&msg=" + customEncode(msg) + "&pid=" + PID  + "&grp=" + grp + "&Country=" + localStorage.getItem("CC") + "&Epoch=12345&rand=" + rand,
 			   success: function(resp){
-			   	online();
 					   if (resp != "SMS Sent!") {
 						  	alert("Error Sending SMS:" + msg );
 					   }	else {
@@ -721,11 +870,9 @@ function shownotify(Phone, Sender, flags, SMS, lastMessage, group) {
 	if ($("#PN" + Phone).size() > 0) {
 		//new message came in!
 		if (Phone == $("#Phone").val() ) {
-			console.log("inner refresh")
 		 switchContact($("#Phone").val(), $("#grp").val() );	//Update onscreen Conversation
 		} else {
 			//update badge
-			console.log("update badge" + Phone)
 			var curBadge = $("#PN" + Phone + " div.badge:first").text();
 				if ( isNumber(curBadge) ) {
 					curBadge = parseInt(curBadge);
@@ -739,19 +886,24 @@ function shownotify(Phone, Sender, flags, SMS, lastMessage, group) {
 				
 	} else {
 		//Contact is not in list, create it
-		console.log("New " + Phone);
 		var lmDate = new Date();
-		$("<li id='PN" + Phone + "' data-groupid='" + group + "' data-lastMessageEpoch='" + lastMessage + "' data-phone='" + Phone + "'><div class='pic'><img src='" + Phone + ".jpg'></div><div class='desc'>" + Phone + "</div><div class='lastMessage'>" + lmDate.toLocaleString() + "</div><div class='badge' style='display:block'>1</div></li>").prependTo( '#ContactList' );
+		var ContactName = Phone;
+		
+  	for (var i=0;i<=myContacts.length-1;i++) {
+      if (Phone == cleanPhone(myContacts[i].to) )  {
+      	ContactName = myContacts[i].name;
+      }
+  	}
+  	
+		$("<li id='PN" + Phone + "' data-groupid='" + group + "' data-lastMessageEpoch='" + lastMessage + "' data-phone='" + Phone + "'><div class='pic'><img src='" + Phone + ".jpg'></div><div class='desc'>" + ContactName + "</div><div class='lastMessage'>" + lmDate.toLocaleString() + "</div><div class='badge' style='display:block'>1</div><div class='btnDelete' title='Delete Conversation' style='display:none'></div></li>").prependTo( '#ContactList' );
 	}
 	
 	updateTitle();
 	
 	if ( localStorage.getItem("Audio") == "1" && flags == "toMe" ) {
 		document.getElementById("newSMS").play();	
-		//console.log(SMS + Sender + flags + Phone)
 	}
 	
-
 }
 
 function updateTitle() {
@@ -1083,6 +1235,66 @@ function check4emoji(s) {
 				out = out + char;
 			}
 		}
+		
+		/* convert smileys to emoticons */
+		var regArray = new Array(13);
+		var i = 0;
+		for (i=0; i < 13; i++) {
+			regArray[i]=new Array(2);
+		}
+		
+		regArray[0][0] = new RegExp(/:-?\)/g); // :), :-)
+		regArray[0][1] = "E056";
+		
+		regArray[1][0] = new RegExp(/:-?P/gi); // :p, :P, :-p, :-P
+		regArray[1][1] = "E105";
+		
+		regArray[2][0] = new RegExp(/:-?\(/g); // :(, :-(
+		regArray[2][1] = "E058";
+		
+		regArray[3][0] = new RegExp(/;-?\)/g); // ;), ;-)
+		regArray[3][1] = "E405";
+		
+		regArray[4][0] = new RegExp(/;-?\(/g); // ;(, ;-(
+		regArray[4][1] = "E411";
+		
+		regArray[5][0] = new RegExp(/:'\(/g); // :'(
+		regArray[5][1] = "E411";
+		
+		regArray[6][0] = new RegExp(/\^\^/g); // ^^
+		regArray[6][1] = "E415";
+		
+		regArray[7][0] = new RegExp(/:-?\$/g); // :$, :-$
+		regArray[7][1] = "E414";
+		
+		regArray[8][0] = new RegExp(/:-?o/gi); // :o, :O, :-o, :-O
+		regArray[8][1] = "E107";
+		
+		regArray[9][0] = new RegExp(/\(L\)/g); // (L)
+		regArray[9][1] = "E022";
+		
+		regArray[10][0] = new RegExp(/:-?d/gi); // :d, :D, :-d, :-D
+		regArray[10][1] = "E057";
+		
+		regArray[11][0] = new RegExp(/<3/g); // <3
+		regArray[11][1] = "E022";
+		
+		regArray[12][0] = new RegExp(/:-?\@/g); // :@
+		regArray[12][1] = "E416";
+		
+		var p = 0;
+		for (p= 0; p < 13; p++)
+		{
+			out = out.replace(regArray[p][0], "<img src='" + targetToBase64(regArray[p][1]) + "'>");
+		}
+					
+    //URLs starting with http://, https://, or ftp://
+    var replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+    out = out.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
+    //URLs starting with www. (without // before it, or it'd re-link the ones done above)
+    var replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+    out = out.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
+   
 		return out;
 } 
 

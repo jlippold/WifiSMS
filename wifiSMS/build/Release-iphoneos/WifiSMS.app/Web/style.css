@@ -277,6 +277,7 @@ div.emoji {
     width: auto;
 		font-family: "Futura","Futura Std",FuturaStd-Medium,"Avant Garde","Avant Garde Std",AvantGardeStd-Regular,"Century Gothic","Century Gothic Std",CenturyGothicStd-Regular,"Twentieth Century","Twentieth Century Std",TwentiethCenturyStd-Regular,Corbel,"Lucida Sans Regular","Trebuchet MS",Helvetica,sans-serif;
 		font-size: 1.4em;
+		cursor: pointer;
 		
 }
 
@@ -310,6 +311,25 @@ li div.badge {
   left: 3px;
   position: absolute;
   top: 2px;
+}
+
+li div.btnDelete {
+	background: url("data:image/png;base64,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") no-repeat;
+  height: 32px;
+  position: absolute;
+  right: -16px;
+  top: -9px;
+  width: 32px;
+}
+
+#Sender span.download {
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAH+SURBVBgZBcE9i11VGAbQtc/sO0OCkqhghEREAwpWAWUg8aMVf4KFaJEqQtAipTZWViKiCGOh2Ap2gmJhlSIWFsFOxUK0EsUM3pl79n4f12qHb3z3Fh7D83gC95GOJsDe0ixLk5Qq/+xv/Lw9Xd+78/HLX3Y8fXTr2nWapy4eCFKxG7Fby97SnDlYtMbxthyfzHO//nl85fNvfvnk8MbX5xa8IHx1518Vkrj54Q+qQms2vVmWZjdiu5ZR2rT01166/NCZg/2PFjwSVMU6yjoC1oq+x6Y3VbHdlXWExPd379nf7Nmejv2Os6OC2O4KLK0RNn3RNCdr2Z5GJSpU4o+/TkhaJ30mEk5HwNuvX7Hpi76wzvjvtIwqVUSkyjqmpHS0mki8+9mPWmuWxqYvGkbFGCUAOH/+QevYI9GFSqmaHr5wkUYTAlGhqiRRiaqiNes6SOkwJwnQEqBRRRJEgkRLJGVdm6R0GLMQENE0EkmkSkQSVVMqopyuIaUTs0J455VLAAAAAODW0U/GiKT0pTWziEj44PZ1AAAAcPPqkTmH3QiJrlEVDXDt0qsAAAAAapa5BqUnyaw0Am7//gUAAAB49tEXzTmtM5KkV/y2G/X4M5fPao03n/sUAAAAwIX7y5yBv9vhjW/fT/IkuSp5gJKElKRISYoUiSRIyD1tufs/IXxui20QsKIAAAAASUVORK5CYII=") no-repeat;
+  height: 32px;
+  width: 32px;
+  display: block;
+  cursor: pointer;
+  float: right;
+  margin-top: 4px;
 }
 
 .badge {
@@ -732,4 +752,23 @@ a.attachment img {
 	float: none !important;
 	margin-right: 0 !important;
 	width: 490px !important;
+}
+
+#QuickEmoji {
+	position: absolute;
+	width: 140px;
+	
+  bottom: 90px;
+  height: 26px;
+  padding: 7px 5px 0;
+	z-index: 100;
+	background: #000;
+	color: #fff;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px; 
+}
+
+#QuickEmoji div {
+	cursor: hand;
 }

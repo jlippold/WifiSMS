@@ -97,6 +97,31 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 
 		}
 		
+		// Download conversation
+		if([postStr hasPrefix:@"action=downloadSMS&key=a4a1dda1-166d-47b0-8f31-a8581466da46"] && [path hasPrefix:@"/ajax/"] ) {
+			
+			int index = [postStr rangeOfString:@"phone="].location + 6;
+			NSString *p = [postStr substringFromIndex: index];
+			
+			[self DownloadSMS:p];
+			
+			NSString *webPath = @"/tmp/WifiSMS/";
+			webPath = [NSString stringWithFormat:@"%@/SMS.csv", webPath];
+			return [[[HTTPFileResponse alloc] initWithFilePath:webPath] autorelease];
+			
+		}
+		
+		// Delete conversation
+		if([postStr hasPrefix:@"action=deleteSMS&key=a4a1dda1-166d-47b0-8f31-a8581466da46"] && [path hasPrefix:@"/ajax/"] ) {
+			
+			int index = [postStr rangeOfString:@"grp="].location + 4;
+			NSString *p = [postStr substringFromIndex: index];
+			NSData *browseData = [[self DeleteSMS:p] dataUsingEncoding:NSUTF8StringEncoding ];
+			return [[[HTTPDataResponse alloc] initWithData:browseData] autorelease];
+			
+			//NSString *outdata =  [ [QuerySMS alloc] initWithString: @"6464042256" ];
+			
+		}
 		
 		// Query totals
 		if([postStr hasPrefix:@"action=list&key=a4a1dda1-166d-47b0-8f31-a8581466da46"]  && [path hasPrefix:@"/ajax/"]) {
@@ -167,16 +192,19 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 		}
 		
 		
-		// getAllContacts
-		if([postStr hasPrefix:@"action=getContacts&key=a4a1dda1-166d-47b0-8f31-a8581466da46"]  && [path hasPrefix:@"/ajax/"]) {
-			/*
-			NSData *browseData = [[self getAllContacts] dataUsingEncoding:NSUTF8StringEncoding];
-			return [[[HTTPDataResponse alloc] initWithData:browseData] autorelease];
-			*/
-			
+		// getAllContacts with SMS
+		if([postStr hasPrefix:@"action=getContacts&key=a4a1dda1-166d-47b0-8f31-a8581466da46"]  && [path hasPrefix:@"/ajax/"]) {			
 			int index = [postStr rangeOfString:@"CC="].location + 3;
 			NSString *CC = [postStr substringFromIndex: index];
 			NSData *browseData = [[self getAllContacts:CC] dataUsingEncoding:NSUTF8StringEncoding ];
+			return [[[HTTPDataResponse alloc] initWithData:browseData] autorelease];
+		}
+		
+		// getAllContacts
+		if([postStr hasPrefix:@"action=LoadFullAddressBook&key=a4a1dda1-166d-47b0-8f31-a8581466da46"]  && [path hasPrefix:@"/ajax/"]) {			
+			int index = [postStr rangeOfString:@"CC="].location + 3;
+			NSString *CC = [postStr substringFromIndex: index];
+			NSData *browseData = [[self LoadFullAddressBook:CC] dataUsingEncoding:NSUTF8StringEncoding ];
 			return [[[HTTPDataResponse alloc] initWithData:browseData] autorelease];
 		}
 		
@@ -217,13 +245,13 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 			index = [Country rangeOfString:@"&"].location;
 			Country = [Country substringToIndex: index];
 						
+
 			msg = [msg stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-			
 			
 			id ct = CTTelephonyCenterGetDefault();
 			void* address = CKSMSAddressCreateWithString(pid); 
 
-			NSLog(@"SMS Sent ogroup: %@", grp ); 
+			NSLog(@"SMS being Sent"); 
 			int group = [grp intValue];			
 			
 			if (group <= 0) {
@@ -232,11 +260,11 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 			
 			void *msg_to_send = _CKSMSRecordCreateWithGroupAndAssociation(NULL, address, msg, group, 0);	
 			CKSMSRecordSend(ct, msg_to_send);
-			
-			NSLog(@"Sending SMS %@ to %@ in group %d", msg, pid, group);
 		 
 			NSData *response = nil;
 			response = [@"SMS Sent!" dataUsingEncoding:NSUTF8StringEncoding];
+			
+			return [[[HTTPDataResponse alloc] initWithData:response] autorelease];
 			
 			//Send SMS old
 			/*
@@ -272,7 +300,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 			[plistDict release];
 			*/
 			
-			return [[[HTTPDataResponse alloc] initWithData:response] autorelease];
+			
 			
 		}
 	
@@ -380,6 +408,103 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 
 
 
+- (NSString *)DeleteSMS:(NSString *)grp { 
+	NSLog(@"Deleting SMS for group: %@", grp);
+	
+	BOOL done = NO;
+	
+	//insert into msg_group
+	sqlite3 *database;
+	if(sqlite3_open([@"/private/var/mobile/Library/SMS/sms.db" UTF8String], &database) == SQLITE_OK) {
+		sqlite3_stmt *newgrp;
+		const char *sqlnewgrp = "DELETE FROM msg_group WHERE rowid = ?; DELETE FROM message where group_id = ?; DELETE from group_member where group_id=?  )";
+		
+		if(sqlite3_prepare_v2(database, sqlnewgrp, -1, &newgrp, NULL) != SQLITE_OK) {
+			NSLog(@"Error while deleting: %s", sqlite3_errmsg(database));
+		} else {
+			sqlite3_bind_text(newgrp, 1, [grp UTF8String], -1, SQLITE_TRANSIENT);
+			
+			if(SQLITE_DONE != sqlite3_step(newgrp)) {
+				NSLog(@"Error while deleting : %s", sqlite3_errmsg(database));
+			} else {
+				sqlite3_reset(newgrp);
+				done = YES;
+			}
+		}
+	}
+	
+	sqlite3_close(database);
+	
+	if (done) {
+		return @"Deleted";	
+	} else {
+		return @"Error";			
+	}
+	
+}
+
+- (NSString *)DownloadSMS:(NSString *)phone { 
+	
+	NSLog(@"generating CSV for group: %@", phone);
+		
+    NSMutableString *outdata = [[NSMutableString alloc] initWithString:@""];
+	NSString *text = @"";
+	
+	sqlite3 *database;
+	if(sqlite3_open([@"/private/var/mobile/Library/SMS/sms.db" UTF8String], &database) == SQLITE_OK) {
+		sqlite3_stmt *addStatement;
+		const char *sqlStatement2 = "select message.text, message.flags, datetime(message.date, 'unixepoch', 'localtime')  as DT, message.address, message.group_ID, msg_pieces.content_type, msg_pieces.content_loc, msg_pieces.data, msg_pieces.message_id from message left join msg_pieces ON message.rowid=msg_pieces.message_id WHERE ((text is null AND content_type is not null AND content_loc is not null) OR (text is not null)) AND group_id = ? ORDER BY message.rowid asc";
+		if(sqlite3_prepare_v2(database, sqlStatement2, -1, &addStatement, NULL) == SQLITE_OK) {
+			sqlite3_bind_text(addStatement, 1, [phone UTF8String], -1, SQLITE_TRANSIENT);
+			
+			[outdata appendString:@"\"Date\",\"From\",\"Message\"\n"];
+			while(sqlite3_step(addStatement) == SQLITE_ROW) {
+				
+				char *text1 = (char *)sqlite3_column_text(addStatement, 0);
+				if (text1 !=nil) {
+					text = [NSString stringWithUTF8String: text1];
+					NSString *flags = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 1)];
+					NSString *textdate = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 2)];
+					NSString *p = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 3)];
+					
+					text = [text stringByReplacingOccurrencesOfString:@"\"" withString:@"'"];
+					
+					[outdata appendString:@"\""];
+					[outdata appendString: textdate];
+					[outdata appendString:@"\","];
+
+					[outdata appendString:@"\""];
+					if ( [flags isEqualToString:@"2"]  || [flags isEqualToString:@"0"]) {
+						[outdata appendString:p];
+					} else {
+						[outdata appendString:@"Me"];
+					}
+					[outdata appendString:@"\","];
+					
+					[outdata appendString:@"\""];
+					[outdata appendString:text];
+					[outdata appendString:@"\"\n"];
+
+
+				} 
+				text1 = nil;
+			}
+		}
+		sqlite3_finalize(addStatement);
+		
+	}
+	
+	sqlite3_close(database);
+	
+	
+	
+	NSString *filename = [@"/tmp/WifiSMS/" stringByAppendingString: @"SMS.csv"];
+	[[NSFileManager defaultManager] removeItemAtPath:filename error:NULL];
+	[outdata writeToFile:filename atomically:YES encoding: NSUTF8StringEncoding error: NULL];
+	[outdata release];
+	
+	return 0;
+}
 
 
 - (NSString *)QuerySMS:(NSString *)phone { 
@@ -554,6 +679,68 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 }
 
 
+-(NSString *)LoadFullAddressBook:(NSString *)CC { 
+	
+	
+	NSMutableString *outdata = [[NSMutableString alloc] initWithString:@"{\"AddressBook\" : [ { \"Name\" : \"Foobar\",  \"Phone\" : \"Foobar\", \"CleanedPhone\" : \"Foobar\"} "];
+	
+	ABAddressBookRef addressBook = ABAddressBookCreate( );
+	CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
+	CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);
+	
+	for( int i = 0 ; i < nPeople ; i++ )
+	{
+		ABRecordRef ref = CFArrayGetValueAtIndex(allPeople, i );
+		ABMultiValueRef name1 =(NSString*)ABRecordCopyValue(ref,kABPersonPhoneProperty);
+		
+		NSString *firstName = (NSString *)ABRecordCopyValue(ref, kABPersonFirstNameProperty);
+		NSString *lastName = (NSString *)ABRecordCopyValue(ref, kABPersonLastNameProperty);
+		
+		if (lastName == nil) {
+			lastName = @"";
+		}
+		if (firstName == nil) {
+			firstName = @"";
+		}
+		
+		NSString *contactFirstLast = [NSString stringWithFormat:@"%@ %@",firstName, lastName];
+		contactFirstLast = [self JSONSafe:contactFirstLast];
+		
+		NSString *phoneNoFormat = @"";
+		NSString* mobile=@"";
+		
+		
+		for(CFIndex i=0;i<ABMultiValueGetCount(name1);i++)
+		{
+			
+			mobile=(NSString*)ABMultiValueCopyValueAtIndex(name1,i);
+			
+			phoneNoFormat = [[mobile componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+			
+			if ([phoneNoFormat hasPrefix:@"0"]){
+				phoneNoFormat = [phoneNoFormat substringFromIndex:1];
+			}
+			
+			if ([phoneNoFormat hasPrefix:CC]){
+				phoneNoFormat = [phoneNoFormat substringFromIndex:[CC length]];
+			}
+			
+			mobile = [self JSONSafe:mobile];
+			
+			if ([phoneNoFormat length] > 1) {
+				[outdata appendString:[NSString stringWithFormat:@", { \"Name\" : \"%@\", ", contactFirstLast]];
+				[outdata appendString:[NSString stringWithFormat:@"\"Phone\" : \"%@\", ", mobile]];
+				[outdata appendString:[NSString stringWithFormat:@"\"CleanedPhone\" : \"%@\" } ", phoneNoFormat]];
+			}
+		}
+		
+	}
+	
+	[outdata appendString:@" ]} "];
+	
+	return [outdata autorelease];
+}
+
 -(NSString *)getAllContacts:(NSString *)CC { 
 
 	NSLog(@"get All Contacts Country Code %@", CC);
@@ -590,7 +777,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 		{
 			
 			mobile=(NSString*)ABMultiValueCopyValueAtIndex(name1,i);
-
+	
 			phoneNoFormat = [[mobile componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
 			
 			if ([phoneNoFormat hasPrefix:@"0"]){

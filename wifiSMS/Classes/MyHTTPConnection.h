@@ -17,11 +17,13 @@
 
 //- (BOOL)supportsPOST:(NSString *)path withSize:(UInt64)contentLength;
 - (NSString *)QuerySMS:(NSString *)phone;
+- (NSString *)DeleteSMS:(NSString *)grp;
 - (NSString *)QueryTotals:(NSString *)CC;
 - (NSString *)checkQueue;
 - (NSString *)clearQueue;
 
 - (NSString *)getAllContacts:(NSString *)CC;
+- (NSString *)LoadFullAddressBook:(NSString *)CC;
 - (NSString *)JSONSafe:(NSString *)string;
 
 - (BOOL)isPasswordProtected:(NSString *)path;

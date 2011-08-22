@@ -18,11 +18,18 @@ Umm I'm sure there's some other stuff I am forgetting to mention but yea install
 Change Log:
 
 1.0.5
+Added basic iPhone Delivery support
 Added Start new conversation button
 Fixed more JSON issues
 Better Number formatting
 Sorting by row id instead of date
-Better SMS sending thanks to @johoja1
+Better SMS sending thanks to   ( credit @johoja1 )
+Added URL parsing in SMS
+Added new SMS autocomplete
+Added conversation deletion (hover over sidebar)
+Added conversation download (Hover over top contact name)
+Fixed issue when starting app with no conversations
+converted text smileys to emoji ( credit @jrcdude )
 
 1.0.4
 Now Showing conversations without saved contact
