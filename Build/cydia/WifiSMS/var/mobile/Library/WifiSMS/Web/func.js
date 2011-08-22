@@ -1237,10 +1237,12 @@ function check4emoji(s) {
 		}
 		
 		/* convert smileys to emoticons */
-		var regArray = new Array(13);
+		var regArray = new Array(23);
+		
 		var i = 0;
-		for (i=0; i < 13; i++) {
-			regArray[i]=new Array(2);
+		for (i=0; i < 23; i++)
+		{
+		regArray[i]=new Array(2);
 		}
 		
 		regArray[0][0] = new RegExp(/:-?\)/g); // :), :-)
@@ -1282,11 +1284,44 @@ function check4emoji(s) {
 		regArray[12][0] = new RegExp(/:-?\@/g); // :@
 		regArray[12][1] = "E416";
 		
+		regArray[13][0] = new RegExp(/:-\*/g); //:-*
+		regArray[13][1] = "E418";
+		
+		regArray[14][0] = new RegExp(/:-?]/g); //:-] :]
+		regArray[14][1] = "E402";
+		
+		regArray[15][0] = new RegExp(/ x-?d/gi); //x-d
+		regArray[15][1] = "E409";
+		
+		regArray[16][0] = new RegExp(/:-?s/gi); //:s
+		regArray[16][1] = "E407";
+		
+		regArray[17][0] = new RegExp(/:-?\|/g); //:|
+		regArray[17][1] = "E40D";
+		
+		regArray[18][0] = new RegExp(/:-?\//g); //:/ :-/
+		regArray[18][1] = "E40E";
+		
+		regArray[19][0] = new RegExp(/>.>/g); //>.>
+		regArray[19][1] = "E403";
+		
+		regArray[20][0] = new RegExp(/<\/3/g);
+		regArray[20][1] = "E023"
+		
+		regArray[21][0] = new RegExp(/:-\|\|/g); // :-||
+		regArray[21][1] = "E416";
+		
+		
+		regArray[22][0] = new RegExp(/:-?x/gi); // :x, :X, :-x, :-X
+		regArray[22][1] = "E40C";
+		
 		var p = 0;
-		for (p= 0; p < 13; p++)
+		for (p= 0; p < 23; p++)
 		{
-			out = out.replace(regArray[p][0], "<img src='" + targetToBase64(regArray[p][1]) + "'>");
+		out = out.replace(regArray[p][0], "<img src='" + targetToBase64(regArray[p][1]) + "'>");
 		}
+		
+		return out;
 					
     //URLs starting with http://, https://, or ftp://
     var replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
