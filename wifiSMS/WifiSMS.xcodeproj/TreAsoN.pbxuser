@@ -100,8 +100,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 335669250;
-			PBXWorkspaceStateSaveDate = 335669250;
+			PBXPerProjectTemplateStateSaveDate = 335803223;
+			PBXWorkspaceStateSaveDate = 335803223;
 		};
 		perUserProjectItems = {
 			5F7F9A1C13ED9A1C001895AE /* PlistBookmark */ = 5F7F9A1C13ED9A1C001895AE /* PlistBookmark */;
@@ -149,6 +149,7 @@
 			5FACA23A13C54CA6002CDC76 /* PBXTextBookmark */ = 5FACA23A13C54CA6002CDC76 /* PBXTextBookmark */;
 			5FACA27C13C54CA6002CDC76 /* PBXTextBookmark */ = 5FACA27C13C54CA6002CDC76 /* PBXTextBookmark */;
 			5FACA28F13C54CA6002CDC76 /* PBXTextBookmark */ = 5FACA28F13C54CA6002CDC76 /* PBXTextBookmark */;
+			5FAE44491403F38200500298 /* PBXTextBookmark */ = 5FAE44491403F38200500298 /* PBXTextBookmark */;
 			5FB36C4314006FAD001F6DFF /* PBXTextBookmark */ = 5FB36C4314006FAD001F6DFF /* PBXTextBookmark */;
 			5FB36CD11400A628001F6DFF /* PBXTextBookmark */ = 5FB36CD11400A628001F6DFF /* PBXTextBookmark */;
 			5FB36CD21400A628001F6DFF /* PBXTextBookmark */ = 5FB36CD21400A628001F6DFF /* PBXTextBookmark */;
@@ -172,7 +173,6 @@
 			5FBB08281401C33900989AB6 /* PBXTextBookmark */ = 5FBB08281401C33900989AB6 /* PBXTextBookmark */;
 			5FBB085B1401D26100989AB6 /* PBXTextBookmark */ = 5FBB085B1401D26100989AB6 /* PBXTextBookmark */;
 			5FBB08671401D86D00989AB6 /* PBXTextBookmark */ = 5FBB08671401D86D00989AB6 /* PBXTextBookmark */;
-			5FBB08691401D86D00989AB6 /* PBXTextBookmark */ = 5FBB08691401D86D00989AB6 /* PBXTextBookmark */;
 			5FBB08851401E80F00989AB6 /* PBXTextBookmark */ = 5FBB08851401E80F00989AB6 /* PBXTextBookmark */;
 			5FC257C213DD06B100FE8DF2 /* PlistBookmark */ = 5FC257C213DD06B100FE8DF2 /* PlistBookmark */;
 			5FC27B4313CAC5B7006C9E0B /* PBXTextBookmark */ = 5FC27B4313CAC5B7006C9E0B /* PBXTextBookmark */;
@@ -331,7 +331,7 @@
 		fRef = 5F7F9A3A13EDB44A001895AE /* README */;
 		name = "README: 18";
 		rLen = 0;
-		rLoc = 1218;
+		rLoc = 1240;
 		rType = 0;
 		vrLen = 922;
 		vrLoc = 0;
@@ -1036,6 +1036,22 @@
 		vrLen = 1870;
 		vrLoc = 0;
 	};
+	5FAE44491403F38200500298 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5FAE444A1403F38200500298 /* README */;
+		name = "README: 22";
+		rLen = 0;
+		rLoc = 652;
+		rType = 0;
+		vrLen = 1382;
+		vrLoc = 0;
+	};
+	5FAE444A1403F38200500298 /* README */ = {
+		isa = PBXFileReference;
+		name = README;
+		path = /Users/TreAsoN/WifiSMS/README;
+		sourceTree = "<absolute>";
+	};
 	5FB36C4314006FAD001F6DFF /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 5FC31A6913FF92B300A08C0F /* CKSMSService.h */;
@@ -1274,35 +1290,19 @@
 		vrLen = 1125;
 		vrLoc = 8101;
 	};
-	5FBB08691401D86D00989AB6 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 5FBB086A1401D86D00989AB6 /* README */;
-		name = "README: 27";
-		rLen = 0;
-		rLoc = 867;
-		rType = 0;
-		vrLen = 1407;
-		vrLoc = 0;
-	};
-	5FBB086A1401D86D00989AB6 /* README */ = {
-		isa = PBXFileReference;
-		lastKnownFileType = text;
-		name = README;
-		path = /Users/TreAsoN/WifiSMS/README;
-		sourceTree = "<absolute>";
-	};
 	5FBB08851401E80F00989AB6 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 5FBB08861401E80F00989AB6 /* README */;
 		name = "README: 27";
 		rLen = 0;
-		rLoc = 867;
+		rLoc = 889;
 		rType = 0;
 		vrLen = 1373;
 		vrLoc = 0;
 	};
 	5FBB08861401E80F00989AB6 /* README */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = text;
 		name = README;
 		path = /Users/TreAsoN/WifiSMS/README;
 		sourceTree = "<absolute>";

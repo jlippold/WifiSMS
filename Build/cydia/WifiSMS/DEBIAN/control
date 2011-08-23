@@ -7,7 +7,7 @@ Replaces: com.treason.treasonsmstwo
 Depends: firmware (>= 4.0), mobilesubstrate, sbsettings, shell-cmds, sudo, coreutils-bin, coreutils
 Section: Messaging
 Installed-Size: 1354
-Version: 1.0.5
+Version: 1.0.6
 Architecture: iphoneos-arm
 Description: send & receive SMS thru PC's webbrowser
 Depiction: http://moreinfo.thebigboss.org/moreinfo/depiction.php?file=wifismsData
