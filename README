@@ -1,0 +1,58 @@
+I code a lot from my desktop, so I wrote this so my boss wont know I'm texting on the job :P
+
+Using the app is pretty simple.. 
+Just activate via SBSettings, then Navigate to your iphone's IP address.
+
+e.g. http://192.168.1.2:8080/
+
+or via bonjour like http://treasons-iphone.local:8080/ (of course rename the "treason" part with your iDevice name)
+
+Port is configurable through the web interface.
+Authentication can be added through the web interface.
+You can send and receive SMS, and view MMS (pics and videos)
+
+Umm I'm sure there's some other stuff I am forgetting to mention but yea install it and poke around.
+
+
+
+Change Log:
+
+1.0.7
+
+iOS5 support
+
+1.0.6
+
+Minor bug fix
+
+1.0.5
+
+Added Start new conversation button with autocomplete
+Added conversation deletion (hover over sidebar)
+Added conversation download (Hover over top contact name)
+Added basic iPhone Delivery support
+Added URL parsing in SMS
+Added text smileys to emoji ( credit @jrcdude )
+Added sidebar re-ordering by date
+Added new contacts creation dynamically into sidebar 
+Better SMS sending thanks to   ( credit @johoja1 )
+Fixed JSON issue
+Better Number formatting
+Sorting SMS by rowid instead of date
+Fixed issue when starting app with no conversations
+
+
+1.0.4
+Now Showing conversations without saved contact
+Fix for country codes
+Removed a bunch of unneeded dependancies
+JSON escape character fix
+Added retries when adding to SMS.db
+
+
+Roadmap: 
+
+Add websockets for immediate notifications
+Add group messaging support
+Add file uploads from browser to MMS
+Start new SMS conversation

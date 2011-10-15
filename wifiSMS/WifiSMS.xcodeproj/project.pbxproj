@@ -1,0 +1,377 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		5F45C1301448E48A00BD3374 /* ChatKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F45C12F1448E48A00BD3374 /* ChatKit.framework */; };
+		5F92E7A513C103CB00B6D9C9 /* MyHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7A113C103CB00B6D9C9 /* MyHTTPConnection.m */; };
+		5F92E7B913C103F900B6D9C9 /* HTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7A813C103F900B6D9C9 /* HTTPConnection.m */; };
+		5F92E7BA13C103F900B6D9C9 /* HTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7A913C103F900B6D9C9 /* HTTPAuthenticationRequest.m */; };
+		5F92E7BB13C103F900B6D9C9 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7AA13C103F900B6D9C9 /* AsyncSocket.m */; };
+		5F92E7BC13C103F900B6D9C9 /* HTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7AC13C103F900B6D9C9 /* HTTPAsyncFileResponse.m */; };
+		5F92E7BD13C103F900B6D9C9 /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7AE13C103F900B6D9C9 /* HTTPServer.m */; };
+		5F92E7BE13C103F900B6D9C9 /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7B313C103F900B6D9C9 /* DDNumber.m */; };
+		5F92E7BF13C103F900B6D9C9 /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7B413C103F900B6D9C9 /* DDRange.m */; };
+		5F92E7C013C103F900B6D9C9 /* HTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7B513C103F900B6D9C9 /* HTTPResponse.m */; };
+		5F92E7C113C103F900B6D9C9 /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7B813C103F900B6D9C9 /* DDData.m */; };
+		5F92E86313C1063500B6D9C9 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F92E86213C1063500B6D9C9 /* libsqlite3.0.dylib */; };
+		5F92E8AC13C1078C00B6D9C9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F92E8AB13C1078C00B6D9C9 /* CFNetwork.framework */; };
+		5F92EAC213C10B3C00B6D9C9 /* Web in Resources */ = {isa = PBXBuildFile; fileRef = 5F92E8CA13C10B3C00B6D9C9 /* Web */; };
+		5F92ED0213C10D9000B6D9C9 /* WifiSMS-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F92ED0113C10D9000B6D9C9 /* WifiSMS-info.plist */; };
+		5F92EF2213C10F4700B6D9C9 /* SMS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F92EF2113C10F4700B6D9C9 /* SMS.plist */; };
+		5FACA0D713C52B21002CDC76 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FACA0D613C52B21002CDC76 /* AddressBook.framework */; };
+		5FB537FD13DB698F00653272 /* WebServer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FB537FC13DB698F00653272 /* WebServer.plist */; };
+		D2940F880FEE032400920DF0 /* wifiSMSDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2940F870FEE032400920DF0 /* wifiSMSDelegate.m */; };
+		D2940F990FEE034100920DF0 /* AppSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2940F980FEE034100920DF0 /* AppSupport.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D6058910D05DD3D006BFB54 /* WifiSMS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WifiSMS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* WifiSMS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiSMS_Prefix.pch; sourceTree = "<group>"; };
+		5F45C12F1448E48A00BD3374 /* ChatKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ChatKit.framework; path = PrivateFrameworks/ChatKit.framework; sourceTree = "<group>"; };
+		5F92E7A113C103CB00B6D9C9 /* MyHTTPConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHTTPConnection.m; sourceTree = "<group>"; };
+		5F92E7A713C103F900B6D9C9 /* HTTPAuthenticationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPAuthenticationRequest.h; sourceTree = "<group>"; };
+		5F92E7A813C103F900B6D9C9 /* HTTPConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPConnection.m; sourceTree = "<group>"; };
+		5F92E7A913C103F900B6D9C9 /* HTTPAuthenticationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPAuthenticationRequest.m; sourceTree = "<group>"; };
+		5F92E7AA13C103F900B6D9C9 /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
+		5F92E7AB13C103F900B6D9C9 /* DDRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDRange.h; sourceTree = "<group>"; };
+		5F92E7AC13C103F900B6D9C9 /* HTTPAsyncFileResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPAsyncFileResponse.m; sourceTree = "<group>"; };
+		5F92E7AD13C103F900B6D9C9 /* HTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPResponse.h; sourceTree = "<group>"; };
+		5F92E7AE13C103F900B6D9C9 /* HTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServer.m; sourceTree = "<group>"; };
+		5F92E7AF13C103F900B6D9C9 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		5F92E7B013C103F900B6D9C9 /* HTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPConnection.h; sourceTree = "<group>"; };
+		5F92E7B113C103F900B6D9C9 /* HTTPAsyncFileResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPAsyncFileResponse.h; sourceTree = "<group>"; };
+		5F92E7B213C103F900B6D9C9 /* HTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServer.h; sourceTree = "<group>"; };
+		5F92E7B313C103F900B6D9C9 /* DDNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNumber.m; sourceTree = "<group>"; };
+		5F92E7B413C103F900B6D9C9 /* DDRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDRange.m; sourceTree = "<group>"; };
+		5F92E7B513C103F900B6D9C9 /* HTTPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPResponse.m; sourceTree = "<group>"; };
+		5F92E7B613C103F900B6D9C9 /* DDData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDData.h; sourceTree = "<group>"; };
+		5F92E7B713C103F900B6D9C9 /* DDNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNumber.h; sourceTree = "<group>"; };
+		5F92E7B813C103F900B6D9C9 /* DDData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDData.m; sourceTree = "<group>"; };
+		5F92E86213C1063500B6D9C9 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		5F92E8AB13C1078C00B6D9C9 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		5F92E8CA13C10B3C00B6D9C9 /* Web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Web; sourceTree = "<group>"; };
+		5F92ED0113C10D9000B6D9C9 /* WifiSMS-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WifiSMS-info.plist"; sourceTree = "<group>"; };
+		5F92EF2113C10F4700B6D9C9 /* SMS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SMS.plist; sourceTree = "<group>"; };
+		5F92F00C13C1235500B6D9C9 /* MyHTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHTTPConnection.h; sourceTree = "<group>"; };
+		5FACA0D613C52B21002CDC76 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		5FB537FC13DB698F00653272 /* WebServer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WebServer.plist; sourceTree = "<group>"; };
+		D2940F860FEE032400920DF0 /* wifiSMSDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wifiSMSDelegate.h; sourceTree = "<group>"; };
+		D2940F870FEE032400920DF0 /* wifiSMSDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wifiSMSDelegate.m; sourceTree = "<group>"; };
+		D2940F980FEE034100920DF0 /* AppSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppSupport.framework; path = System/Library/PrivateFrameworks/AppSupport.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
+				D2940F990FEE034100920DF0 /* AppSupport.framework in Frameworks */,
+				5F92E86313C1063500B6D9C9 /* libsqlite3.0.dylib in Frameworks */,
+				5F92E8AC13C1078C00B6D9C9 /* CFNetwork.framework in Frameworks */,
+				5FACA0D713C52B21002CDC76 /* AddressBook.framework in Frameworks */,
+				5F45C1301448E48A00BD3374 /* ChatKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				5F92F00C13C1235500B6D9C9 /* MyHTTPConnection.h */,
+				5F92E7A113C103CB00B6D9C9 /* MyHTTPConnection.m */,
+				D2940F860FEE032400920DF0 /* wifiSMSDelegate.h */,
+				D2940F870FEE032400920DF0 /* wifiSMSDelegate.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* WifiSMS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				5FB936C913ED9439005CDE48 /* cocoaHTTPServer */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* WifiSMS_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5F92EF2113C10F4700B6D9C9 /* SMS.plist */,
+				5FB537FC13DB698F00653272 /* WebServer.plist */,
+				5F92ED0113C10D9000B6D9C9 /* WifiSMS-info.plist */,
+				5F92E86213C1063500B6D9C9 /* libsqlite3.0.dylib */,
+				5F92E8CA13C10B3C00B6D9C9 /* Web */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5F45C12F1448E48A00BD3374 /* ChatKit.framework */,
+				5FACA0D613C52B21002CDC76 /* AddressBook.framework */,
+				5F92E8AB13C1078C00B6D9C9 /* CFNetwork.framework */,
+				D2940F980FEE034100920DF0 /* AppSupport.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5FB936C913ED9439005CDE48 /* cocoaHTTPServer */ = {
+			isa = PBXGroup;
+			children = (
+				5F92E7A713C103F900B6D9C9 /* HTTPAuthenticationRequest.h */,
+				5F92E7A813C103F900B6D9C9 /* HTTPConnection.m */,
+				5F92E7A913C103F900B6D9C9 /* HTTPAuthenticationRequest.m */,
+				5F92E7AA13C103F900B6D9C9 /* AsyncSocket.m */,
+				5F92E7AB13C103F900B6D9C9 /* DDRange.h */,
+				5F92E7AC13C103F900B6D9C9 /* HTTPAsyncFileResponse.m */,
+				5F92E7AD13C103F900B6D9C9 /* HTTPResponse.h */,
+				5F92E7AE13C103F900B6D9C9 /* HTTPServer.m */,
+				5F92E7AF13C103F900B6D9C9 /* AsyncSocket.h */,
+				5F92E7B013C103F900B6D9C9 /* HTTPConnection.h */,
+				5F92E7B113C103F900B6D9C9 /* HTTPAsyncFileResponse.h */,
+				5F92E7B213C103F900B6D9C9 /* HTTPServer.h */,
+				5F92E7B313C103F900B6D9C9 /* DDNumber.m */,
+				5F92E7B413C103F900B6D9C9 /* DDRange.m */,
+				5F92E7B513C103F900B6D9C9 /* HTTPResponse.m */,
+				5F92E7B613C103F900B6D9C9 /* DDData.h */,
+				5F92E7B713C103F900B6D9C9 /* DDNumber.h */,
+				5F92E7B813C103F900B6D9C9 /* DDData.m */,
+			);
+			name = cocoaHTTPServer;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* WifiSMS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "WifiSMS" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WifiSMS;
+			productName = WifiSMS;
+			productReference = 1D6058910D05DD3D006BFB54 /* WifiSMS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "WifiSMS" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* WifiSMS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F92EAC213C10B3C00B6D9C9 /* Web in Resources */,
+				5F92ED0213C10D9000B6D9C9 /* WifiSMS-info.plist in Resources */,
+				5F92EF2213C10F4700B6D9C9 /* SMS.plist in Resources */,
+				5FB537FD13DB698F00653272 /* WebServer.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				D2940F880FEE032400920DF0 /* wifiSMSDelegate.m in Sources */,
+				5F92E7A513C103CB00B6D9C9 /* MyHTTPConnection.m in Sources */,
+				5F92E7B913C103F900B6D9C9 /* HTTPConnection.m in Sources */,
+				5F92E7BA13C103F900B6D9C9 /* HTTPAuthenticationRequest.m in Sources */,
+				5F92E7BB13C103F900B6D9C9 /* AsyncSocket.m in Sources */,
+				5F92E7BC13C103F900B6D9C9 /* HTTPAsyncFileResponse.m in Sources */,
+				5F92E7BD13C103F900B6D9C9 /* HTTPServer.m in Sources */,
+				5F92E7BE13C103F900B6D9C9 /* DDNumber.m in Sources */,
+				5F92E7BF13C103F900B6D9C9 /* DDRange.m in Sources */,
+				5F92E7C013C103F900B6D9C9 /* HTTPResponse.m in Sources */,
+				5F92E7C113C103F900B6D9C9 /* DDData.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/PrivateFrameworks\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = WifiSMS_Prefix.pch;
+				INFOPLIST_FILE = "WifiSMS-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks/CoreTelephony.framework\"",
+					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/Frameworks/AddressBook.framework\"",
+					"\"$(SRCROOT)\"",
+				);
+				PRODUCT_NAME = WifiSMS;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/PrivateFrameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = WifiSMS_Prefix.pch;
+				INFOPLIST_FILE = "WifiSMS-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks/CoreTelephony.framework\"",
+					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/Frameworks/AddressBook.framework\"",
+					"\"$(SRCROOT)\"",
+				);
+				PRODUCT_NAME = WifiSMS;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "/Users/TreAsoN/WifiSMS/wifiSMS/PrivateFrameworks/**";
+				PREBINDING = NO;
+				SDKROOT = iphoneos5.0;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "/Users/TreAsoN/WifiSMS/wifiSMS/PrivateFrameworks/**";
+				OTHER_LDFLAGS = (
+					"-undefined",
+					suppress,
+					"-force_flat_namespace",
+				);
+				PREBINDING = NO;
+				SDKROOT = iphoneos5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "WifiSMS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "WifiSMS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

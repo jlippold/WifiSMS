@@ -1,0 +1,626 @@
+TWifiSMS
+v4
+r1
+cCheck dependencies
+cProcessInfoPlistFile /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/Info.plist WifiSMS-Info.plist
+cCpResource Web build/Release-iphoneos/WifiSMS.app/Web
+cCopyPlistFile /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WifiSMS-info.plist WifiSMS-info.plist
+cCopyPlistFile /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/SMS.plist SMS.plist
+cCopyPlistFile /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WebServer.plist WebServer.plist
+cProcessPCH /var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch.pth WifiSMS_Prefix.pch normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/main.o /Users/TreAsoN/WifiSMS/wifiSMS/main.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/wifiSMSDelegate.o /Users/TreAsoN/WifiSMS/wifiSMS/Classes/wifiSMSDelegate.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/MyHTTPConnection.o /Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPConnection.o /Users/TreAsoN/WifiSMS/wifiSMS/HTTPConnection.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPAuthenticationRequest.o /Users/TreAsoN/WifiSMS/wifiSMS/HTTPAuthenticationRequest.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/AsyncSocket.o /Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPAsyncFileResponse.o /Users/TreAsoN/WifiSMS/wifiSMS/HTTPAsyncFileResponse.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPServer.o /Users/TreAsoN/WifiSMS/wifiSMS/HTTPServer.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDNumber.o /Users/TreAsoN/WifiSMS/wifiSMS/DDNumber.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDRange.o /Users/TreAsoN/WifiSMS/wifiSMS/DDRange.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPResponse.o /Users/TreAsoN/WifiSMS/wifiSMS/HTTPResponse.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDData.o /Users/TreAsoN/WifiSMS/wifiSMS/DDData.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cLd /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WifiSMS normal armv7
+cGenerateDSYMFile /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app.dSYM /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WifiSMS
+cTouch /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk
+c000000004E7840290000000000000110
+t1316503593
+s272
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/AddressBook.framework/AddressBook
+c000000004E7805440000000000110A50
+t1316488516
+s1116752
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/CFNetwork.framework/CFNetwork
+c000000004E72F307000000000032AC00
+t1316156167
+s3320832
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004E72F28700000000003AB0A0
+t1316156039
+s3846304
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004E72F3440000000000529540
+t1316156228
+s5412160
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004E72F3370000000000001534
+t1316156215
+s5428
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004E7808770000000000000BCB
+t1316489335
+s3019
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004E7808C7000000000078BE50
+t1316489415
+s7913040
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks/AppSupport.framework/AppSupport
+c000000004E72F42C00000000000D3930
+t1316156460
+s866608
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/usr/lib/libsqlite3.0.dylib
+c000000004E72EE930000000000153B60
+t1316155027
+s1391456
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m
+c000000004E5392700000000000015F45
+t1314099824
+s89925
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m
+c000000004E98BB2E000000000000A15B
+t1318632238
+s41307
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/Classes/wifiSMSDelegate.m
+c000000004E99B5990000000000002C97
+t1318696345
+s11415
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/DDData.m
+c000000004E53927000000000000010BB
+t1314099824
+s4283
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/DDNumber.m
+c000000004E539270000000000000052E
+t1314099824
+s1326
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/DDRange.m
+c000000004E53927000000000000009E2
+t1314099824
+s2530
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/HTTPAsyncFileResponse.m
+c000000004E5392700000000000001154
+t1314099824
+s4436
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/HTTPAuthenticationRequest.m
+c000000004E539270000000000000196E
+t1314099824
+s6510
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/HTTPConnection.m
+c000000004E539270000000000001048E
+t1314099824
+s66702
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/HTTPResponse.m
+c000000004E5392700000000000000871
+t1314099824
+s2161
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/HTTPServer.m
+c000000004E53927000000000000024CB
+t1314099824
+s9419
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/PrivateFrameworks/ChatKit.framework/ChatKit
+c00000000000000000000000000000000
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/SMS.plist
+c000000004E5392700000000000000038
+t1314099824
+s56
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/Web
+c000000004E5392700000000000000242
+t1314099824
+s578
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/WebServer.plist
+c000000004E5392700000000000000134
+t1314099824
+s308
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/WifiSMS-info.plist
+c000000004E5392700000000000000331
+t1314099824
+s817
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/WifiSMS_Prefix.pch
+c000000004E53927000000000000000C7
+t1314099824
+s199
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app.dSYM
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/Info.plist
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/PkgInfo
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/SMS.plist
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/Web
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WebServer.plist
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WifiSMS
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WifiSMS-info.plist
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/AsyncSocket.o
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDData.o
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDNumber.o
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDRange.o
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPAsyncFileResponse.o
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPAuthenticationRequest.o
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPConnection.o
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPResponse.o
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPServer.o
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/MyHTTPConnection.o
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/WifiSMS.LinkFileList
+c000000004E99BB31000000000000058D
+t1318697777
+s1421
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/main.o
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/wifiSMSDelegate.o
+t2
+s0
+
+N/Users/TreAsoN/WifiSMS/wifiSMS/main.m
+c000000004E5392700000000000000299
+t1314099824
+s665
+
+N/var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch.pth
+t2
+s0
+
+NWifiSMS-Info.plist
+c000000004E5392700000000000000331
+t1314099824
+s817
+
+CBuild AST from /Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m
+r0
+
+CBuild AST from /Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m
+r0
+
+CBuild AST from /Users/TreAsoN/WifiSMS/wifiSMS/Classes/wifiSMSDelegate.m
+r0
+
+CBuild AST from /Users/TreAsoN/WifiSMS/wifiSMS/DDData.m
+r0
+
+CBuild AST from /Users/TreAsoN/WifiSMS/wifiSMS/DDNumber.m
+r0
+
+CBuild AST from /Users/TreAsoN/WifiSMS/wifiSMS/DDRange.m
+r0
+
+CBuild AST from /Users/TreAsoN/WifiSMS/wifiSMS/HTTPAsyncFileResponse.m
+r0
+
+CBuild AST from /Users/TreAsoN/WifiSMS/wifiSMS/HTTPAuthenticationRequest.m
+r0
+
+CBuild AST from /Users/TreAsoN/WifiSMS/wifiSMS/HTTPConnection.m
+r0
+
+CBuild AST from /Users/TreAsoN/WifiSMS/wifiSMS/HTTPResponse.m
+r0
+
+CBuild AST from /Users/TreAsoN/WifiSMS/wifiSMS/HTTPServer.m
+r0
+
+CBuild AST from /Users/TreAsoN/WifiSMS/wifiSMS/main.m
+r0
+
+CCheck dependencies
+r0
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependenciesf452c1b1f249b441^fe9bdbb1f249b441^---0#1#0#--18"Check dependencies36"9B4B25E1-F785-47AC-9522-B24116C68C18-
+
+CCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/AsyncSocket.o /Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s340390578.446436
+e340390579.366669
+r1
+xCompileC
+xbuild/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/AsyncSocket.o
+x/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+o/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m:2858:70:{2858:69-2858:71}{2858:81-2858:85}: warning: conversion specifies type 'int' but the argument has type 'CFSocketCallBackType' (aka 'unsigned long') [-Wformat,9]
+o                         NSLog (@"AsyncSocket %p received unexpected CFSocketCallBackType %d.", self, type);
+o                                                                                          ~^          ~~~~
+o                                                                                          %lu
+ofix-it:"/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m":{2858:69-2858:71}:"%lu"
+o/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m:2886:90:{2886:89-2886:91}{2886:101-2886:105}: warning: conversion specifies type 'int' but the argument has type 'CFStreamEventType' (aka 'unsigned long') [-Wformat,9]
+o                         NSLog (@"AsyncSocket %p received unexpected CFReadStream callback, CFStreamEventType %d.", self, type);
+o                                                                                                              ~^          ~~~~
+o                                                                                                              %lu
+ofix-it:"/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m":{2886:89-2886:91}:"%lu"
+o/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m:2913:91:{2913:90-2913:92}{2913:102-2913:106}: warning: conversion specifies type 'int' but the argument has type 'CFStreamEventType' (aka 'unsigned long') [-Wformat,9]
+o                         NSLog (@"AsyncSocket %p received unexpected CFWriteStream callback, CFStreamEventType %d.", self, type);
+o                                                                                                               ~^          ~~~~
+o                                                                                                               %lu
+ofix-it:"/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m":{2913:90-2913:92}:"%lu"
+o3 warnings generated.
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.meb1c73b2f249b441^3be15db3f249b441^-1949"/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m:2858:70:{2858:69-2858:71}{2858:81-2858:85}: warning: conversion specifies type 'int' but the argument has type 'CFSocketCallBackType' (aka 'unsigned long') [-Wformat,9]                         NSLog (@"AsyncSocket %p received unexpected CFSocketCallBackType %d.", self, type);                                                                                          ~^          ~~~~                                                                                          %lufix-it:"/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m":{2858:69-2858:71}:"%lu"/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m:2886:90:{2886:89-2886:91}{2886:101-2886:105}: warning: conversion specifies type 'int' but the argument has type 'CFStreamEventType' (aka 'unsigned long') [-Wformat,9]                         NSLog (@"AsyncSocket %p received unexpected CFReadStream callback, CFStreamEventType %d.", self, type);                                                                                                              ~^          ~~~~                                                                                                              %lufix-it:"/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m":{2886:89-2886:91}:"%lu"/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m:2913:91:{2913:90-2913:92}{2913:102-2913:106}: warning: conversion specifies type 'int' but the argument has type 'CFStreamEventType' (aka 'unsigned long') [-Wformat,9]                         NSLog (@"AsyncSocket %p received unexpected CFWriteStream callback, CFStreamEventType %d.", self, type);                                                                                                               ~^          ~~~~                                                                                                               %lufix-it:"/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m":{2913:90-2913:92}:"%lu"3 warnings generated.3(21%IDEActivityLogMessage2@102"Conversion specifies type 'int' but the argument has type 'CFSocketCallBackType' (aka 'unsigned long')80"Conversion specifies type 'int' but the argument has type 'CFSocketCallBackType'340390578#0#214#1(26%IDEActivityLogFixItMessage3@24"Fix-It: replace with %lu-340390578#524#78#-0#23"com.apple.dt.IDE.fix-it23%DVTTextDocumentLocation4@60"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m0000000000000000^2857#68#2857#70#18446744073709551615#0#---3"%lu1#-4@60"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m0000000000000000^2857#69#2857#69#18446744073709551615#0#19"Format String Issue2(4@60"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m0000000000000000^2857#68#2857#70#18446744073709551615#0#4@60"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m0000000000000000^2857#80#2857#84#18446744073709551615#0#-2@99"Conversion specifies type 'int' but the argument has type 'CFStreamEventType' (aka 'unsigned long')77"Conversion specifies type 'int' but the argument has type 'CFStreamEventType'340390578#602#213#1(3@24"Fix-It: replace with %lu-340390578#1185#78#-0#23"com.apple.dt.IDE.fix-it4@60"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m0000000000000000^2885#88#2885#90#18446744073709551615#0#---3"%lu1#-4@60"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m0000000000000000^2885#89#2885#89#18446744073709551615#0#19"Format String Issue2(4@60"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m0000000000000000^2885#88#2885#90#18446744073709551615#0#4@60"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m0000000000000000^2885#100#2885#104#18446744073709551615#0#-2@99"Conversion specifies type 'int' but the argument has type 'CFStreamEventType' (aka 'unsigned long')77"Conversion specifies type 'int' but the argument has type 'CFStreamEventType'340390578#1263#213#1(3@24"Fix-It: replace with %lu-340390578#1849#78#-0#23"com.apple.dt.IDE.fix-it4@60"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m0000000000000000^2912#89#2912#91#18446744073709551615#0#---3"%lu1#-4@60"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m0000000000000000^2912#90#2912#90#18446744073709551615#0#19"Format String Issue2(4@60"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m0000000000000000^2912#89#2912#91#18446744073709551615#0#4@60"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m0000000000000000^2912#101#2912#105#18446744073709551615#0#-0#0#0#-19%DVTDocumentLocation5@60"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m0000000000000000^2770"CompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/AsyncSocket.o AsyncSocket.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-shorten-64-to-32 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk -gdwarf-2 -fvisibility=hidden -Wno-sign-conversion -mthumb "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -miphoneos-version-min=5.0 -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-generated-files.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-own-target-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-all-target-headers.hmap -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-project-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/include -IPrivateFrameworks -IPrivateFrameworks/GraphicsServices -IPrivateFrameworks/UIKit -IPrivateFrameworks/WebCore -IPrivateFrameworks/UIKit/README -IPrivateFrameworks/WebCore/wak -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources/armv7 -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources -F/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks -F/Users/TreAsoN/WifiSMS/wifiSMS -F/Users/TreAsoN/WifiSMS/wifiSMS/PrivateFrameworks -include /var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch -MMD -MT dependencies -MF /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/AsyncSocket.d -c /Users/TreAsoN/WifiSMS/wifiSMS/AsyncSocket.m -o /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/AsyncSocket.o36"02E7D4B1-5005-460C-B947-3C925FC8E7DC-
+
+CCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDData.o /Users/TreAsoN/WifiSMS/wifiSMS/DDData.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s340390578.986092
+e340390579.084879
+r1
+xCompileC
+xbuild/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDData.o
+x/Users/TreAsoN/WifiSMS/wifiSMS/DDData.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection47"Compile /Users/TreAsoN/WifiSMS/wifiSMS/DDData.m7d95fcb2f249b441^41bc1ab3f249b441^---0#0#0#-19%DVTDocumentLocation2@55"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/DDData.m0000000000000000^2745"CompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDData.o DDData.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-shorten-64-to-32 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk -gdwarf-2 -fvisibility=hidden -Wno-sign-conversion -mthumb "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -miphoneos-version-min=5.0 -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-generated-files.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-own-target-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-all-target-headers.hmap -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-project-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/include -IPrivateFrameworks -IPrivateFrameworks/GraphicsServices -IPrivateFrameworks/UIKit -IPrivateFrameworks/WebCore -IPrivateFrameworks/UIKit/README -IPrivateFrameworks/WebCore/wak -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources/armv7 -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources -F/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks -F/Users/TreAsoN/WifiSMS/wifiSMS -F/Users/TreAsoN/WifiSMS/wifiSMS/PrivateFrameworks -include /var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch -MMD -MT dependencies -MF /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDData.d -c /Users/TreAsoN/WifiSMS/wifiSMS/DDData.m -o /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDData.o36"0F2ECE89-63E9-460F-8858-7F426ACE56F9-
+
+CCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDNumber.o /Users/TreAsoN/WifiSMS/wifiSMS/DDNumber.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s340390578.809869
+e340390578.880244
+r1
+xCompileC
+xbuild/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDNumber.o
+x/Users/TreAsoN/WifiSMS/wifiSMS/DDNumber.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection49"Compile /Users/TreAsoN/WifiSMS/wifiSMS/DDNumber.m8692d1b2f249b441^f019f9b2f249b441^---0#0#0#-19%DVTDocumentLocation2@57"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/DDNumber.m0000000000000000^2755"CompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDNumber.o DDNumber.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-shorten-64-to-32 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk -gdwarf-2 -fvisibility=hidden -Wno-sign-conversion -mthumb "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -miphoneos-version-min=5.0 -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-generated-files.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-own-target-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-all-target-headers.hmap -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-project-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/include -IPrivateFrameworks -IPrivateFrameworks/GraphicsServices -IPrivateFrameworks/UIKit -IPrivateFrameworks/WebCore -IPrivateFrameworks/UIKit/README -IPrivateFrameworks/WebCore/wak -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources/armv7 -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources -F/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks -F/Users/TreAsoN/WifiSMS/wifiSMS -F/Users/TreAsoN/WifiSMS/wifiSMS/PrivateFrameworks -include /var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch -MMD -MT dependencies -MF /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDNumber.d -c /Users/TreAsoN/WifiSMS/wifiSMS/DDNumber.m -o /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDNumber.o36"A8284E3E-3E57-42B6-97F1-7959BD2023C6-
+
+CCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDRange.o /Users/TreAsoN/WifiSMS/wifiSMS/DDRange.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s340390578.881580
+e340390578.970480
+r1
+xCompileC
+xbuild/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDRange.o
+x/Users/TreAsoN/WifiSMS/wifiSMS/DDRange.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection48"Compile /Users/TreAsoN/WifiSMS/wifiSMS/DDRange.m83fbe1b2f249b441^db4cf9b2f249b441^---0#0#0#-19%DVTDocumentLocation2@56"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/DDRange.m0000000000000000^2750"CompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDRange.o DDRange.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-shorten-64-to-32 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk -gdwarf-2 -fvisibility=hidden -Wno-sign-conversion -mthumb "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -miphoneos-version-min=5.0 -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-generated-files.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-own-target-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-all-target-headers.hmap -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-project-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/include -IPrivateFrameworks -IPrivateFrameworks/GraphicsServices -IPrivateFrameworks/UIKit -IPrivateFrameworks/WebCore -IPrivateFrameworks/UIKit/README -IPrivateFrameworks/WebCore/wak -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources/armv7 -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources -F/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks -F/Users/TreAsoN/WifiSMS/wifiSMS -F/Users/TreAsoN/WifiSMS/wifiSMS/PrivateFrameworks -include /var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch -MMD -MT dependencies -MF /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDRange.d -c /Users/TreAsoN/WifiSMS/wifiSMS/DDRange.m -o /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/DDRange.o36"46A01740-8945-48C5-B042-085F6C763448-
+
+CCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPAsyncFileResponse.o /Users/TreAsoN/WifiSMS/wifiSMS/HTTPAsyncFileResponse.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s340390578.530730
+e340390578.665107
+r1
+xCompileC
+xbuild/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPAsyncFileResponse.o
+x/Users/TreAsoN/WifiSMS/wifiSMS/HTTPAsyncFileResponse.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+o/Users/TreAsoN/WifiSMS/wifiSMS/HTTPAsyncFileResponse.m:58:35: warning: 'fileAttributesAtPath:traverseLink:' is deprecated [-Wdeprecated-declarations,8]
+o                 NSDictionary *fileAttributes = [[NSFileManager defaultManager] fileAttributesAtPath:filePath traverseLink:NO];
+o                                                 ^
+o1 warning generated.
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection62"Compile /Users/TreAsoN/WifiSMS/wifiSMS/HTTPAsyncFileResponse.me02d88b2f249b441^0950abb2f249b441^-352"/Users/TreAsoN/WifiSMS/wifiSMS/HTTPAsyncFileResponse.m:58:35: warning: 'fileAttributesAtPath:traverseLink:' is deprecated [-Wdeprecated-declarations,8]                 NSDictionary *fileAttributes = [[NSFileManager defaultManager] fileAttributesAtPath:filePath traverseLink:NO];                                                 ^1 warning generated.1(21%IDEActivityLogMessage2@50"'fileAttributesAtPath:traverseLink:' is deprecated-340390578#0#152#-1#-23%DVTTextDocumentLocation3@70"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/HTTPAsyncFileResponse.m0000000000000000^57#34#57#34#18446744073709551615#0#12"Deprecations--0#0#0#-19%DVTDocumentLocation4@70"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/HTTPAsyncFileResponse.m0000000000000000^2820"CompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPAsyncFileResponse.o HTTPAsyncFileResponse.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-shorten-64-to-32 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk -gdwarf-2 -fvisibility=hidden -Wno-sign-conversion -mthumb "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -miphoneos-version-min=5.0 -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-generated-files.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-own-target-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-all-target-headers.hmap -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-project-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/include -IPrivateFrameworks -IPrivateFrameworks/GraphicsServices -IPrivateFrameworks/UIKit -IPrivateFrameworks/WebCore -IPrivateFrameworks/UIKit/README -IPrivateFrameworks/WebCore/wak -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources/armv7 -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources -F/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks -F/Users/TreAsoN/WifiSMS/wifiSMS -F/Users/TreAsoN/WifiSMS/wifiSMS/PrivateFrameworks -include /var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch -MMD -MT dependencies -MF /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPAsyncFileResponse.d -c /Users/TreAsoN/WifiSMS/wifiSMS/HTTPAsyncFileResponse.m -o /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPAsyncFileResponse.o36"D8B87670-80BF-48D1-91E6-1A72E4EFF456-
+
+CCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPAuthenticationRequest.o /Users/TreAsoN/WifiSMS/wifiSMS/HTTPAuthenticationRequest.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s340390578.380247
+e340390578.529114
+r1
+xCompileC
+xbuild/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPAuthenticationRequest.o
+x/Users/TreAsoN/WifiSMS/wifiSMS/HTTPAuthenticationRequest.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection66"Compile /Users/TreAsoN/WifiSMS/wifiSMS/HTTPAuthenticationRequest.m77a161b2f249b441^8d0d95b2f249b441^---0#0#0#-19%DVTDocumentLocation2@74"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/HTTPAuthenticationRequest.m0000000000000000^2840"CompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPAuthenticationRequest.o HTTPAuthenticationRequest.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-shorten-64-to-32 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk -gdwarf-2 -fvisibility=hidden -Wno-sign-conversion -mthumb "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -miphoneos-version-min=5.0 -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-generated-files.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-own-target-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-all-target-headers.hmap -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-project-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/include -IPrivateFrameworks -IPrivateFrameworks/GraphicsServices -IPrivateFrameworks/UIKit -IPrivateFrameworks/WebCore -IPrivateFrameworks/UIKit/README -IPrivateFrameworks/WebCore/wak -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources/armv7 -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources -F/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks -F/Users/TreAsoN/WifiSMS/wifiSMS -F/Users/TreAsoN/WifiSMS/wifiSMS/PrivateFrameworks -include /var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch -MMD -MT dependencies -MF /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPAuthenticationRequest.d -c /Users/TreAsoN/WifiSMS/wifiSMS/HTTPAuthenticationRequest.m -o /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPAuthenticationRequest.o36"22B3750B-2133-4BEC-87CA-5B44D91B339E-
+
+CCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPConnection.o /Users/TreAsoN/WifiSMS/wifiSMS/HTTPConnection.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s340390578.224785
+e340390579.038632
+r1
+xCompileC
+xbuild/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPConnection.o
+x/Users/TreAsoN/WifiSMS/wifiSMS/HTTPConnection.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Compile /Users/TreAsoN/WifiSMS/wifiSMS/HTTPConnection.m03b039b2f249b441^c4070ab3f249b441^---0#0#0#-19%DVTDocumentLocation2@63"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/HTTPConnection.m0000000000000000^2785"CompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPConnection.o HTTPConnection.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-shorten-64-to-32 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk -gdwarf-2 -fvisibility=hidden -Wno-sign-conversion -mthumb "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -miphoneos-version-min=5.0 -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-generated-files.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-own-target-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-all-target-headers.hmap -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-project-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/include -IPrivateFrameworks -IPrivateFrameworks/GraphicsServices -IPrivateFrameworks/UIKit -IPrivateFrameworks/WebCore -IPrivateFrameworks/UIKit/README -IPrivateFrameworks/WebCore/wak -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources/armv7 -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources -F/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks -F/Users/TreAsoN/WifiSMS/wifiSMS -F/Users/TreAsoN/WifiSMS/wifiSMS/PrivateFrameworks -include /var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch -MMD -MT dependencies -MF /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPConnection.d -c /Users/TreAsoN/WifiSMS/wifiSMS/HTTPConnection.m -o /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPConnection.o36"CAF60B8A-1935-4B6E-9740-AEACECF856B9-
+
+CCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPResponse.o /Users/TreAsoN/WifiSMS/wifiSMS/HTTPResponse.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s340390578.972873
+e340390579.065278
+r1
+xCompileC
+xbuild/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPResponse.o
+x/Users/TreAsoN/WifiSMS/wifiSMS/HTTPResponse.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+o/Users/TreAsoN/WifiSMS/wifiSMS/HTTPResponse.m:19:35: warning: 'fileAttributesAtPath:traverseLink:' is deprecated [-Wdeprecated-declarations,8]
+o                 NSDictionary *fileAttributes = [[NSFileManager defaultManager] fileAttributesAtPath:filePath traverseLink:NO];
+o                                                 ^
+o1 warning generated.
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection53"Compile /Users/TreAsoN/WifiSMS/wifiSMS/HTTPResponse.m3f36f9b2f249b441^06bc10b3f249b441^-343"/Users/TreAsoN/WifiSMS/wifiSMS/HTTPResponse.m:19:35: warning: 'fileAttributesAtPath:traverseLink:' is deprecated [-Wdeprecated-declarations,8]                 NSDictionary *fileAttributes = [[NSFileManager defaultManager] fileAttributesAtPath:filePath traverseLink:NO];                                                 ^1 warning generated.1(21%IDEActivityLogMessage2@50"'fileAttributesAtPath:traverseLink:' is deprecated-340390579#0#143#-1#-23%DVTTextDocumentLocation3@61"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/HTTPResponse.m0000000000000000^18#34#18#34#18446744073709551615#0#12"Deprecations--0#0#0#-19%DVTDocumentLocation4@61"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/HTTPResponse.m0000000000000000^2775"CompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPResponse.o HTTPResponse.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-shorten-64-to-32 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk -gdwarf-2 -fvisibility=hidden -Wno-sign-conversion -mthumb "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -miphoneos-version-min=5.0 -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-generated-files.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-own-target-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-all-target-headers.hmap -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-project-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/include -IPrivateFrameworks -IPrivateFrameworks/GraphicsServices -IPrivateFrameworks/UIKit -IPrivateFrameworks/WebCore -IPrivateFrameworks/UIKit/README -IPrivateFrameworks/WebCore/wak -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources/armv7 -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources -F/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks -F/Users/TreAsoN/WifiSMS/wifiSMS -F/Users/TreAsoN/WifiSMS/wifiSMS/PrivateFrameworks -include /var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch -MMD -MT dependencies -MF /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPResponse.d -c /Users/TreAsoN/WifiSMS/wifiSMS/HTTPResponse.m -o /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPResponse.o36"211FA4F6-3244-493B-865F-F64E62DD8093-
+
+CCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPServer.o /Users/TreAsoN/WifiSMS/wifiSMS/HTTPServer.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s340390578.666567
+e340390578.805655
+r1
+xCompileC
+xbuild/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPServer.o
+x/Users/TreAsoN/WifiSMS/wifiSMS/HTTPServer.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+o/Users/TreAsoN/WifiSMS/wifiSMS/HTTPServer.m:232:28:{232:28-232:32}: warning: sending 'HTTPServer *' to parameter of incompatible type 'id<NSNetServiceDelegate>' [3]
+o                         [netService setDelegate:self];
+o                                                 ^~~~
+o/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSNetServices.h:82:48: note: passing argument to parameter 'delegate' here [3]
+o - (void)setDelegate:(id <NSNetServiceDelegate>)delegate;
+o                                                ^
+o1 warning generated.
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection51"Compile /Users/TreAsoN/WifiSMS/wifiSMS/HTTPServer.m86c7aab2f249b441^2940d4b2f249b441^-608"/Users/TreAsoN/WifiSMS/wifiSMS/HTTPServer.m:232:28:{232:28-232:32}: warning: sending 'HTTPServer *' to parameter of incompatible type 'id<NSNetServiceDelegate>' [3]                         [netService setDelegate:self];                                                 ^~~~/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSNetServices.h:82:48: note: passing argument to parameter 'delegate' here [3] - (void)setDelegate:(id <NSNetServiceDelegate>)delegate;                                                ^1 warning generated.1(21%IDEActivityLogMessage2@83"Sending 'HTTPServer *' to parameter of incompatible type 'id<NSNetServiceDelegate>'-340390578#0#165#1(2@45"Passing argument to parameter 'delegate' here-340390578#275#204#-0#-23%DVTTextDocumentLocation3@156"file://localhost/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSNetServices.h0000000000000000^81#47#81#47#18446744073709551615#0#14"Semantic Issue--1#-3@59"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/HTTPServer.m0000000000000000^231#27#231#27#18446744073709551615#0#14"Semantic Issue1(3@59"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/HTTPServer.m0000000000000000^231#27#231#31#18446744073709551615#0#-0#0#0#-19%DVTDocumentLocation4@59"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/HTTPServer.m0000000000000000^2765"CompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPServer.o HTTPServer.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-shorten-64-to-32 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk -gdwarf-2 -fvisibility=hidden -Wno-sign-conversion -mthumb "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -miphoneos-version-min=5.0 -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-generated-files.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-own-target-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-all-target-headers.hmap -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-project-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/include -IPrivateFrameworks -IPrivateFrameworks/GraphicsServices -IPrivateFrameworks/UIKit -IPrivateFrameworks/WebCore -IPrivateFrameworks/UIKit/README -IPrivateFrameworks/WebCore/wak -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources/armv7 -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources -F/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks -F/Users/TreAsoN/WifiSMS/wifiSMS -F/Users/TreAsoN/WifiSMS/wifiSMS/PrivateFrameworks -include /var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch -MMD -MT dependencies -MF /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPServer.d -c /Users/TreAsoN/WifiSMS/wifiSMS/HTTPServer.m -o /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/HTTPServer.o36"1FEE0691-0B05-47C7-9FA3-0979A9E6D544-
+
+CCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/MyHTTPConnection.o /Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s340390578.224326
+e340390578.983358
+r1
+xCompileC
+xbuild/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/MyHTTPConnection.o
+x/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+o/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:115:4:{115:4-115:24}: warning: instance method '-DownloadSMS:' not found (return type defaults to 'id') [3]
+o                         [self DownloadSMS:p];
+o                         ^~~~~~~~~~~~~~~~~~~~
+o/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:270:36:{270:36-270:79}: warning: class method '+sharedConversationList' not found (return type defaults to 'id') [3]
+o                 conversationList = [CKConversationList sharedConversationList];
+o                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+o/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:272:48:{272:48-272:158}: warning: instance method '-conversationForRecipients:create:service:' not found (return type defaults to 'id') [3]
+o                 CKConversation *conversation = [conversationList conversationForRecipients:[NSArray arrayWithObject:ckEntity] create:TRUE service:smsService];
+o                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+o/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:273:27:{273:37-273:59}: warning: incompatible integer to pointer conversion initializing 'NSString *' with an expression of type 'int' [3]
+o                 NSString *groupID = [conversation groupID];
+o                           ^         ~~~~~~~~~~~~~~~~~~~~~~
+o/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:310:4: warning: '/*' within block comment [-Wcomment,2]
+o                         /*
+o                         ^
+o/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:379:13:{379:13-379:17}: warning: format string is not a string literal (potentially insecure) [-Wformat-security,9]
+o                                                 NSLog(file);
+o                                                       ^~~~
+o/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:380:13:{380:13-380:27}: warning: format string is not a string literal (potentially insecure) [-Wformat-security,9]
+o                                                 NSLog(writableDBPath);
+o                                                       ^~~~~~~~~~~~~~
+o/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:844:28: warning: implicit declaration of function 'resizedImage' is invalid in C99 [-Wimplicit-function-declaration,3]
+o                                         UIImage *smallImage = resizedImage(image, sz);
+o                                                               ^
+o/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:844:15:{844:28-844:51}: warning: incompatible integer to pointer conversion initializing 'UIImage *' with an expression of type 'int' [3]
+o                                         UIImage *smallImage = resizedImage(image, sz);
+o                                                  ^            ~~~~~~~~~~~~~~~~~~~~~~~
+o/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:1019:1:{1019:1-1019:13}: warning: type specifier missing, defaults to 'int' [-Wimplicit-int,3]
+o resizedImage (UIImage *inImage, CGRect thumbRect) {
+o ^~~~~~~~~~~~
+o/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:1053:9:{1053:9-1053:15}: warning: incompatible pointer to integer conversion returning 'UIImage *' from a function with result type 'int' [3]
+o         return result;
+o                ^~~~~~
+o11 warnings generated.
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection65"Compile /Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.mdfa839b2f249b441^b1f904b3f249b441^-3402"/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:115:4:{115:4-115:24}: warning: instance method '-DownloadSMS:' not found (return type defaults to 'id') [3]                         [self DownloadSMS:p];                         ^~~~~~~~~~~~~~~~~~~~/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:270:36:{270:36-270:79}: warning: class method '+sharedConversationList' not found (return type defaults to 'id') [3]                 conversationList = [CKConversationList sharedConversationList];                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:272:48:{272:48-272:158}: warning: instance method '-conversationForRecipients:create:service:' not found (return type defaults to 'id') [3]                 CKConversation *conversation = [conversationList conversationForRecipients:[NSArray arrayWithObject:ckEntity] create:TRUE service:smsService];                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:273:27:{273:37-273:59}: warning: incompatible integer to pointer conversion initializing 'NSString *' with an expression of type 'int' [3]                 NSString *groupID = [conversation groupID];                           ^         ~~~~~~~~~~~~~~~~~~~~~~/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:310:4: warning: '/*' within block comment [-Wcomment,2]                         /*                         ^/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:379:13:{379:13-379:17}: warning: format string is not a string literal (potentially insecure) [-Wformat-security,9]                                                 NSLog(file);                                                       ^~~~/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:380:13:{380:13-380:27}: warning: format string is not a string literal (potentially insecure) [-Wformat-security,9]                                                 NSLog(writableDBPath);                                                       ^~~~~~~~~~~~~~/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:844:28: warning: implicit declaration of function 'resizedImage' is invalid in C99 [-Wimplicit-function-declaration,3]                                         UIImage *smallImage = resizedImage(image, sz);                                                               ^/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:844:15:{844:28-844:51}: warning: incompatible integer to pointer conversion initializing 'UIImage *' with an expression of type 'int' [3]                                         UIImage *smallImage = resizedImage(image, sz);                                                  ^            ~~~~~~~~~~~~~~~~~~~~~~~/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:1019:1:{1019:1-1019:13}: warning: type specifier missing, defaults to 'int' [-Wimplicit-int,3] resizedImage (UIImage *inImage, CGRect thumbRect) { ^~~~~~~~~~~~/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m:1053:9:{1053:9-1053:15}: warning: incompatible pointer to integer conversion returning 'UIImage *' from a function with result type 'int' [3]         return result;                ^~~~~~11 warnings generated.11(21%IDEActivityLogMessage2@72"Instance method '-DownloadSMS:' not found (return type defaults to 'id')41"Instance method '-DownloadSMS:' not found340390578#0#166#-1#-23%DVTTextDocumentLocation3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^114#3#114#3#18446744073709551615#0#14"Semantic Issue1(3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^114#3#114#23#18446744073709551615#0#-2@79"Class method '+sharedConversationList' not found (return type defaults to 'id')48"Class method '+sharedConversationList' not found340390578#259#175#-1#-3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^269#35#269#35#18446744073709551615#0#14"Semantic Issue1(3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^269#35#269#78#18446744073709551615#0#-2@101"Instance method '-conversationForRecipients:create:service:' not found (return type defaults to 'id')70"Instance method '-conversationForRecipients:create:service:' not found340390578#595#198#-1#-3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^271#47#271#47#18446744073709551615#0#14"Semantic Issue1(3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^271#47#271#157#18446744073709551615#0#-2@101"Incompatible integer to pointer conversion initializing 'NSString *' with an expression of type 'int'-340390578#1112#197#-1#-3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^272#26#272#26#18446744073709551615#0#14"Semantic Issue1(3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^272#36#272#58#18446744073709551615#0#-2@25"'/*' within block comment-340390578#1430#114#-1#-3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^309#3#309#3#18446744073709551615#0#29"Lexical or Preprocessor Issue--2@60"Format string is not a string literal (potentially insecure)37"Format string is not a string literal340390578#1599#174#-1#-3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^378#12#378#12#18446744073709551615#0#19"Format String Issue1(3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^378#12#378#16#18446744073709551615#0#-2@60"Format string is not a string literal (potentially insecure)37"Format string is not a string literal340390578#1895#174#-1#-3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^379#12#379#12#18446744073709551615#0#19"Format String Issue1(3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^379#12#379#26#18446744073709551615#0#-2@65"Implicit declaration of function 'resizedImage' is invalid in C99-340390578#2211#177#-1#-3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^843#27#843#27#18446744073709551615#0#14"Semantic Issue--2@100"Incompatible integer to pointer conversion initializing 'UIImage *' with an expression of type 'int'-340390578#2541#196#-1#-3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^843#14#843#14#18446744073709551615#0#14"Semantic Issue1(3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^843#27#843#50#18446744073709551615#0#-2@41"Type specifier missing, defaults to 'int'-340390578#2912#153#-1#-3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^1018#0#1018#0#18446744073709551615#0#14"Semantic Issue1(3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^1018#0#1018#12#18446744073709551615#0#-2@103"Incompatible pointer to integer conversion returning 'UIImage *' from a function with result type 'int'-340390578#3132#200#-1#-3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^1052#8#1052#8#18446744073709551615#0#14"Semantic Issue1(3@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^1052#8#1052#14#18446744073709551615#0#-0#0#0#-19%DVTDocumentLocation4@73"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m0000000000000000^2811"CompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/MyHTTPConnection.o Classes/MyHTTPConnection.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-shorten-64-to-32 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk -gdwarf-2 -fvisibility=hidden -Wno-sign-conversion -mthumb "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -miphoneos-version-min=5.0 -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-generated-files.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-own-target-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-all-target-headers.hmap -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-project-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/include -IPrivateFrameworks -IPrivateFrameworks/GraphicsServices -IPrivateFrameworks/UIKit -IPrivateFrameworks/WebCore -IPrivateFrameworks/UIKit/README -IPrivateFrameworks/WebCore/wak -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources/armv7 -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources -F/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks -F/Users/TreAsoN/WifiSMS/wifiSMS -F/Users/TreAsoN/WifiSMS/wifiSMS/PrivateFrameworks -include /var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch -MMD -MT dependencies -MF /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/MyHTTPConnection.d -c /Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m -o /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/MyHTTPConnection.o36"041428AC-068F-4AD5-B683-3AE0474DB340-
+
+CCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/main.o /Users/TreAsoN/WifiSMS/wifiSMS/main.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s340390578.224015
+e340390578.378769
+r1
+xCompileC
+xbuild/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/main.o
+x/Users/TreAsoN/WifiSMS/wifiSMS/main.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection45"Compile /Users/TreAsoN/WifiSMS/wifiSMS/main.m5c9039b2f249b441^46ef94b2f249b441^---0#0#0#-19%DVTDocumentLocation2@53"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/main.m0000000000000000^2735"CompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/main.o main.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-shorten-64-to-32 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk -gdwarf-2 -fvisibility=hidden -Wno-sign-conversion -mthumb "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -miphoneos-version-min=5.0 -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-generated-files.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-own-target-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-all-target-headers.hmap -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-project-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/include -IPrivateFrameworks -IPrivateFrameworks/GraphicsServices -IPrivateFrameworks/UIKit -IPrivateFrameworks/WebCore -IPrivateFrameworks/UIKit/README -IPrivateFrameworks/WebCore/wak -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources/armv7 -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources -F/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks -F/Users/TreAsoN/WifiSMS/wifiSMS -F/Users/TreAsoN/WifiSMS/wifiSMS/PrivateFrameworks -include /var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch -MMD -MT dependencies -MF /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/main.d -c /Users/TreAsoN/WifiSMS/wifiSMS/main.m -o /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/main.o36"CA8E2928-0E53-401F-91C6-AA8913E03AA3-
+
+CCompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/wifiSMSDelegate.o /Users/TreAsoN/WifiSMS/wifiSMS/Classes/wifiSMSDelegate.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s340390578.224164
+e340390578.445157
+r1
+xCompileC
+xbuild/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/wifiSMSDelegate.o
+x/Users/TreAsoN/WifiSMS/wifiSMS/Classes/wifiSMSDelegate.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+o/Users/TreAsoN/WifiSMS/wifiSMS/Classes/wifiSMSDelegate.m:319:66:{319:66-319:69}: warning: incompatible integer to pointer conversion sending 'BOOL' (aka 'signed char') to parameter of type 'BOOL *' (aka 'signed char *') [3]
+o         if(![fileManager fileExistsAtPath:@"/tmp/WifiSMS/" isDirectory: YES])
+o                                                                         ^~~
+o/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/usr/include/objc/objc.h:50:25: note: instantiated from:
+o #define YES             (BOOL)1
+o                         ^~~~~~~
+o/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSFileManager.h:191:63: note: passing argument to parameter 'isDirectory' here [3]
+o - (BOOL)fileExistsAtPath:(NSString *)path isDirectory:(BOOL *)isDirectory;
+o                                                               ^
+o1 warning generated.
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection64"Compile /Users/TreAsoN/WifiSMS/wifiSMS/Classes/wifiSMSDelegate.m999d39b2f249b441^32ff94b2f249b441^-942"/Users/TreAsoN/WifiSMS/wifiSMS/Classes/wifiSMSDelegate.m:319:66:{319:66-319:69}: warning: incompatible integer to pointer conversion sending 'BOOL' (aka 'signed char') to parameter of type 'BOOL *' (aka 'signed char *') [3]         if(![fileManager fileExistsAtPath:@"/tmp/WifiSMS/" isDirectory: YES])                                                                         ^~~/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/usr/include/objc/objc.h:50:25: note: instantiated from: #define YES             (BOOL)1                         ^~~~~~~/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSFileManager.h:191:63: note: passing argument to parameter 'isDirectory' here [3] - (BOOL)fileExistsAtPath:(NSString *)path isDirectory:(BOOL *)isDirectory;                                                               ^1 warning generated.1(21%IDEActivityLogMessage2@129"Incompatible integer to pointer conversion sending 'BOOL' (aka 'signed char') to parameter of type 'BOOL *' (aka 'signed char *')57"Incompatible integer to pointer conversion sending 'BOOL'340390578#0#224#2(2@112"Instantiated from: /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/usr/include/objc/objc.h-340390578#380#126#-0#-23%DVTTextDocumentLocation3@109"file://localhost/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/usr/include/objc/objc.h0000000000000000^49#24#49#24#18446744073709551615#0#30"Apple LLVM compiler 3.0 Notice--2@48"Passing argument to parameter 'isDirectory' here-340390578#572#208#-0#-3@156"file://localhost/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSFileManager.h0000000000000000^190#62#190#62#18446744073709551615#0#14"Semantic Issue--1#-3@72"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/wifiSMSDelegate.m0000000000000000^318#65#318#65#18446744073709551615#0#14"Semantic Issue1(3@72"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/wifiSMSDelegate.m0000000000000000^318#65#318#68#18446744073709551615#0#-0#0#0#-19%DVTDocumentLocation4@72"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/Classes/wifiSMSDelegate.m0000000000000000^2806"CompileC build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/wifiSMSDelegate.o Classes/wifiSMSDelegate.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-shorten-64-to-32 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk -gdwarf-2 -fvisibility=hidden -Wno-sign-conversion -mthumb "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -miphoneos-version-min=5.0 -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-generated-files.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-own-target-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-all-target-headers.hmap -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-project-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/include -IPrivateFrameworks -IPrivateFrameworks/GraphicsServices -IPrivateFrameworks/UIKit -IPrivateFrameworks/WebCore -IPrivateFrameworks/UIKit/README -IPrivateFrameworks/WebCore/wak -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources/armv7 -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources -F/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks -F/Users/TreAsoN/WifiSMS/wifiSMS -F/Users/TreAsoN/WifiSMS/wifiSMS/PrivateFrameworks -include /var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch -MMD -MT dependencies -MF /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/wifiSMSDelegate.d -c /Users/TreAsoN/WifiSMS/wifiSMS/Classes/wifiSMSDelegate.m -o /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/wifiSMSDelegate.o36"28CEDE8B-AEF3-4BC4-BE3B-42D87260E27F-
+
+CCopyPlistFile /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/SMS.plist SMS.plist
+s340390577.877395
+e340390577.880354
+r1
+xCopyPlistFile
+x/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/SMS.plist
+xSMS.plist
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection14"Copy SMS.plistc4b3e0b1f249b441^fa60e1b1f249b441^---0#0#0#-19%DVTDocumentLocation2@56"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/SMS.plist0000000000000000^421"CopyPlistFile build/Release-iphoneos/WifiSMS.app/SMS.plist SMS.plist    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    builtin-copyPlist --convert binary1 --outdir /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app -- SMS.plist36"24A62F92-6BA6-4305-A916-6295EFF1C52E-
+
+CCopyPlistFile /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WebServer.plist WebServer.plist
+s340390577.877890
+e340390577.887658
+r1
+xCopyPlistFile
+x/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WebServer.plist
+xWebServer.plist
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection20"Copy WebServer.plistffcce0b1f249b441^573ee3b1f249b441^---0#0#0#-19%DVTDocumentLocation2@62"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/WebServer.plist0000000000000000^439"CopyPlistFile build/Release-iphoneos/WifiSMS.app/WebServer.plist WebServer.plist    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    builtin-copyPlist --convert binary1 --outdir /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app -- WebServer.plist36"F3B3B0D6-FD69-4687-82D4-B2A7AF74F730-
+
+CCopyPlistFile /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WifiSMS-info.plist WifiSMS-info.plist
+s340390577.877389
+e340390577.883135
+r1
+xCopyPlistFile
+x/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WifiSMS-info.plist
+xWifiSMS-info.plist
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection23"Copy WifiSMS-info.plistd4b7e0b1f249b441^3319e2b1f249b441^---0#0#0#-19%DVTDocumentLocation2@65"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/WifiSMS-info.plist0000000000000000^448"CopyPlistFile build/Release-iphoneos/WifiSMS.app/WifiSMS-info.plist WifiSMS-info.plist    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    builtin-copyPlist --convert binary1 --outdir /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app -- WifiSMS-info.plist36"D39AFBBD-F368-4045-8CD5-A46410C780DC-
+
+CCpResource Web build/Release-iphoneos/WifiSMS.app/Web
+s340390577.877382
+e340390577.886033
+r1
+xCpResource
+xWeb
+xbuild/Release-iphoneos/WifiSMS.app/Web
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection43"Copy build/Release-iphoneos/WifiSMS.app/Web74b6e0b1f249b441^aad6e2b1f249b441^---0#0#0#-19%DVTDocumentLocation2@85"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/Web00f41041dfffdf42^512"CpResource Web build/Release-iphoneos/WifiSMS.app/Web    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -strip-debug-symbols -resolve-src-symlinks /Users/TreAsoN/WifiSMS/wifiSMS/Web /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app36"21C2D881-6AB1-44A3-B2F7-EF8EFB910EF0-
+
+CGenerateDSYMFile /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app.dSYM /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WifiSMS
+s340390579.499880
+e340390579.528931
+r1
+xGenerateDSYMFile
+x/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app.dSYM
+x/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WifiSMS
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection81"Generating /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app.dSYM560b80b3f249b441^236987b3f249b441^---0#0#0#-19%DVTDocumentLocation2@86"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app.dSYM00f41041dfffdf42^504"GenerateDSYMFile build/Release-iphoneos/WifiSMS.app.dSYM build/Release-iphoneos/WifiSMS.app/WifiSMS    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/usr/bin/dsymutil /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WifiSMS -o /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app.dSYM36"F29A6A45-1F7A-4054-A03B-90C9FF935FF2-
+
+CLd /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WifiSMS normal armv7
+s340390579.373235
+e340390579.493499
+r1
+xLd
+x/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WifiSMS
+xnormal
+xarmv7
+old: warning: directory not found for option '-L/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks/CoreTelephony.framework'
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection78"Link /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WifiSMSd6ac5fb3f249b441^f3557eb3f249b441^-175"ld: warning: directory not found for option '-L/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks/CoreTelephony.framework'1(21%IDEActivityLogMessage2@161"Directory not found for option '-L/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks/CoreTelephony.framework'-340390579#0#175#-1#-23%DVTTextDocumentLocation3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#27"Apple Mach-O Linker Warning--0#0#0#--1519"Ld build/Release-iphoneos/WifiSMS.app/WifiSMS normal armv7    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv IPHONEOS_DEPLOYMENT_TARGET 5.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -arch armv7 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk -L/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos -L/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks/CoreTelephony.framework -L/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/AddressBook.framework -L/Users/TreAsoN/WifiSMS/wifiSMS -F/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks -F/Users/TreAsoN/WifiSMS/wifiSMS -F/Users/TreAsoN/WifiSMS/wifiSMS/PrivateFrameworks -filelist /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/Objects-normal/armv7/WifiSMS.LinkFileList -dead_strip -undefined suppress -force_flat_namespace -miphoneos-version-min=5.0 -framework Foundation -framework UIKit -framework CoreGraphics -framework AppSupport -lsqlite3.0 -framework CFNetwork -framework AddressBook -framework ChatKit -o /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/WifiSMS36"2CAAED49-CF09-4D0E-841D-8AA8343A4FA8-
+
+CProcessInfoPlistFile /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/Info.plist WifiSMS-Info.plist
+s340390577.863938
+e340390577.868507
+r1
+xProcessInfoPlistFile
+x/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/Info.plist
+xWifiSMS-Info.plist
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection26"Process WifiSMS-Info.plist4145ddb1f249b441^7a56deb1f249b441^---0#0#0#-19%DVTDocumentLocation2@65"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/WifiSMS-Info.plist0000000000000000^579"ProcessInfoPlistFile build/Release-iphoneos/WifiSMS.app/Info.plist WifiSMS-Info.plist    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    builtin-infoPlistUtility WifiSMS-Info.plist -genpkginfo /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -o /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app/Info.plist36"719E2B65-5FB0-4EA7-94D5-01B33887866F-
+
+CProcessPCH /Users/TreAsoN/Library/Developer/Xcode/DerivedData/WifiSMS-gptaqffllawtfjftsxfuitygjwmb/Index/PrecompiledHeaders/WifiSMS_Prefix-fniftvrqgrcvpoejuotzdavetcmz_ast/WifiSMS_Prefix.pch.pth WifiSMS_Prefix.pch normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
+
+CProcessPCH /var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch.pth WifiSMS_Prefix.pch normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s340390577.895881
+e340390578.216212
+r1
+xProcessPCH
+x/var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch.pth
+xWifiSMS_Prefix.pch
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection29"Precompile WifiSMS_Prefix.pch1c7ce5b1f249b441^6f7e37b2f249b441^---0#0#0#-19%DVTDocumentLocation2@65"file://localhost/Users/TreAsoN/WifiSMS/wifiSMS/WifiSMS_Prefix.pch0000000000000000^2784"ProcessPCH /var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch.pth WifiSMS_Prefix.pch normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -x objective-c-header -arch armv7 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-shorten-64-to-32 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk -gdwarf-2 -fvisibility=hidden -Wno-sign-conversion -mthumb "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -miphoneos-version-min=5.0 -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-generated-files.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-own-target-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-all-target-headers.hmap -iquote /Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/WifiSMS-project-headers.hmap -I/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/include -IPrivateFrameworks -IPrivateFrameworks/GraphicsServices -IPrivateFrameworks/UIKit -IPrivateFrameworks/WebCore -IPrivateFrameworks/UIKit/README -IPrivateFrameworks/WebCore/wak -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources/armv7 -I/Users/TreAsoN/WifiSMS/wifiSMS/build/WifiSMS.build/Release-iphoneos/WifiSMS.build/DerivedSources -F/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/PrivateFrameworks -F/Users/TreAsoN/WifiSMS/wifiSMS -F/Users/TreAsoN/WifiSMS/wifiSMS/PrivateFrameworks -c /Users/TreAsoN/WifiSMS/wifiSMS/WifiSMS_Prefix.pch -o /var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch.pth -MMD -MT dependencies -MF /var/folders/37/t7ncdbzn79qbv150z1pljmy40000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/WifiSMS_Prefix-hggtrtopcupbydbjqghiwavazhfa/WifiSMS_Prefix.pch.d36"36FFF7EB-2858-4EEE-9CFA-B517A1362B06-
+
+CTouch /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app
+s340390579.536522
+e340390579.543552
+r1
+xTouch
+x/Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection71"Touch /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.appca6f89b3f249b441^dd278bb3f249b441^---0#0#0#--353"Touch build/Release-iphoneos/WifiSMS.app    cd /Users/TreAsoN/WifiSMS/wifiSMS    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /usr/bin/touch -c /Users/TreAsoN/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS.app36"E56E50EF-B8F6-43E4-86F2-114ED19D3364-
+
