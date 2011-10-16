@@ -77,6 +77,14 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 }
 
 
+- (BOOL)isSecureServer
+{
+	// Override me to create an https server...
+	
+	return NO;
+}
+
+
 
 - (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path
 {
@@ -238,6 +246,11 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 			NSString *msg = [postStr substringFromIndex: index];
 			index = [msg rangeOfString:@"&"].location;
 			msg = [msg substringToIndex: index];
+            msg = [msg stringByReplacingOccurrencesOfString:@"|WifiSMSPlus|" withString:@"+"];
+            msg = [msg stringByReplacingOccurrencesOfString:@"|WifiSMSEquals|" withString:@"="];
+            msg = [msg stringByReplacingOccurrencesOfString:@"|WifiSMSAmpersand|" withString:@"&"];
+            msg = [msg stringByReplacingOccurrencesOfString:@"|WifiSMSPercent|" withString:@"%"];
+            //msg = [msg stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 			
 			index = [postStr rangeOfString:@"pid="].location + 4;
 			NSString *pid = [postStr substringFromIndex: index];
@@ -256,14 +269,15 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 			Country = [Country substringToIndex: index];
             
             
-			msg = [msg stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+			//msg = [msg stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 			
-
             
             CKSMSService *smsService = [CKSMSService sharedSMSService];
             
             //id ct = CTTelephonyCenterGetDefault();
             CKConversationList *conversationList = nil;
+            
+            NSLog(@"SMS being Sent"); 
             
             NSString *value =[[UIDevice currentDevice] systemVersion];          
             if([value hasPrefix:@"5"])
@@ -280,7 +294,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
                 id ct = CTTelephonyCenterGetDefault();
                 void* address = CKSMSAddressCreateWithString(pid); 
                 
-                NSLog(@"SMS being Sent"); 
+                
                 int group = [grp intValue];			
                 
                 if (group <= 0) {

@@ -836,15 +836,14 @@ function SendSMS() {
 }
 
 function customEncode(s) {
-	s = s.replace(/=/gi, escape("="));
-	s = s.replace(/\+/gi,encodeURIComponent("+"));
-	s = s.replace(/&/gi, escape("&"));
-	s = s.replace(/%/gi, encodeURIComponent("%"));
+	s = s.replace(/=/gi, "|WifiSMSEquals|");
+	s = s.replace(/\+/gi, "|WifiSMSPlus|");
+	s = s.replace(/&/gi, "|WifiSMSAmpersand|");
+	s = s.replace(/%/gi, "|WifiSMSPercent|");
 	return s;
 }
 
 function ProcessSMS(Phone, PID, grp, msg, rand) {
-		
 
 		//Send the SMS 
 		$.ajax({
@@ -853,13 +852,16 @@ function ProcessSMS(Phone, PID, grp, msg, rand) {
 			   url: "/ajax/",
 			   data: "phone=" + Phone + "&msg=" + customEncode(msg) + "&pid=" + PID  + "&grp=" + grp + "&Country=" + localStorage.getItem("CC") + "&Epoch=12345&rand=" + rand,
 			   success: function(resp){
-					   if (resp != "SMS Sent!") {
-						  	alert("Error Sending SMS:" + msg );
-					   }	else {
-					   	document.getElementById("sentSMS").play();	
-							$("#Contact img:first").trigger("click");
-					  }
-				 }
+				   if (resp != "SMS Sent!") {
+					  	alert("Error Sending SMS:" + msg );
+				   }	else {
+				   		if ( localStorage.getItem("Audio") == "1"  ) {
+				   			document.getElementById("sentSMS").play();		
+				   		}
+				   		
+						$("#Contact img:first").trigger("click");
+				  }
+			 }
 		});	
 
 }
@@ -1237,91 +1239,91 @@ function check4emoji(s) {
 		}
 		
 		/* convert smileys to emoticons */
-		var regArray = new Array(23);
-		
-		var i = 0;
-		for (i=0; i < 23; i++)
-		{
-		regArray[i]=new Array(2);
-		}
-		
-		regArray[0][0] = new RegExp(/:-?\)/g); // :), :-)
-		regArray[0][1] = "E056";
-		
-		regArray[1][0] = new RegExp(/:-?P/gi); // :p, :P, :-p, :-P
-		regArray[1][1] = "E105";
-		
-		regArray[2][0] = new RegExp(/:-?\(/g); // :(, :-(
-		regArray[2][1] = "E058";
-		
-		regArray[3][0] = new RegExp(/;-?\)/g); // ;), ;-)
-		regArray[3][1] = "E405";
-		
-		regArray[4][0] = new RegExp(/;-?\(/g); // ;(, ;-(
-		regArray[4][1] = "E411";
-		
-		regArray[5][0] = new RegExp(/:'\(/g); // :'(
-		regArray[5][1] = "E411";
-		
-		regArray[6][0] = new RegExp(/\^\^/g); // ^^
-		regArray[6][1] = "E415";
-		
-		regArray[7][0] = new RegExp(/:-?\$/g); // :$, :-$
-		regArray[7][1] = "E414";
-		
-		regArray[8][0] = new RegExp(/:-?o/gi); // :o, :O, :-o, :-O
-		regArray[8][1] = "E107";
-		
-		regArray[9][0] = new RegExp(/\(L\)/g); // (L)
-		regArray[9][1] = "E022";
-		
-		regArray[10][0] = new RegExp(/:-?d/gi); // :d, :D, :-d, :-D
-		regArray[10][1] = "E057";
-		
-		regArray[11][0] = new RegExp(/<3/g); // <3
-		regArray[11][1] = "E022";
-		
-		regArray[12][0] = new RegExp(/:-?\@/g); // :@
-		regArray[12][1] = "E416";
-		
-		regArray[13][0] = new RegExp(/:-\*/g); //:-*
-		regArray[13][1] = "E418";
-		
-		regArray[14][0] = new RegExp(/:-?]/g); //:-] :]
-		regArray[14][1] = "E402";
-		
-		regArray[15][0] = new RegExp(/ x-?d/gi); //x-d
-		regArray[15][1] = "E409";
-		
-		regArray[16][0] = new RegExp(/:-?s/gi); //:s
-		regArray[16][1] = "E407";
-		
-		regArray[17][0] = new RegExp(/:-?\|/g); //:|
-		regArray[17][1] = "E40D";
-		
-		regArray[18][0] = new RegExp(/:-?\//g); //:/ :-/
-		regArray[18][1] = "E40E";
-		
-		regArray[19][0] = new RegExp(/>.>/g); //>.>
-		regArray[19][1] = "E403";
-		
-		regArray[20][0] = new RegExp(/<\/3/g);
-		regArray[20][1] = "E023"
-		
-		regArray[21][0] = new RegExp(/:-\|\|/g); // :-||
-		regArray[21][1] = "E416";
-		
-		
-		regArray[22][0] = new RegExp(/:-?x/gi); // :x, :X, :-x, :-X
-		regArray[22][1] = "E40C";
-		
-		var p = 0;
-		for (p= 0; p < 23; p++)
-		{
-		out = out.replace(regArray[p][0], "<img src='" + targetToBase64(regArray[p][1]) + "'>");
-		}
-		
-		return out;
+//		var regArray = new Array(23);
+//		
+//		var i = 0;
+//		for (i=0; i < 23; i++)
+//		{
+//		regArray[i]=new Array(2);
+//		}
+//		
+//		regArray[0][0] = new RegExp(/:-?\)/g); // :), :-)
+//		regArray[0][1] = "E056";
+//		
+//		regArray[1][0] = new RegExp(/:-?P/gi); // :p, :P, :-p, :-P
+//		regArray[1][1] = "E105";
+//		
+//		regArray[2][0] = new RegExp(/:-?\(/g); // :(, :-(
+//		regArray[2][1] = "E058";
+//		
+//		regArray[3][0] = new RegExp(/;-?\)/g); // ;), ;-)
+//		regArray[3][1] = "E405";
+//		
+//		regArray[4][0] = new RegExp(/;-?\(/g); // ;(, ;-(
+//		regArray[4][1] = "E411";
+//		
+//		regArray[5][0] = new RegExp(/:'\(/g); // :'(
+//		regArray[5][1] = "E411";
+//		
+//		regArray[6][0] = new RegExp(/\^\^/g); // ^^
+//		regArray[6][1] = "E415";
+//		
+//		regArray[7][0] = new RegExp(/:-?\$/g); // :$, :-$
+//		regArray[7][1] = "E414";
+//		
+//		regArray[8][0] = new RegExp(/:-?o/gi); // :o, :O, :-o, :-O
+//		regArray[8][1] = "E107";
+//		
+//		regArray[9][0] = new RegExp(/\(L\)/g); // (L)
+//		regArray[9][1] = "E022";
+//		
+//		regArray[10][0] = new RegExp(/:-?d/gi); // :d, :D, :-d, :-D
+//		regArray[10][1] = "E057";
+//		
+//		regArray[11][0] = new RegExp(/<3/g); // <3
+//		regArray[11][1] = "E022";
+//		
+//		regArray[12][0] = new RegExp(/:-?\@/g); // :@
+//		regArray[12][1] = "E416";
+//		
+//		regArray[13][0] = new RegExp(/:-\*/g); //:-*
+//		regArray[13][1] = "E418";
+//		
+//		regArray[14][0] = new RegExp(/:-?]/g); //:-] :]
+//		regArray[14][1] = "E402";
+//		
+//		regArray[15][0] = new RegExp(/ x-?d/gi); //x-d
+//		regArray[15][1] = "E409";
+//		
+//		regArray[16][0] = new RegExp(/:-?s/gi); //:s
+//		regArray[16][1] = "E407";
+//		
+//		regArray[17][0] = new RegExp(/:-?\|/g); //:|
+//		regArray[17][1] = "E40D";
+//		
+//		regArray[18][0] = new RegExp(/:-?\//g); //:/ :-/
+//		regArray[18][1] = "E40E";
+//		
+//		regArray[19][0] = new RegExp(/>.>/g); //>.>
+//		regArray[19][1] = "E403";
+//		
+//		regArray[20][0] = new RegExp(/<\/3/g);
+//		regArray[20][1] = "E023"
+//		
+//		regArray[21][0] = new RegExp(/:-\|\|/g); // :-||
+//		regArray[21][1] = "E416";
+//		
+//		
+//		regArray[22][0] = new RegExp(/:-?x/gi); // :x, :X, :-x, :-X
+//		regArray[22][1] = "E40C";
+//		
+//		var p = 0;
+//		for (p= 0; p < 23; p++)
+//		{
+//		out = out.replace(regArray[p][0], "<img src='" + targetToBase64(regArray[p][1]) + "'>");
+//		}
+//		
+//		return out;
 					
     //URLs starting with http://, https://, or ftp://
     var replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
@@ -1330,7 +1332,7 @@ function check4emoji(s) {
     var replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
     out = out.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
    
-		return out;
+	return out;
 } 
 
 

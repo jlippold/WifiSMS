@@ -78,6 +78,7 @@
 		height: 100%;
 		overflow-x: hidden;
 		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
 		position: fixed;
 		width: 250px;
 		z-index: 500;
@@ -178,6 +179,7 @@
 		position: fixed;
 		right: 0;
 		top: 118px;
+		
 	}
 	
 	#chatWindow {
@@ -194,6 +196,7 @@
 		height: 100%;
 		overflow-x: hidden;
 		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
 	}
 	#chatWindow span{
 		

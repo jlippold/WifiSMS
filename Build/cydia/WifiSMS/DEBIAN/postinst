@@ -1,5 +1,6 @@
 #!/bin/bash
 chown -R mobile:mobile /private/var/mobile/Library/WifiSMS
+chmod 0755 /private/var/mobile/Library/WifiSMS/WifiSMS
 chown mobile:mobile /private/var/mobile/Library/SBSettings/Commands/com.WifiSMS.enable
 chown mobile:mobile /private/var/mobile/Library/SBSettings/Toggles/WifiSMS/Toggle.dylib
 killall sbsettingsd

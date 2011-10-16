@@ -4,6 +4,9 @@
 #import <sqlite3.h>
 
 //3.0 MsgCenter
+/* depcrecated
+ 
+
 @interface CTMessageCenter : NSObject                                                                                  
 {                                                                                                                      
 }               
@@ -19,7 +22,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 	
 	NSLog(@"Notification: %@", name);
 	
-	/* this works */
+
 /*
 	 if ([@"kCTMessageReceivedNotification" isEqualToString:IncomingNotification] || [@"kCTMessageSentNotification" isEqualToString:IncomingNotification]) {
 	 
@@ -55,11 +58,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 	 //[pool drain];
 
 	 }
-*/
-	/* end test */
-	
-	
-	/* This will be web socket shit */
+
 	if ([@"kCTMessageSentNotification" isEqualToString:IncomingNotification]) {
 		
 		NSLog(@"Message Sent Notification");
@@ -246,7 +245,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
     return;
 }
 
-
+*/
 
 @implementation wifiSMSDelegate
 
@@ -261,13 +260,14 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 {
 	myAppPath = @"/private/var/mobile/Library/WifiSMS/";	
 		
-    NSLog(@"1");
-    
-	NSString *ppath = [myAppPath stringByAppendingString:@"WebServer.plist"];
+
+    //[UIApp addStatusBarImageNamed: (NSString*) @"foo"];
+	
+    NSString *ppath = [myAppPath stringByAppendingString:@"WebServer.plist"];
 
 	NSMutableDictionary* settingsDict = [[NSMutableDictionary alloc] initWithContentsOfFile:ppath];
 	
-    NSLog(@"3");
+
 	NSString *pUserName = @"";
 	NSString *pPassword = @"";
 	NSString *pPort= @"";
@@ -277,7 +277,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 	pPort = [pPort stringByAppendingString:[settingsDict objectForKey:@"Port"]];
 	
 	[settingsDict release];
-	NSLog(@"3");
+
 	/* Clear SMS Queue */
 	NSString *Spath = [myAppPath stringByAppendingString:@"SMS.plist"];
 	NSMutableDictionary *SMSplistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:Spath];
@@ -289,7 +289,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 	wifiUserName = pUserName;
 	wifiPassword = pPassword;
 	wifiPort = pPort;
-	NSLog(@"4");
+
 	NSError *error;
 	
 	httpServer = [HTTPServer new];
@@ -302,9 +302,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 	
 	//Start server	
 	[httpServer setPort:[pPort integerValue] ];
-	
-    NSLog(@"5");
-	
+
 	if(![httpServer start:&error])
 	{
 		NSLog(@"Error starting HTTP Server: %@", error);
@@ -316,7 +314,6 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 	//Clear tmp directory
 	[[NSFileManager defaultManager] removeItemAtPath:tmpDir error:NULL];
 	
-	NSLog(@"6");
 
     
 	NSFileManager *fileManager= [NSFileManager defaultManager]; 
@@ -324,8 +321,8 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 		if(![fileManager createDirectoryAtPath:tmpDir withIntermediateDirectories:YES attributes:nil error:NULL])
 			NSLog(@"Error: Create tmp folder failed /private/var/tmp/WifiSMS/");
 	
-    NSLog(@"7");
-	//Clear Plist data
+
+	/* Clear Plist data
 	NSString *path = [myAppPath stringByAppendingString:@"SMS.plist"];
 	NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:path];	
 	[plistDict setValue:@"" forKey:@"Phone"];
@@ -338,7 +335,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 	[plistDict setValue:@"" forKey:@"Country"];
 	[plistDict writeToFile:path atomically: YES];
 	[plistDict release];
-	
+	*/
 	//id ct = CTTelephonyCenterGetDefault();
 	//CTTelephonyCenterAddObserver(ct, NULL, callback, NULL, NULL, CFNotificationSuspensionBehaviorHold);		
 
