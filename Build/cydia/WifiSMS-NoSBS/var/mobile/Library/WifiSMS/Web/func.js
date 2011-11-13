@@ -506,7 +506,7 @@ function switchContact(p, grp) {
 		   type: "POST",
 		   url: "/ajax/",
 		   contentType: "text",
-		   data: "action=getphone&key=a4a1dda1-166d-47b0-8f31-a8581466da46&phone=" + grp,  
+		   data: "action=getphone&key=a4a1dda1-166d-47b0-8f31-a8581466da46&phone=" + p + "&grp=" + grp + "&r=" + Math.random(),  
 		   error:function (){
 			   offline();
 			   return;
@@ -557,9 +557,20 @@ function switchContact(p, grp) {
 									var ext = "";
 								  var bubble = $('<div/>');
 								  var fromMe = true;
+								  var isMadrid = false;
 								  if (flags == "2" || flags == "0") {
 								  	fromMe = false;
 								  } 
+								  
+								  if (flags == "8") {
+								  	fromMe = true;
+								  	isMadrid = true;
+								  }
+								  
+								  if (flags == "9") {
+								  	fromMe = false;
+								  	isMadrid = true;
+								  }
 								  
 								  if (blnShowTime) {
 								  	if ( $("#chatWindow").children().last().hasClass("timespan") ) {
@@ -576,6 +587,10 @@ function switchContact(p, grp) {
 									} else {
 										bubble.addClass("left");
 										bubble.attr("title", "Received: " + dt);
+									}
+									
+									if (isMadrid) {
+										bubble.addClass("iMessage");
 									}
 									
 									
@@ -876,15 +891,16 @@ function shownotify(Phone, Sender, flags, SMS, lastMessage, group) {
 		} else {
 			//update badge
 			var curBadge = $("#PN" + Phone + " div.badge:first").text();
-				if ( isNumber(curBadge) ) {
-					curBadge = parseInt(curBadge);
-					curBadge = curBadge + 1;
-					$("#PN" + Phone + " div.badge:first").html(curBadge).show();
-					// Move to top of list
-					var para = $("#PN" + Phone);
-	  			para.prependTo( '#ContactList' );
-				}
+			if ( isNumber(curBadge) ) {
+				curBadge = parseInt(curBadge);
+				curBadge = curBadge + 1;
+				$("#PN" + Phone + " div.badge:first").html(curBadge).show();
+				// Move to top of list
+				var para = $("#PN" + Phone);
+  				para.prependTo( '#ContactList' );
+			}
 		}
+
 				
 	} else {
 		//Contact is not in list, create it

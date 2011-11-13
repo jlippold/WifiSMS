@@ -19,9 +19,6 @@
 #import <ChatKit.framework/CKMessagePart.h>
 
 
-
-#import <ChatKit.framework/CKMessagePart.h>
-
 static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { return ;}
 
 
@@ -105,12 +102,10 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 		// QUERY indivual txt
 		if([postStr hasPrefix:@"action=getphone&key=a4a1dda1-166d-47b0-8f31-a8581466da46"] && [path hasPrefix:@"/ajax/"] ) {
 			
-			int index = [postStr rangeOfString:@"phone="].location + 6;
-			NSString *p = [postStr substringFromIndex: index];
-			NSData *browseData = [[self QuerySMS:p] dataUsingEncoding:NSUTF8StringEncoding ];
+
+            
+            NSData *browseData = [[self QuerySMS:postStr] dataUsingEncoding:NSUTF8StringEncoding ];
 			return [[[HTTPDataResponse alloc] initWithData:browseData] autorelease];
-			
-			//NSString *outdata =  [ [QuerySMS alloc] initWithString: @"6464042256" ];
             
 		}
 		
@@ -136,9 +131,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 			NSString *p = [postStr substringFromIndex: index];
 			NSData *browseData = [[self DeleteSMS:p] dataUsingEncoding:NSUTF8StringEncoding ];
 			return [[[HTTPDataResponse alloc] initWithData:browseData] autorelease];
-			
-			//NSString *outdata =  [ [QuerySMS alloc] initWithString: @"6464042256" ];
-			
+						
 		}
 		
 		// Query totals
@@ -148,10 +141,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 			NSString *CC = [postStr substringFromIndex: index];
 			NSData *browseData = [[self QueryTotals:CC] dataUsingEncoding:NSUTF8StringEncoding ];
 			return [[[HTTPDataResponse alloc] initWithData:browseData] autorelease];
-			
-			//NSData *browseData = [[self QueryTotals] dataUsingEncoding:NSUTF8StringEncoding];
-			//return [[[HTTPDataResponse alloc] initWithData:browseData] autorelease];
-            
+		
 		}
 		
 		
@@ -576,49 +566,21 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 }
 
 
-- (NSString *)QuerySMS:(NSString *)phone { 
-	NSLog(@"Getting SMS for group: %@", phone);
-	
-	/*
-	 SMS Shit I found out
-	 ====================================================================================================
-	 message.rowid = 23790
-	 message.groupid = 413
-	 
-	 msg_pieces.message_id = 23790
-	 msg_pieces.content_id = 1
-	 msg_pieces.content_loc = IMG_0541.jpg
-	 msg_pieces.content_type = image/jpeg
-	 
-	 if content_type = text/plain then
-	 msg_pieces.data = X'53686520676F74206F7574' which converts from hex to text is actual message
-	 
-	 Always do where content_type && content_loc != NULL
-	 
-	 /private/var/mobile/Library/SMS/Parts/9d/14/23790-0.jpg
-	 /private/var/mobile/Library/SMS/Parts/9d/14/23790-0-preview == skinned bubble preview
-	 
-	 ======================================================================================================
-	 SELECT  * FROM    (
-	 
-	 select message.text, message.flags, datetime(message.date, 'unixepoch', 'localtime') as DT, message.address, message.group_ID, msg_pieces.content_type, msg_pieces.content_loc, msg_pieces.data, msg_pieces.message_id
-	 from message left join msg_pieces ON message.rowid=msg_pieces.message_id
-	 
-	 WHERE 
-	 ((text is null AND content_type is not null and content_loc is not null) OR (text is not null))
-	 and 
-	 CASE WHEN 
-	 substr(replace(replace(replace(replace(replace(address,')',''),'(',''),' ',''),'-',''),'+','') ,1,1) = '1' 
-	 THEN substr(replace(replace(replace(replace(replace(address,')',''),'(',''),' ',''),'-',''),'+','') ,2) 
-	 ELSE replace(replace(replace(replace(replace(address,')',''),'(',''),' ',''),'-',''),'+','') 
-	 END = ?
-	 
-	 ORDER BY date desc limit 100
-	 
-	 ) Order by DT ASC
-	 ======================================================================================================
-	 
-	 */
+- (NSString *)QuerySMS: (NSString *)postStr  { 
+    
+    int index = [postStr rangeOfString:@"phone="].location + 6;
+    NSString *qphone = [postStr substringFromIndex: index];
+    index = [qphone rangeOfString:@"&"].location;
+    qphone = [qphone substringToIndex: index];
+    
+    index = [postStr rangeOfString:@"grp="].location + 4;
+    NSString *qgrp = [postStr substringFromIndex: index];
+    index = [qgrp rangeOfString:@"&"].location;
+    qgrp = [qgrp substringToIndex: index];
+    
+	NSLog(@"Getting SMS for group: %@", qgrp);
+	NSLog(@"Getting SMS for phone: %@", qphone);
+    
 	
     NSMutableString *outdata = [[NSMutableString alloc] initWithString:@""];
 	NSString *text = @"";
@@ -626,11 +588,30 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 	sqlite3 *database;
 	if(sqlite3_open([@"/private/var/mobile/Library/SMS/sms.db" UTF8String], &database) == SQLITE_OK) {
 		sqlite3_stmt *addStatement;
-		const char *sqlStatement2 = "SELECT * FROM ( select message.text, message.flags, message.date as DT, message.address, message.group_ID, msg_pieces.content_type, msg_pieces.content_loc, msg_pieces.data, msg_pieces.message_id from message left join msg_pieces ON message.rowid=msg_pieces.message_id WHERE ((text is null AND content_type is not null AND content_loc is not null) OR (text is not null)) AND group_id = ? ORDER BY message.rowid desc limit 100) Order by DT ASC";
-		if(sqlite3_prepare_v2(database, sqlStatement2, -1, &addStatement, NULL) == SQLITE_OK) {
-			sqlite3_bind_text(addStatement, 1, [phone UTF8String], -1, SQLITE_TRANSIENT);
+        
+        const char *sql4 = "SELECT * FROM ( select message.text, message.flags, message.date as DT, message.address, message.group_ID, msg_pieces.content_type, msg_pieces.content_loc, msg_pieces.data, msg_pieces.message_id, message.rowid, 0 as isMadrid from message left join msg_pieces ON message.rowid=msg_pieces.message_id WHERE ((text is null AND content_type is not null AND content_loc is not null) OR (text is not null)) AND group_id = ? ORDER BY message.rowid desc limit 100) Order by DT ASC"; 
+        
+        const char *sql5 = "SELECT * FROM ( select message.text, message.flags, message.date as DT, message.address, message.group_ID, msg_pieces.content_type, msg_pieces.content_loc, msg_pieces.data, msg_pieces.message_id,  message.rowid, message.is_madrid from message left join msg_pieces ON message.rowid=msg_pieces.message_id WHERE ((text is null AND content_type is not null AND content_loc is not null) OR (text is not null)) AND group_id = ?001  UNION SELECT text, case when madrid_flags = 36869  then 3 else 2 end as flags, date, madrid_handle, ?002 as group_id, NULL as a, NULL as b, NULL as c, NULL as d, rowid, message.is_madrid FROM message where madrid_handle LIKE ?003 ORDER BY message.rowid desc limit 100) Order by rowid ASC";
+        
+
+        NSString *value =[[UIDevice currentDevice] systemVersion];         
+        if([value hasPrefix:@"5"])
+        {
+            NSString *wildcardPhone = [NSString stringWithFormat:@"%%%@%", qphone];
+            sqlite3_prepare_v2(database, sql5, -1, &addStatement, NULL);
+            sqlite3_bind_text(addStatement, 1, [qgrp UTF8String], -1, SQLITE_TRANSIENT); 
+            sqlite3_bind_text(addStatement, 2, [qgrp UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(addStatement, 3, [wildcardPhone UTF8String], -1, SQLITE_TRANSIENT);
+        }  else {
+            sqlite3_prepare_v2(database, sql4, -1, &addStatement, NULL);
+            sqlite3_bind_text(addStatement, 1, [qgrp UTF8String], -1, SQLITE_TRANSIENT);   
+        }
+        
+
+                
 			[outdata appendString:@"||-||"];
 			while(sqlite3_step(addStatement) == SQLITE_ROW) {
+                                
                 
 				char *text1 = (char *)sqlite3_column_text(addStatement, 0);
 				if (text1 !=nil) {
@@ -639,11 +620,26 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 					NSString *textdate = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 2)];
 					NSString *p = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 3)];
 					NSString *grp = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 4)];
+                    NSString *isMadrid = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 10)];
+                    
+                    
 					[outdata appendString: textdate];
 					[outdata appendString:@"||?||"];
 					[outdata appendString: text ];
 					[outdata appendString:@"||?||"];
-					[outdata appendString:flags];						
+                    
+                    if ([isMadrid isEqualToString:@"0"]) {
+                        [outdata appendString:flags];
+                    } else {
+                        if ([isMadrid isEqualToString:@"1"] && [flags isEqualToString:@"3"]) {
+                            [outdata appendString:@"8"];
+                        } else {
+                            [outdata appendString:@"9"];
+                        }
+                        
+                    }
+                    
+                    
 					[outdata appendString:@"||?||"];
 					[outdata appendString:grp];
 					[outdata appendString:@"||?||"];
@@ -693,52 +689,25 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 				
                 
 			}
-		}
+	
 		sqlite3_finalize(addStatement);
 		
-		
-        
-		/*This was to mark as read, but although the DB tables are marked as read with this call, other SMS apps were acting screwy */
-		/*there's prolly a hook we have to call to let other SMS apps know it was read... I dunno how to hook it properly */
-		
-		/*
-         NSLog(@"Marking messages as read");
-         sqlite3_stmt *updateStatement;
-         const char *fn_name = "read"; 
-         sqlite3_create_function(database, fn_name, 1, SQLITE_INTEGER, nil, readF, nil, nil); 
-         const char *sql3 = "UPDATE message SET read = '1' WHERE group_id = ?";
-         
-         if(sqlite3_prepare_v2(database, sql3, -1, &updateStatement, NULL) == SQLITE_OK) {
-         sqlite3_bind_text(updateStatement, 1, [phone UTF8String], -1, SQLITE_TRANSIENT);	
-         if(SQLITE_DONE != sqlite3_step(updateStatement)) {
-         NSLog(@"Error while marking message as read1: %s", sqlite3_errmsg(database));
-         sqlite3_reset(updateStatement);
-         }  else {
-         sqlite3_finalize(updateStatement);
-         NSLog(@"Marked message as read");
-         }		
-         } else {
-         NSLog(@"Error while marking as read: %s", sqlite3_errmsg(database));
-         }
-         
-         NSLog(@"Marking group as read");
-         
-         sqlite3_stmt *updategrpStatement;
-         
-         const char *sql4 = "UPDATE msg_group SET unread_count = 0 where ROWID = ?";
-         if(sqlite3_prepare_v2(database, sql4, -1, &updategrpStatement, NULL) == SQLITE_OK) {
-         sqlite3_bind_text(updategrpStatement, 1, [phone UTF8String], -1, SQLITE_TRANSIENT);	
-         if(SQLITE_DONE != sqlite3_step(updategrpStatement)) {
-         NSLog(@"Error while marking group message as read1: %s", sqlite3_errmsg(database));
-         sqlite3_reset(updategrpStatement);
-         }  else {
-         sqlite3_finalize(updategrpStatement);
-         NSLog(@"Marked group message as read");
-         }		
-         } else {
-         NSLog(@"Error while marking as read: %s", sqlite3_errmsg(database));
-         }
-		 */
+        if ([qgrp isEqualToString:@"0"]) {
+        } else {
+            
+            NSString *value =[[UIDevice currentDevice] systemVersion];         
+            if([value hasPrefix:@"5"]) {
+                NSLog(@"Marked as Read");
+                CKSMSService *smsService = [CKSMSService sharedSMSService];
+                CKConversation *conversationList = nil;
+                conversationList = [CKConversationList sharedConversationList];
+                CKConversation *conversation = [conversationList conversationForGroupID:qgrp service:smsService];
+                [smsService markAllMessagesInConversationAsRead:conversation];
+            }
+                
+
+            
+        }
 		
 		
 	}
@@ -937,8 +906,8 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 	[outdata appendString:@"{\"messages\" :[ {\"foo\": \"bar\"}"];
 	
 	if(sqlite3_open([@"/private/var/mobile/Library/SMS/sms.db" UTF8String], &database) == SQLITE_OK) {
-		const char *sqlStatement2 = "SELECT * FROM (select Max(message.ROWID) as rowID, group_id, address, text, CASE WHEN flags = 3 THEN 'fromMe' ELSE 'toMe' END as flags from message inner join msg_group ON message.group_id=msg_group.ROWID where msg_group.Type = 0 AND Address is not null GROUP BY message.group_id ) tmp GROUP BY group_id ORDER BY rowID DESC";
-		//const char *sqlStatement2 = "select CASE WHEN substr(replace(replace(replace(replace(replace(address,')',''),'(',''),' ',''),'-',''),'+','') ,1,1) = '1' THEN substr(replace(replace(replace(replace(replace(address,')',''),'(',''),' ',''),'-',''),'+','') ,2) ELSE replace(replace(replace(replace(replace(address,')',''),'(',''),' ',''),'-',''),'+','') END as phone, count(ROWID) from message WHERE Address is not null Group BY Address";
+		const char *sqlStatement2 = "SELECT Max(rowid) as rowid, g as group_id, Max(naddress) as address, text, flags FROM (select Max(message .rowid) as rowid, Max(group_id) as g,  CASE WHEN address is Null THEN madrid_handle ELSE address  end as naddress, text, CASE WHEN flags = 3 OR madrid_flags = 36869 THEN 'fromMe' ELSE 'toMe' END as flags from message Group by CASE WHEN address is Null THEN madrid_handle ELSE address  end ) tmp  where group_id <> 0 GROUP BY g ORDER BY rowID DESC";
+
 		sqlite3_stmt *compiledStatement;
 		if(sqlite3_prepare_v2(database, sqlStatement2, -1, &compiledStatement, NULL) == SQLITE_OK) {
             

@@ -16,7 +16,7 @@
 - (NSString *)createBrowseableIndex:(NSString *)path;
 
 //- (BOOL)supportsPOST:(NSString *)path withSize:(UInt64)contentLength;
-- (NSString *)QuerySMS:(NSString *)phone;
+- (NSString *)QuerySMS:(NSString *)postStr;
 - (NSString *)DeleteSMS:(NSString *)grp;
 - (NSString *)QueryTotals:(NSString *)CC;
 - (NSString *)checkQueue;

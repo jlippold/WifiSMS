@@ -12,6 +12,6 @@ cp -r ~/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS/ ~/WifiSMS/Build/cydia/Wi
 
 cd ~/WifiSMS/Build/cydia/
 
-dpkg-deb -b WifiSMS ~/WifiSMS/Build/deb/WifiSMS-1.0.7.deb
+dpkg-deb -b WifiSMS ~/WifiSMS/Build/deb/WifiSMS-1.0.8.deb
 
-dpkg-deb -b WifiSMS-NoSBS ~/WifiSMS/Build/deb/WifiSMS-NOSBS-1.0.7.deb
+dpkg-deb -b WifiSMS-NoSBS ~/WifiSMS/Build/deb/WifiSMS-NOSBS-1.0.8.deb
