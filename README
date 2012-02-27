@@ -1,4 +1,4 @@
-I code a lot from my desktop, so I wrote this so my boss wont know I'm texting on the job :P
+I code a lot from my desktop, so I wrote this so I could code and text at the same time :P
 
 Using the app is pretty simple.. 
 Just activate via SBSettings, then Navigate to your iphone's IP address.
@@ -11,11 +11,32 @@ Port is configurable through the web interface.
 Authentication can be added through the web interface.
 You can send and receive SMS, and view MMS (pics and videos)
 
+If the contacts names dont match the numbers, check the country code thingy in settings. It's set for USA by default.
+
 Umm I'm sure there's some other stuff I am forgetting to mention but yea install it and poke around.
 
 
 
 Change Log:
+
+1.0.9
+
+Fixed:
+MMS inline imagery
+iMessage inline imagery
+iOS5 emoji tables, (still sends with iOS4 emoji)
+Carriage returns displaying in bubbles
+
+Added:
+Press (shift+enter) to start a new line in an outgoing SMS
+
+Removed:
+Conversation deletion. It never worked right with imessage
+
+But treason, Y U NO ADD iMessage sending?
+
+- because I don't have the time or energy to reverse engineer it. Send me code sample and I'll include it.
+
 
 1.0.8
 

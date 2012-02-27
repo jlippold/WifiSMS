@@ -13,6 +13,16 @@
 #import <ChatKit.framework/CKSMSService.h>
 #import <ChatKit.framework/CKSMSMessage.h>
 #import <ChatKit.framework/CKSMSEntity.h>
+
+#import <ChatKit.framework/CKMadridService.h>
+#import <ChatKit.framework/CKMadridMessage.h>
+#import <ChatKit.framework/CKMadridEntity.h>
+
+#import <ChatKit.framework/CKEntity.h>
+#import <ChatKit.framework/CKService.h> 
+#import <ChatKit.framework/CKPreferredServiceManager.h> 
+#import <ChatKit.framework/CKClientComposeService.h> 
+
 #import <ChatKit.framework/CKConversation.h>
 #import <ChatKit.framework/CKConversationList.h>
 #import <ChatKit.framework/CKMessage.h>
@@ -90,6 +100,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 	if([method isEqualToString:@"POST"] )
 	{
 		NSString *postStr = nil;	
+
 		CFDataRef postData = CFHTTPMessageCopyBody(request);
 		
 		if(postData)
@@ -266,19 +277,22 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
             
             //id ct = CTTelephonyCenterGetDefault();
             CKConversationList *conversationList = nil;
-            
-            NSLog(@"SMS being Sent"); 
+
             
             NSString *value =[[UIDevice currentDevice] systemVersion];          
             if([value hasPrefix:@"5"])
             {
+                //CKMadridService *madridService = [CKMadridService sharedMadridService];
+                //NSString *foo = [madridService _temporaryFileURLforGUID:@"A5F70DCD-F145-4D02-B308-B7EA6C248BB2"];
+                NSLog(@"Sending SMS");
                 conversationList = [CKConversationList sharedConversationList];
                 CKSMSEntity *ckEntity = [smsService copyEntityForAddressString:Phone];
                 CKConversation *conversation = [conversationList conversationForRecipients:[NSArray arrayWithObject:ckEntity] create:TRUE service:smsService];
                 NSString *groupID = [conversation groupID];           
                 CKSMSMessage *ckMsg = [smsService _newSMSMessageWithText:msg forConversation:conversation];
                 [smsService sendMessage:ckMsg];
-                [ckMsg release];            
+                [ckMsg release];     
+
             } else {
                 //4.0
                 id ct = CTTelephonyCenterGetDefault();
@@ -370,45 +384,52 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 				[regName appendString:@"-0-preview"];				
 			}
             
-			NSString *attPath = @"/private/var/mobile/Library/SMS/Parts/";
-			NSString* file;
             
-			NSArray *dirContents = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:attPath error:NULL];
-			for ( file in dirContents) {
-				
-				if ([file hasSuffix: regName])  {
-					if ([path hasPrefix:@"/attachmentPrev:"] ) {
-						[regName appendString:@".png"];
-					}
-                    
-
-                    NSString *writableDBPath =  [myAppPath stringByAppendingString:@"tmp/"];
-                    
-					NSMutableString *oldPath = [NSMutableString new];
-					[oldPath appendString:attPath];
-					[oldPath appendString:file];
-                    
-					NSFileManager *filemgr = [NSFileManager defaultManager];
-					if ( [filemgr copyItemAtPath:oldPath toPath:writableDBPath error:NULL] == YES) {
-						//NSLog(@"Copied");
-					} else {
-						//NSLog(@"Not Copied");
-						//NSLog(file);
-						//NSLog(writableDBPath);
-					}
-					
-                    NSString *webPath =  [myAppPath stringByAppendingString:@"tmp/"];
-
-					webPath = [NSString stringWithFormat:@"%@/%@", webPath, regName];
-                    
-					return [[[HTTPFileResponse alloc] initWithFilePath:webPath] autorelease];
-                    
-				}
-				
-			}
-			
-			//return [[[HTTPFileResponse alloc] initWithFilePath:webPath] autorelease];
+            NSString *webPath =  [myAppPath stringByAppendingString:@"tmp/"];
+            webPath = [NSString stringWithFormat:@"%@/%@", webPath, regName];
             
+            NSFileManager *filemgr = [NSFileManager defaultManager];
+            NSString *writableDBPath =  [myAppPath stringByAppendingString:@"tmp/"];
+            writableDBPath = [writableDBPath stringByAppendingString:regName] ;
+            //Check if already copied from madrid
+            if ([filemgr fileExistsAtPath: [NSString stringWithFormat:@"%@", writableDBPath]]) {
+                return [[[HTTPFileResponse alloc] initWithFilePath:webPath] autorelease];
+            } else {
+                //it's wasnt, so search in sms parts
+                NSString *attPath = @"/private/var/mobile/Library/SMS/Parts/";
+                NSString* file;
+                
+                NSArray *dirContents = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:attPath error:NULL];
+                for ( file in dirContents) {
+                    
+                    if ([file hasSuffix: regName])  {
+                        
+                        if ([path hasPrefix:@"/attachmentPrev:"] ) {
+                            [regName appendString:@".png"];
+                        }
+                        
+                        NSMutableString *oldPath = [NSMutableString new];
+                        [oldPath appendString:attPath];
+                        [oldPath appendString:file];
+                        
+                        NSError *errol = nil;
+                        
+                        if ( [filemgr copyItemAtPath:oldPath toPath:writableDBPath error:&errol] == YES) {
+                            //NSLog(@"Copied");
+                        } else {
+                            NSLog(@"Not Copied %@", errol);
+                        }
+                        
+                        
+                        return [[[HTTPFileResponse alloc] initWithFilePath:webPath] autorelease];
+                        
+                    }
+                    
+                }
+            }
+            
+
+			            
 		} else  {
 			if ([path hasSuffix:@".png"] || [path hasSuffix:@".ico"] || [path hasSuffix:@".wav"] || [path hasSuffix:@".css"] || [path hasSuffix:@".js"] || [path hasSuffix:@".gif"] || [path hasSuffix:@"oji.html"]){
 				NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
@@ -578,8 +599,8 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
     index = [qgrp rangeOfString:@"&"].location;
     qgrp = [qgrp substringToIndex: index];
     
-	NSLog(@"Getting SMS for group: %@", qgrp);
-	NSLog(@"Getting SMS for phone: %@", qphone);
+	//NSLog(@"Getting SMS for group: %@", qgrp);
+	//NSLog(@"Getting SMS for phone: %@", qphone);
     
 	
     NSMutableString *outdata = [[NSMutableString alloc] initWithString:@""];
@@ -591,7 +612,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
         
         const char *sql4 = "SELECT * FROM ( select message.text, message.flags, message.date as DT, message.address, message.group_ID, msg_pieces.content_type, msg_pieces.content_loc, msg_pieces.data, msg_pieces.message_id, message.rowid, 0 as isMadrid from message left join msg_pieces ON message.rowid=msg_pieces.message_id WHERE ((text is null AND content_type is not null AND content_loc is not null) OR (text is not null)) AND group_id = ? ORDER BY message.rowid desc limit 100) Order by DT ASC"; 
         
-        const char *sql5 = "SELECT * FROM ( select message.text, message.flags, message.date as DT, message.address, message.group_ID, msg_pieces.content_type, msg_pieces.content_loc, msg_pieces.data, msg_pieces.message_id,  message.rowid, message.is_madrid from message left join msg_pieces ON message.rowid=msg_pieces.message_id WHERE ((text is null AND content_type is not null AND content_loc is not null) OR (text is not null)) AND group_id = ?001  UNION SELECT text, case when madrid_flags = 36869  then 3 else 2 end as flags, date, madrid_handle, ?002 as group_id, NULL as a, NULL as b, NULL as c, NULL as d, rowid, message.is_madrid FROM message where madrid_handle LIKE ?003 ORDER BY message.rowid desc limit 100) Order by rowid ASC";
+        const char *sql5 = "SELECT * FROM ( select message.text, message.flags, message.date as DT, message.address, message.group_ID, msg_pieces.content_type, msg_pieces.content_loc, msg_pieces.data, msg_pieces.message_id,  message.rowid, message.is_madrid from message left join msg_pieces ON message.rowid=msg_pieces.message_id WHERE ((text is null AND content_type is not null AND content_loc is not null) OR (text is not null)) AND group_id = ?001  UNION SELECT text, case when madrid_flags = 36869  then 3 else 2 end as flags, date, madrid_handle, ?002 as group_id, NULL as a, CASE WHEN madrid_AttachmentInfo is null then '' else 'madridattachment' end as b, madrid_attachmentInfo as c, NULL as d, rowid, message.is_madrid FROM message where madrid_handle LIKE ?003 ORDER BY message.rowid desc limit 100) Order by rowid ASC";
         
 
         NSString *value =[[UIDevice currentDevice] systemVersion];         
@@ -614,7 +635,160 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
                                 
                 
 				char *text1 = (char *)sqlite3_column_text(addStatement, 0);
-				if (text1 !=nil) {
+                NSString *content_loc = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 6)];
+                //NSLog(@" %@", content_loc);
+                
+				if (text1 == nil || [content_loc isEqualToString:@"madridattachment"] ) {
+                    
+                    
+                    NSString *flags = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 1)];
+					NSString *textdate = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 2)];
+					NSString *p = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 3)];
+					NSString *grp = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 4)];
+					                        
+					NSString *content_type = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 5)];
+					NSString *hexdata = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 7)];
+					NSString *message_id = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 9)];
+                    
+
+                    
+					if ([content_loc isEqualToString:@"madridattachment"]) {
+                       
+                        //This sucks.. first pull the madrid blob to NSdata
+                        const void *ptr = sqlite3_column_blob(addStatement, 7);
+                        int size = sqlite3_column_bytes(addStatement, 7);
+                        NSData *data = [[NSData alloc] initWithBytes:ptr length:size];
+                        
+                        //Now read the hex from the blob to a string
+                        NSString *tokenKey = [[[data description] stringByTrimmingCharactersInSet:
+                                               [NSCharacterSet characterSetWithCharactersInString:@"<>"]] 
+                                              stringByReplacingOccurrencesOfString:@" " withString:@""];
+                        
+                        [data autorelease];
+                        
+                        //now convert that hex back to a string :-(
+                        //in this string is the madrid attchement GUID
+                        NSMutableString * blobstring = [[[NSMutableString alloc] init] autorelease];
+                        int i = 0;
+                        while (i < [tokenKey length])
+                        {
+                            NSString * hexChar = [tokenKey substringWithRange: NSMakeRange(i, 2)];
+                            int value = 0;
+                            sscanf([hexChar cStringUsingEncoding:NSASCIIStringEncoding], "%x", &value);
+                            [blobstring appendFormat:@"%c", (char)value];
+                            i+=2;
+                        }
+                        
+                        
+                        //loop madrid for this folder name
+                        NSMutableString *preview = [NSMutableString new];
+                        [preview appendString:@""];
+                        NSMutableString *attachment = [NSMutableString new];
+                        [attachment appendString:@""];
+
+                        NSString *attPath = @"/private/var/mobile/Library/SMS/Attachments/";
+                        NSString* file;
+                        
+                        NSArray *dirContents = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:attPath error:NULL];
+                        //NSLog(@"blob: %@", blobstring);
+                        for ( file in dirContents) {
+                            //NSLog(@"file: %@", file);
+                            
+                            if ([blobstring rangeOfString:[[file stringByDeletingLastPathComponent] lastPathComponent]].location != NSNotFound) {
+                                //NSLog(@"found");
+                                if ([flags isEqualToString:@"3"]) { //from me
+                                    if ( [[file stringByDeletingPathExtension] hasSuffix:@"preview-left"] && [preview isEqualToString:@""] ){
+                                        [preview appendString:attPath];
+                                        [preview appendString:file];
+                                        //NSLog(@"preview-left");
+                                    }
+                                } else {
+                                    if ( [[file stringByDeletingPathExtension] hasSuffix:@"preview-right"] && [preview isEqualToString:@""] ){
+                                        [preview appendString:attPath];
+                                        [preview appendString:file];
+                                        //NSLog(@"preview-right");
+                                    }
+                                }
+                                
+                                if ([attachment isEqualToString:@""] && [file rangeOfString:@"preview-"].location == NSNotFound) {
+                                    [attachment appendString:attPath];
+                                    [attachment appendString:file];
+                                    //NSLog(@"orig");
+                                }
+                            }
+
+                        }
+                        
+                        //NSLog(@"attachment: %@", attachment);
+                        //NSLog(@"preview: %@", preview);
+                        if (([attachment isEqualToString:@""] == NO) && ([preview isEqualToString:@""] == NO)) { //We have the attachment                             
+                            //copy to temp
+                            
+
+                            
+                            NSString *writableDBPath =  [myAppPath stringByAppendingString:@"tmp/"];
+                            NSMutableString *newpreviewPath = [NSMutableString new];
+                            [newpreviewPath appendString:writableDBPath];
+                            [newpreviewPath appendString:message_id];
+                            [newpreviewPath appendString:@"-0-preview"];
+                            //NSLog(@"newpreviewPath: %@", newpreviewPath);
+                               
+                            NSFileManager *filemgr = [NSFileManager defaultManager];
+                            [filemgr copyItemAtPath:preview toPath:newpreviewPath error:nil];
+                            
+                            
+                            NSMutableString *newAttachmentPath = [NSMutableString new];
+                            [newAttachmentPath appendString:writableDBPath];
+                            [newAttachmentPath appendString:message_id]; 
+                            [newAttachmentPath appendString:@"-0."];
+                            [newAttachmentPath appendString:[attachment pathExtension]];
+                            //NSLog(@"newAttachmentPath: %@", newAttachmentPath);
+                            
+                            [filemgr copyItemAtPath:attachment toPath:newAttachmentPath error:nil];
+                 
+                            
+                            if ( [[attachment pathExtension] isEqualToString:@"png"]) {
+                                content_type = @"image/png";
+                            }
+                            if ( [[attachment pathExtension] isEqualToString:@"jpg"]) {
+                                content_type = @"image/jpeg";
+                            }
+                            
+                            hexdata = @"(null)";
+                            content_loc = [attachment lastPathComponent] ;
+                            
+                        }
+                        
+ 
+
+                        
+                    } 
+
+                        [outdata appendString: textdate];
+                        [outdata appendString:@"||?||attachment:"];
+                        [outdata appendString: message_id ];
+                        
+                        [outdata appendString: @"||" ];
+                        [outdata appendString: content_type ];
+                        [outdata appendString: @"||" ];
+                        [outdata appendString: hexdata ];
+                        [outdata appendString: @"||" ];
+                        [outdata appendString: content_loc ];
+                        
+                        [outdata appendString:@"||?||"];
+                        [outdata appendString:flags];						
+                        [outdata appendString:@"||?||"];
+                        [outdata appendString:grp];
+                        [outdata appendString:@"||?||"];
+                        [outdata appendString:p];
+                        [outdata appendString:@"||-||"];
+          
+
+                    
+                    
+				} else { 
+					
+  					
 					text = [NSString stringWithUTF8String: text1];
 					NSString *flags = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 1)];
 					NSString *textdate = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 2)];
@@ -645,45 +819,8 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 					[outdata appendString:@"||?||"];
 					[outdata appendString:p];
 					[outdata appendString:@"||-||"];
-				} else { 
-					/*
-                     char *content_type = (char *)sqlite3_column_text(addStatement, 5);
-                     char *content_loc = (char *)sqlite3_column_text(addStatement, 6);
-                     char *hexdata = (char *)sqlite3_column_text(addStatement, 7);
-                     char *message_id = (char *)sqlite3_column_text(addStatement, 8);
-                     */
-					
-					
-					
-					NSString *flags = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 1)];
-					NSString *textdate = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 2)];
-					NSString *p = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 3)];
-					NSString *grp = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 4)];
-					
-					NSString *content_type = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 5)];
-					NSString *content_loc = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 6)];
-					NSString *hexdata = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 7)];
-					NSString *message_id = [NSString stringWithFormat:@"%s", (char *)sqlite3_column_text(addStatement, 8)];
-					
-					//text = [NSString stringWithUTF8String: message_id];
-					[outdata appendString: textdate];
-					[outdata appendString:@"||?||attachment:"];
-					[outdata appendString: message_id ];
-					
-                    [outdata appendString: @"||" ];
-                    [outdata appendString: content_type ];
-                    [outdata appendString: @"||" ];
-                    [outdata appendString: hexdata ];
-                    [outdata appendString: @"||" ];
-                    [outdata appendString: content_loc ];
-					
-					[outdata appendString:@"||?||"];
-					[outdata appendString:flags];						
-					[outdata appendString:@"||?||"];
-					[outdata appendString:grp];
-					[outdata appendString:@"||?||"];
-					[outdata appendString:p];
-					[outdata appendString:@"||-||"];
+					                    
+
 				}
 				text1 = nil;
 				
@@ -697,7 +834,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
             
             NSString *value =[[UIDevice currentDevice] systemVersion];         
             if([value hasPrefix:@"5"]) {
-                NSLog(@"Marked as Read");
+                //NSLog(@"Marked as Read");
                 CKSMSService *smsService = [CKSMSService sharedSMSService];
                 CKConversation *conversationList = nil;
                 conversationList = [CKConversationList sharedConversationList];

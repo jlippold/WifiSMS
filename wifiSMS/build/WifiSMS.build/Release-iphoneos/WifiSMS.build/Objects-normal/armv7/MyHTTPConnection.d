@@ -12,6 +12,11 @@ dependencies: /Users/TreAsoN/WifiSMS/wifiSMS/Classes/MyHTTPConnection.m \
   PrivateFrameworks/ChatKit.framework/CKMessage.h \
   PrivateFrameworks/ChatKit.framework/CKSMSEntity.h \
   PrivateFrameworks/ChatKit.framework/CKEntity.h \
+  PrivateFrameworks/ChatKit.framework/CKMadridService.h \
+  PrivateFrameworks/ChatKit.framework/CKMadridMessage.h \
+  PrivateFrameworks/ChatKit.framework/CKMadridEntity.h \
+  PrivateFrameworks/ChatKit.framework/CKPreferredServiceManager.h \
+  PrivateFrameworks/ChatKit.framework/CKClientComposeService.h \
   PrivateFrameworks/ChatKit.framework/CKConversation.h \
   PrivateFrameworks/ChatKit.framework/CKConversationList.h \
   PrivateFrameworks/ChatKit.framework/CKMessagePart.h

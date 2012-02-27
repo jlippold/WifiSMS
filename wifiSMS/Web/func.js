@@ -45,46 +45,47 @@ $(document).ready(function() {
 		closeFB();
 				
 	});
-	$('div.btnDelete').live("click", function(event) {
-		
-		event.stopPropagation();
-		if ( confirm("Are you sure you want to delete this conversation? There is no undo.") ) {
-				var pa = $(this).parent()
-				var grp = $(pa).attr("data-groupid");
-				$.ajaxSetup({'beforeSend': function(xhr){
-						if (xhr.overrideMimeType)
-							xhr.overrideMimeType("text/plain");
-						}
-				});
-				
-				$.ajax({
-					   type: "POST",
-					   contentType: "text",
-					   url: "/ajax/",
-					   data: "action=deleteSMS&key=a4a1dda1-166d-47b0-8f31-a8581466da46&grp=" + grp, 
-					   error:function (){
-						   offline();
-						   return;
-					   },
-					   success: function(resp){
-					   	if (resp == "Deleted" ) {
-								$(pa).remove();
-								$("#grp").val("");
-							  $('#ContactList li:first').trigger("click");
-					   	} else {
-					   		alert("Error deleting conversation");
-					   	}
-						 }
-				});	
-		}
-	});
-		
-		
-	$('#ContactList li').live("mouseenter", function() {
-		$(this).find("div.btnDelete").delay(500).fadeIn();
-	}).live("mouseleave", function() {
-		$(this).find("div.btnDelete").stop().hide();
-	});
+	
+//	$('div.btnDelete').live("click", function(event) {
+//		
+//		event.stopPropagation();
+//		if ( confirm("Are you sure you want to delete this conversation? There is no undo.") ) {
+//				var pa = $(this).parent()
+//				var grp = $(pa).attr("data-groupid");
+//				$.ajaxSetup({'beforeSend': function(xhr){
+//						if (xhr.overrideMimeType)
+//							xhr.overrideMimeType("text/plain");
+//						}
+//				});
+//				
+//				$.ajax({
+//					   type: "POST",
+//					   contentType: "text",
+//					   url: "/ajax/",
+//					   data: "action=deleteSMS&key=a4a1dda1-166d-47b0-8f31-a8581466da46&grp=" + grp, 
+//					   error:function (){
+//						   offline();
+//						   return;
+//					   },
+//					   success: function(resp){
+//					   	if (resp == "Deleted" ) {
+//								$(pa).remove();
+//								$("#grp").val("");
+//							  $('#ContactList li:first').trigger("click");
+//					   	} else {
+//					   		alert("Error deleting conversation");
+//					   	}
+//						 }
+//				});	
+//		}
+//	});
+//		
+//		
+//	$('#ContactList li').live("mouseenter", function() {
+//		$(this).find("div.btnDelete").delay(500).fadeIn();
+//	}).live("mouseleave", function() {
+//		$(this).find("div.btnDelete").stop().hide();
+//	});
 			
 		
 	$('#ContactList li').live('click', function() {
@@ -109,26 +110,26 @@ $(document).ready(function() {
 	
 	
 		
-	$('#msg').bind('keyup', function(e) {
-			if (e.shiftKey && e.keyCode == 13) {
-	      //$(this).val( $(this).val() + "\r\n" ) //well, that didnt work
-      	return false;
-			} else if ( e.keyCode==13 ) {
-      	SendSMS();
-      	$("#charCountContainer").html("160");
-      	e.preventDefault();
-      	return false;
-      } else  {
-      	
-      	if ( $(this).val() == "") {
-      		$("#charCountContainer").html("160");
-      	} else {
-	      	$("#charCountContainer").show();
-					var charCount = parseInt( $(this).val().length );
-					charsLeft = (160 - charCount);
-					$("#charCountContainer").html("" + charsLeft);
-      	}
-				return true;
+	$('#msg').bind('keydown', function(e) {
+		if (e.shiftKey && e.keyCode == 13) {
+				console.log("foo");
+	      	    $(this).val( $(this).val() + "" +  String.fromCharCode(25) + "" ) //well, that didnt work
+      			return false;
+		} else if ( e.keyCode==13 ) {
+		      	SendSMS();
+		      	$("#charCountContainer").html("160");
+		      	e.preventDefault();
+		      	return false;
+      	} else  {
+	      	if ( $(this).val() == "") {
+	      		$("#charCountContainer").html("160");
+	      	} else {
+		      	$("#charCountContainer").show();
+						var charCount = parseInt( $(this).val().length );
+						charsLeft = (160 - charCount);
+						$("#charCountContainer").html("" + charsLeft);
+	      	}
+			return true;
       }
       return true;
 	});
@@ -840,6 +841,7 @@ function SendSMS() {
 	if (msg == "" || grp == "" || pid == "") {
 		return false;
 	}
+	msg = msg.replace(//g, "\r\n")
 	$('#msg').val("");
 	
 	
@@ -1222,125 +1224,38 @@ function saveWeb() {
 
 /* Emoji */
 function check4emoji(s) {
-		var out = "";
-		for( var n = 0; n < s.length; n++ )
-		{
-			var charcode = s.charCodeAt(n);
-			var char = s.charAt(n);
-			if( charcode > 57344 && charcode < 59000)
-			{
-				var base64 = "";
-				for( var j = 0; j < replacements.length; j++)
-				{
-					var target = replacements[j];
-					var targetchar = eval('"\\u' + target + '"');
-					if(targetchar == char)
-					{
-						base64 = targetToBase64(target);
+	s = s.replace(/\n/g, '<br />');
+
+	//console.log(s);
+	var out = "";
+	for( var n = 0; n < s.length; n++ ) {
+		var charcode = s.charCodeAt(n);
+		var char = s.charAt(n);
+		if ( charcode > 20000) {
+			var base64 = "";
+			var idx = $.inArray(charcode.toString(16).toUpperCase(), replacements);
+			
+			if (idx > -1) {
+				base64 = targetToBase64(charcode.toString(16).toUpperCase());
+			}
+
+			if(base64 == "") {
+				var Uni32 = getWholeChar(s, n);
+				if (Uni32 != "") {
+					Uni32 = Uni32.toUpperCase();
+					if (Unicode32to16[Uni32]) {
+						base64 = targetToBase64(Unicode32to16[Uni32]);
+						out = out + "<img src='" + base64 + "'>";
 					}
 				}
-				if(base64 == "")   
-				{
-					out = out + char;
-				}
-				else
-				{
-					out = out + "<img src='" + base64 + "'>"
-				}
+			} else {
+				out = out + "<img src='" + base64 + "'>";
 			}
-			else
-			{
-				out = out + char;
-			}
+		} else {
+			out = out + char;
 		}
-		
-		/* convert smileys to emoticons */
-//		var regArray = new Array(23);
-//		
-//		var i = 0;
-//		for (i=0; i < 23; i++)
-//		{
-//		regArray[i]=new Array(2);
-//		}
-//		
-//		regArray[0][0] = new RegExp(/:-?\)/g); // :), :-)
-//		regArray[0][1] = "E056";
-//		
-//		regArray[1][0] = new RegExp(/:-?P/gi); // :p, :P, :-p, :-P
-//		regArray[1][1] = "E105";
-//		
-//		regArray[2][0] = new RegExp(/:-?\(/g); // :(, :-(
-//		regArray[2][1] = "E058";
-//		
-//		regArray[3][0] = new RegExp(/;-?\)/g); // ;), ;-)
-//		regArray[3][1] = "E405";
-//		
-//		regArray[4][0] = new RegExp(/;-?\(/g); // ;(, ;-(
-//		regArray[4][1] = "E411";
-//		
-//		regArray[5][0] = new RegExp(/:'\(/g); // :'(
-//		regArray[5][1] = "E411";
-//		
-//		regArray[6][0] = new RegExp(/\^\^/g); // ^^
-//		regArray[6][1] = "E415";
-//		
-//		regArray[7][0] = new RegExp(/:-?\$/g); // :$, :-$
-//		regArray[7][1] = "E414";
-//		
-//		regArray[8][0] = new RegExp(/:-?o/gi); // :o, :O, :-o, :-O
-//		regArray[8][1] = "E107";
-//		
-//		regArray[9][0] = new RegExp(/\(L\)/g); // (L)
-//		regArray[9][1] = "E022";
-//		
-//		regArray[10][0] = new RegExp(/:-?d/gi); // :d, :D, :-d, :-D
-//		regArray[10][1] = "E057";
-//		
-//		regArray[11][0] = new RegExp(/<3/g); // <3
-//		regArray[11][1] = "E022";
-//		
-//		regArray[12][0] = new RegExp(/:-?\@/g); // :@
-//		regArray[12][1] = "E416";
-//		
-//		regArray[13][0] = new RegExp(/:-\*/g); //:-*
-//		regArray[13][1] = "E418";
-//		
-//		regArray[14][0] = new RegExp(/:-?]/g); //:-] :]
-//		regArray[14][1] = "E402";
-//		
-//		regArray[15][0] = new RegExp(/ x-?d/gi); //x-d
-//		regArray[15][1] = "E409";
-//		
-//		regArray[16][0] = new RegExp(/:-?s/gi); //:s
-//		regArray[16][1] = "E407";
-//		
-//		regArray[17][0] = new RegExp(/:-?\|/g); //:|
-//		regArray[17][1] = "E40D";
-//		
-//		regArray[18][0] = new RegExp(/:-?\//g); //:/ :-/
-//		regArray[18][1] = "E40E";
-//		
-//		regArray[19][0] = new RegExp(/>.>/g); //>.>
-//		regArray[19][1] = "E403";
-//		
-//		regArray[20][0] = new RegExp(/<\/3/g);
-//		regArray[20][1] = "E023"
-//		
-//		regArray[21][0] = new RegExp(/:-\|\|/g); // :-||
-//		regArray[21][1] = "E416";
-//		
-//		
-//		regArray[22][0] = new RegExp(/:-?x/gi); // :x, :X, :-x, :-X
-//		regArray[22][1] = "E40C";
-//		
-//		var p = 0;
-//		for (p= 0; p < 23; p++)
-//		{
-//		out = out.replace(regArray[p][0], "<img src='" + targetToBase64(regArray[p][1]) + "'>");
-//		}
-//		
-//		return out;
-					
+	}
+	
     //URLs starting with http://, https://, or ftp://
     var replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
     out = out.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
@@ -1351,10 +1266,48 @@ function check4emoji(s) {
 	return out;
 } 
 
+function getWholeChar(str, i) {
+    var code = str.charCodeAt(i);     
+ 
+    if (isNaN(code)) {
+        return '';
+    }
+    if (code < 0xD800 || code > 0xDFFF) {
+    	//console.log(code);
+        return str.charAt(i);
+    }
+    if (0xD800 <= code && code <= 0xDBFF) { 
+        if (str.length <= (i+1))  {
+        	return '';
+            //throw 'High surrogate without following low surrogate';
+        }
+        var next = str.charCodeAt(i+1);
+        if (0xDC00 > next || next > 0xDFFF) {
+        	return '';
+            //throw 'High surrogate without following low surrogate';
+        }
+        return surrogatePairToCodePoint(str.charCodeAt(i), str.charCodeAt(i+1)).toString(16);
+    }
+    // Low surrogate (0xDC00 <= code && code <= 0xDFFF)
+    if (i === 0) {
+    	return '';	
+        //throw 'Low surrogate without preceding high surrogate';
+    }
+    var prev = str.charCodeAt(i-1);
+    if (0xD800 > prev || prev > 0xDBFF) { 
+        //throw 'Low surrogate without preceding high surrogate';
+        return '';	
+    }
+    return ''; 
+}
+
+function surrogatePairToCodePoint(charCode1, charCode2) {
+    return ((charCode1 & 0x3FF) << 10) + (charCode2 & 0x3FF) + 0x10000;
+}
+
 
 function targetToBase64(target) {
 	var base64 = "";
-
 if( target =="E001" ){ base64 =  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAD5klEQVQ4ja2UTWxUVRTHf+/d9+a96bQzQzvQdqCdSgvRdsRWbIXy5QckRkyMiSzAqGsToy6wC00wRBai0UTiwojGxIUaQmJg5QZFSQwESMFWIdoAU5tSaWuHdj7ezHvvHhetUAnohrM7uef88j/3nvuHuxzGnQ6UQYeF8aAyWK0Mo8kAWyOzoTAWiJwLhF8Epv4XaBvGE3WW8WbcVP22UqatTNRClQbCUPC1xhNdzleDgyUtbwgUbwuMmsbepRFrT9yJUBexcS1FxFIoY75MgEBrqr6mGAbkPY9pzz+TD/QWgRKAuqmMnamIfWBJzGFJ1CURdYi5DjW2wrUtHEsRsSxspbCUAYY5r1p02gu1DoTvFyuMJSxzNOnY9UnXIR6NEFUKpUwQA2UujKznFVbCkIJXpRKGlPyAmUrVy/u6WSBvLcjchkh9wfPRAn4oKBN8P8APQmJRF6015UqV6+Uq14Em12bK84kqE43hmrA1hMP/vOh7JkhLIiotcVcWrksaa1zpuWf5zTzqyvb+bjn41ktSPP6xDDy7WQAxQSzDeBfAAhAhroGXn1lHbTKFVZOgp7uL3g295C6PM3hhhO5722lrb4V4DEoFmBhn/+7nWJa02f3pMUQkcQOo4WydZbK9v4uuvochkYJoFAJNpqOFTFc7VKpQ9eHaJFQ9qlUfypon+zp5/6vjXC2GZ28Ak8maXGdTHbYVofJXnrGxPzk/OkMmnSK7qh3TtOdn1j7Dv4+QuzrNA60NrKhxsCybjtallK/O5fL5IibApo2ZXb33pymUPQgruKu3su+jo5Bej4hGGYJlCCIC6X72HTiCu+pxjMCj4FXoyabZsimz68YeOpadjjmyPZtupHFZiqg3QW92JZmE4JhCuTxHtVJCYeBUptjQtZyMOU1Y9ciNjvPDxRF+G5395Npk4bQCuDZZODOVLxV7muu3tWXSRAxhZVua2iW1FPJ5Pj90iMGhIbId7aSWxlmRcKjMzlAqlzl1ZpjPjg0PXMrlD/zrpxTKwU9l33t685rWZsd1Kc4VGbqYo7EhTt+aTtZmO9E6ZHDwV2L4+IHP5PQkHxz+8fzPV2ZeuNUTAKiJmA/t39kfXv56QMYO75Fsfb0AYizsISAbMstl8uheufTl67J/V7+uiZhrFzPU4sQPZXzwysRwA+GO9raU8erzj9HZUE+DtuhraWJg56O8/dpTTE5N8c23p/Q7R07vmPXC7xYzbuuHtY7q3Xhf84cvbsqu7+7JkIzHMICZ2TnODf7BFyeGTp64MPFKoRKevrX3jgYLUOda61Jx95GGOrcDYHrOG5ma9Y7PecHJ/+q7q/E3m5es+MSwy7oAAAAASUVORK5CYII=';}
 if( target =="E002" ){ base64 =  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAEMElEQVQ4ja2UTWyUZRDHf/N+7Lu73W5bClWWlrYUQgXkQypiEVITUQ4YEBMgGhOiHjQaL0Y5eMNED3gxmhANKQcTP4IiUSKiAiqiBmltMEhrEQULpV27y7b7+b7v8zwebKsmxINxTpPJ5D8z//nPwP9scr2gLSyJiTwds2SNiHi+1t8HyNmoxd02Mjs05nJJ64MlzW4g/FfAhCV76j33sYRr41k2IoJBozTYliAIoVaUlWbCD0w6UBsCwyfXBay2rYM3eM6muniUGtfFcx1E/koxGARBaU3BD8hVAsbKZa5WwvWh4TMAZyrZFXmoLuJsqonHqI15VEVcPMdBxKC1mawuiAXaGBzHBtsmBCqqdDAdqASAPd2dY79TG43MTEY94hEX17ZQGEJl8LUh0AplQAtowIigjSE0Gl/pSDFUlzT0OZNzz3QtabdECLQh74eUwhClQWlDvliiUK5Ql0wQdR0sWxAjhFqjjSBiERF5PDBmnwNgCWuVMRSVplIqowJF2ffJK0MRSMUirOnsYP/xb7GBBFDl2riRCJYFgdEI0gHmTw6NobkYKLJBCYCGeJTU3BStzSk6VtzMju33klrezrF3D/PB4S/54dwgQ5evcmU0Q36SX29ye1MrfATY+8TGVTy5bQPz2xfgpFKQrAPLgfE8plRBapMQ98AvQXqMiaGLnDrVx7N7DtB7YQRAbADXtSONycij3Tu30javmaFMjhO9/RRGRqlD0H5IGAaYQpErgwN8deI0E9kx5tTEmd8yC5Ub46OeC2lgtwXQ2Tn3rpXLmhlOj1OayKFbu9j18oeo2atRRuGgsNFYqozddDsvvHqIyqxVlIKAfHYcPwy4f8tts6Zl40Wc+vmNye1tdbWkZjcQLQ6zqC1FU41QG49QLBWwLU25HBALcyxsrGGOnaHOMeQmJujrH8SvttXp3t922QBjmWL/aDZfXNKQXN/W2khUhPa2FLXVMcRo9h86zJHPj5GIxmhtTtF6Y5K49ikUJsiOZej++OTI+0cHlwWBvjYt7Hwh/NoPK+u6lre12p6L8n2G01mqEx4rblrA8vaFzGtJMTo8wrXRNJaqUCpX6P/pZ146cHpLvhT2/OP0BOr7Bq429p4dYN3qW4hHHJ558U3e++5Hmtw4nucxls9RRvPW8zvoWrmA8XyOAyfOUCyrO4FPpzm04b449FzT1J8ZGGJurcvMGVVsvedWWqoSZIaz2H7IuqXzeGXnNlYunsP5C7+w79BJuo+cQ2CtK6wPoXtKjIs84awxUIGeeMR66oHOtrc337G4adnSVmKxBFprbAuGh9N8c2qQPUf79p75NftGaPgiLhDCRd/QMgXYJcLDApuVoQYwADOq3I0tDdUPtqfqOpJxLzGUyV8euJI5fun34muVQJ+fZGu7LbyiDc8ZeP3v73AR0MB/s1VTzh8E+dncm1sg6AAAAABJRU5ErkJggg==';}
 if( target =="E003" ){ base64 =  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAACA0lEQVQ4je2RTUtUYRiGr/d8zGfOOEMTDhplhljLsHARfRBRbSLaFCHUD9B/Mf+gFi0rjMB2gejKiBBsaJOBYNYYY6kzU86Z45mZ8/Gec9oUaDQatGnhtXt4uC+ehxv2+e9Qd1v2afGzY5mjEwcj0d4Tsa5zN7vyhc9ue9kMZLlTRnRa9KjRM497T7+61DsUkxEdRRFonmT2y5I9ujp/fsN3in99YVyo+UL34OsL2f50EImj6DqBULC9gCyadkgGN2bt7xOS0NpTqCAio/H81PVk35Dth3yzLTasBlXToG5t0bZtcmhJR7ojC9KaCMHv+LIAdUTPPBlLHLmjCZWadKgFLiYSEKRQyKlRcmoMGXo8aJWfznv1u9ulO4TH9OSzi9Hc7WygYomQA5k0mUyWeCwBCtjNNpvGJq26QTwU1BWfl05tsuQ1b/1yaNuFlcB9vqi7p67k+gcv5wcY6DlMItWNEouBCAkcl6bZYGWjzNzaJ+aqpQ/Vtju53bFD2PS9qaKxvhDA/eFM7mraD0krGqoaQQiBrwgiASy1LKarpZm3xvq4H4aru5Xih2B8tbdmikYlpTrOsNZuIw0Do1Zhea3Ei5V3FJbfPHxv1sZDWANkx1J+I5XWoteOJ7rv9SdSJwFWWubix5bxqCGdacD8U2g3IUAUSAL6z9kDmoCzR26ff+AH3pfWp7DtYGcAAAAASUVORK5CYII=';}
@@ -1825,10 +1778,12 @@ if( target =="E533" ){ base64 =  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA
 if( target =="E534" ){ base64 =  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAADjElEQVQ4ja2UTWhcVRSAv3vvy2SSSZpoh8RKV2INDAUDpiEq3TTamlAXtrWIROimBelGsP7SRSEkgoHWRUHoptAGBMlCVzFtaAWNWmMkEZpSOyg2A5NMMslMJvNm5r1597jIy09LsRsPHLhw7/3eed89HPifQ20sdsOBg0p9si8efz7W2FgjII+5qIqFgj+5tDRzTeSzFNzYBO6GA0M7dnz3yqlTNU2JBFKpgAgo9WhauKdqa8nPzjJ+6ZL/werqaym4oQDe0/qnT/v6XmxoacGdnV2/sAHcDrX2QbDWxBIJCpkMg8PDP39h7UsOQGc0mnB8n7XZWUQpgrU1bAg1dXXoaJTAdbGetwW1FsplqpUKkdZWOqPRBK6LA6BFlJfNUgXs/ALNH31M7O23oFBg/uhR/FSKuu5udg4NIYAGJAgojl1jpb8f5ufRIopwD19EvHKZwHWp+h71B19FA7qxEb2njUo6jRiDAqrJJNmBAWw+T0NvD43v9FFJp/FFZAtoLdVSCS+XQ1qfwsR3sjY+DkB0/8uUs1n8oguAOzHBP2fPMn/mDABOWxsV18UPVWgALwgopdOUFxeJ7OsAIDs8jJ9OEzt0CM+vUi2tA4OGBvyWFqKHDwNQuH6dUiaDFwRbj3XRcXKTWsuPIMtjYyIi8nvjDlkZGRERkaldu+TesTfl4Vi5dUu+B/kV5KLj5LYqDH/bB5q6u6m6LqnCKpnpaQBMezvF1BwAK6Oj/NbezuLVqzR3dvLMlSu4gLeuMHQIlIDavXvRxuDU1/O6CM/19wPQ1NNDqVhcd5hMMjczw+0TJwB4+sgRrFL424FBCGzq7QVg+eZN/h4cZO7CBQDiPT1IPA6AF4mwAkSOH19vx9VVPKC6veHPGZP7BqRw/76IiEx0dMhXIF+DeAsLIiJy9/z5TXelbR7/OHlSvgU5Fzp0AAIRpY0hdfkyTizG8p07RMPKp0+f5omuLvJTU/w5MIDWGhON4uVyLIyOkpmcJKI1QdjYCuBDY3JdIk1laxGgFtCOAyJUgoAAMOEHNkaQDjOiNcoYfrE2/3kQNDsASZFkuzEv1BiDADZMlMJojQmFGx4KpbDho94TSW6eWYL8HqXeaFBKq7CKB1KpRydQAf4SCUasfd+F2xuzqb4Fju3X+t1ntW6rAfOf0zV05UOQtPbuD9Z+mYERwN0+QeuBJ0OFG4U+jrlR5DLgAvwLcPXp2GLNpTsAAAAASUVORK5CYII=';}
 if( target =="E535" ){ base64 =  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAADd0lEQVQ4ja2UTWhcVRTHf/e9+yaTSTKxXxMKhYg0FlLBlUGlCilWAoZCUqGbdhsIlGIRbXVRuigKunFRKnSdZZcqEqRdpFSplCCdFEpiKmk6xulM0+RN3uf9cPHeTFIRdeGDA5d7z/mdc+497w//8yfaiwNw9F0hPnlt795Xe/r6PAv2XwLFlu+nPzcav8xa+/kq3OgAD8DRL8vl79+ZmvL6h4exUZRHib+n2SyXKBbZuH+fH65dSz/a3BxbhRsC4APHuf3pqVNv9FYqBAsLGahtSmHjGLAI6UGhsA21ltLhw7TqdT6bmfnxK2PedABGisVhmaa0qlW0lGjXRQtB/EedaH2ddNdu1L4KsbaEq6solWR+UtKqVpFpykixOAwgARxrRdJsooRARBFYS/r4MaWJCXadP48slzvdbn7zLc8uXcIpbuH09GKFwDSbONaKDjC11iZhiHFdhDGktRp9p0+z7+JFAIKbN1FPntA3Pk55/D26Dr3M6vHjSAsUChitSW12sQ5AagwqDNFhSLK+ju7to5LDfj97lt8mJ6mdOcPSyAhqbY2uoSF6Tp4kfPQIHYaoMCQ1hg4w0ZpwbY0kSYgaDYpHjgAQP3xIfWYGOzCArVQIV1aoX7kCQHlykiSOSaIoi9WaTstKCIJaDTY3Ub7PnhcHs1arVZJWAHs0aJ09wvx8FjgwQNxqES8uIqII5TjbwARIXRfj+8TWEjebAJhCAT+N6a7VwHVRvo+M42xq0pStIEACrueR5LOZ3SGgACUlBlifmwOgf3SUENgKAiLfpwn0njgBQGt+ngTQUqJyRgfY3kgBA6zdukW0vIwsFHhldhZ//34apRKVqSlemp4G4NfLl7M4IToFbY/NDpiQklQpbo+O8va9ewweO8Zgrfbcn/fgwgVqd+7Q5bqkeVXpTqC2ViRCZGogBEjJ05UVvqtUOHjuHANjY8jubjaqVZavXqV+9y5dQJo/hMgZ7TUfu+6z1x2nf6e8CGtRSnUyt89cwHNdRA5rQ34yZuMLrV9wAJasXYrylnVuSgjwPDwpkVLiuS6elLieh3Gcjp8BImDR2qV2QhqwMSTERK8Qjsir6ZgQz9tfzmNg2Vp93ZgPA1hoC16pAu+/5TjTBx3nkAfuP6pr3mYKesmYB3PGfF2H60CwU0FLwG6gK/f/L8x2kU+BAOBPJqWzja3pIIUAAAAASUVORK5CYII=';}
 if( target =="E536" ){ base64 =  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAACCklEQVQ4jb2RPWgUQRiG3/nZ2Y05c/Fu70KOhBAEEzRaaYygjYKdmICCoPiLWlhoIVeIIvEnRQ5ELIQcmIigKYQEi+BP0C4iWohaaGEhCHIgil6883Izu5+FCmazqzkjvtXMPN/3zjvzAf9DrUwu2y5jx3K2e7vWXh482Gc19J+13VsfyC9MeZWJBRmeVomx175+sb9S6NIgvVY4W1JMtNZiKH/d3PHKI8u5Wn/IariUYKIZAFqY7HxP3tu/Msww0dEr67MAYEAYN6XcU39mspaEs57cyESLJkATcNeUh6/qYjbY0C2c3hMqEfm3swzvm/IVDUADuKw/Hwhr0ET6lV99dEYlpzJMdv4x8ojT9DXvNH0KY13c3nzedp+5TLR1cLXhuFoykWKiPTIhAIyZLwMSiAvACrKlXK5rZmLVoO2+STDeNqqns30ydu63CRsZzwzZadolF+fDeE65hSE7TXk7TYet+M3gxXMSlog+agA9ou7gau7sDPJhU9ytAVQBrOT2Nu/7l0cbalDl52C2ytiFIH/pV+9VAdIAHnqVa0E+xxAAJr3SoAbhsV+5EcYNiGkQRk1xbxgP1SKwRNh5j6g7MqBStILbffM2i1I7tzb2K5f2yPiDBZt1C+foKZWkkypJGSbXRNXJKBDUJlF/0fxYvyPzJKoudChheu7PXNcgjJvpHfPt+Sf6BmsOpo/7ZfQBAAAAAElFTkSuQmCC';}
-					
 	return base64;
 }
 
+
+
+var Unicode32to16 = { "1F466": "E001", "1F467": "E002", "1F48B": "E003", "1F468": "E004", "1F469": "E005", "1F45A": "E006", "1F455": "E006", "1F45E": "E007", "1F45F": "E007", "1F4F7": "E008", "260E": "E009", "1F4DE": "E009", "1F4F1": "E00A", "1F4E0": "E00B", "1F4BB": "E00C", "1F44A": "E00D", "1F44D": "E00E", "261D": "E00F", "270A": "E010", "270C": "E011", "1F64B": "E012", "270B": "E012", "1F3BF": "E013", "26F3": "E014", "1F3BE": "E015", "26BE": "E016", "1F3C4": "E017", "26BD": "E018", "1F421": "E019", "1F41F": "E019", "1F3A3": "E019", "1F434": "E01A", "1F697": "E01B", "26F5": "E01C", "2708": "E01D", "1F683": "E01E", "1F685": "E01F", "2753": "E020", "2757": "E021", "2764": "E022", "1F494": "E023", "1F550": "E024", "1F551": "E025", "1F552": "E026", "1F553": "E027", "1F554": "E028", "1F555": "E029", "1F556": "E02A", "1F557": "E02B", "1F558": "E02C", "1F559": "E02D", "23F0": "E02D", "1F55A": "E02E", "1F55B": "E02F", "1F338": "E030", "1F531": "E031", "1F339": "E032", "1F384": "E033", "1F48D": "E034", "1F48E": "E035", "1F3E0": "E036", "1F3E1": "E036", "26EA": "E037", "1F3E2": "E038", "1F689": "E039", "26FD": "E03A", "1F5FB": "E03B", "1F3A4": "E03C", "1F3A5": "E03D", "1F4F9": "E03D", "1F3B5": "E03E", "1F511": "E03F", "1F3B7": "E040", "1F3B8": "E041", "1F3BA": "E042", "1F374": "E043", "1F378": "E044", "1F377": "E044", "1F379": "E044", "2615": "E045", "1F370": "E046", "1F37A": "E047", "26C4": "E048", "26C5": "E049", "2601": "E049", "2600": "E04A", "2614": "E04B", "1F313": "E04C", "1F319": "E04C", "1F314": "E04C", "1F31B": "E04C", "1F304": "E04D", "1F47C": "E04E", "1F431": "E04F", "1F42F": "E050", "1F43B": "E051", "1F429": "E052", "1F436": "E052", "1F42D": "E053", "1F433": "E054", "1F427": "E055", "1F60B": "E056", "1F60A": "E056", "1F603": "E057", "1F63A": "E057", "1F61E": "E058", "1F620": "E059", "1F4A9": "E05A", "1F4EA": "E101", "1F4EB": "E101", "1F4EE": "E102", "1F4E8": "E103", "1F4E7": "E103", "1F4E9": "E103", "2709": "E103", "1F4F2": "E104", "1F61C": "E105", "1F60D": "E106", "1F63B": "E106", "1F631": "E107", "1F613": "E108", "1F435": "E109", "1F419": "E10A", "1F437": "E10B", "1F43D": "E10B", "1F47D": "E10C", "1F680": "E10D", "1F451": "E10E", "1F4A1": "E10F", "1F33F": "E110", "1F340": "E110", "1F331": "E110", "1F48F": "E111", "1F4E6": "E112", "1F381": "E112", "1F52B": "E113", "1F50E": "E114", "1F50D": "E114", "1F3C3": "E115", "1F528": "E116", "1F386": "E117", "1F341": "E118", "1F342": "E119", "1F47F": "E11A", "1F47B": "E11B", "1F480": "E11C", "1F525": "E11D", "1F4BC": "E11E", "1F4BA": "E11F", "1F354": "E120", "26F2": "E121", "26FA": "E122", "2668": "E123", "1F3A1": "E124", "1F3AB": "E125", "1F4BF": "E126", "1F4C0": "E127", "1F4FB": "E128", "1F4FC": "E129", "1F4FA": "E12A", "1F47E": "E12B", "303D": "E12C", "1F004": "E12D", "1F19A": "E12E", "1F4B0": "E12F", "1F4B5": "E12F", "1F4B2": "E12F", "1F3AF": "E130", "1F3C6": "E131", "1F3C1": "E132", "1F3B0": "E133", "1F40E": "E134", "1F6A4": "E135", "1F6B2": "E136", "26D4": "E137", "1F6A7": "E137", "1F6B9": "E138", "1F6BA": "E139", "1F6BC": "E13A", "1F489": "E13B", "1F4A4": "E13C", "26A1": "E13D", "1F460": "E13E", "1F6C0": "E13F", "1F6BD": "E140", "1F50A": "E141", "1F4E2": "E142", "1F38C": "E143", "1F50F": "E144", "1F510": "E144", "1F512": "E144", "1F513": "E145", "1F306": "E146", "1F373": "E147", "1F4D3": "E148", "1F4C7": "E148", "1F4DA": "E148", "1F4D9": "E148", "1F4D8": "E148", "1F4D7": "E148", "1F4D5": "E148", "1F4D6": "E148", "1F4D2": "E148", "1F4D4": "E148", "1F4B1": "E149", "1F4C8": "E14A", "1F4CA": "E14A", "1F4B9": "E14A", "1F4E1": "E14B", "1F4AA": "E14C", "1F3E6": "E14D", "1F6A5": "E14E", "1F17F": "E14F", "1F68F": "E150", "1F6BB": "E151", "1F46E": "E152", "1F3E3": "E153", "1F3E7": "E154", "1F3E5": "E155", "1F3EA": "E156", "1F3EB": "E157", "1F3E8": "E158", "1F68C": "E159", "1F695": "E15A", "1F6B6": "E201", "2693": "E202", "1F6A2": "E202", "1F201": "E203", "1F49F": "E204", "2734": "E205", "2733": "E206", "1F51E": "E207", "1F6AD": "E208", "1F530": "E209", "267F": "E20A", "1F4F6": "E20B", "2665": "E20C", "2666": "E20D", "2660": "E20E", "2663": "E20F", "27BF": "E211", "1F195": "E212", "1F199": "E213", "1F192": "E214", "1F236": "E215", "1F21A": "E216", "1F237": "E217", "1F238": "E218", "26AB": "E219", "26AA": "E219", "1F534": "E219", "2B1B": "E21A", "1F535": "E21A", "1F532": "E21A", "25FE": "E21A", "25FC": "E21A", "25AA": "E21A", "2B1C": "E21B", "1F533": "E21B", "25FB": "E21B", "25FD": "E21B", "1F537": "E21B", "25AB": "E21B", "1F538": "E21B", "1F539": "E21B", "1F536": "E21B", "0031": "E21C", "0032": "E21D", "0033": "E21E", "0034": "E21F", "0035": "E220", "0036": "E221", "0037": "E222", "0038": "E223", "0039": "E224", "0030": "E225", "1F250": "E226", "1F239": "E227", "1F202": "E228", "1F194": "E229", "1F235": "E22A", "1F233": "E22B", "1F22F": "E22C", "1F23A": "E22D", "1F446": "E22E", "1F447": "E22F", "1F448": "E230", "1F449": "E231", "2B06": "E232", "2B07": "E233", "27A1": "E234", "1F519": "E235", "2B05": "E235", "2934": "E236", "2197": "E236", "2196": "E237", "2198": "E238", "2935": "E238", "2199": "E239", "25B6": "E23A", "25C0": "E23B", "23E9": "E23C", "23EA": "E23D", "1F52E": "E23E", "1F52F": "E23E", "2648": "E23F", "2649": "E240", "264A": "E241", "264B": "E242", "264C": "E243", "264D": "E244", "264E": "E245", "264F": "E246", "2650": "E247", "2651": "E248", "2652": "E249", "2653": "E24A", "26CE": "E24B", "1F51D": "E24C", "1F197": "E24D", "00A9": "E24E", "00AE": "E24F", "1F4F3": "E250", "1F4F4": "E251", "26A0": "E252", "1F481": "E253", "1F4CB": "E301", "1F4DD": "E301", "270F": "E301", "1F4D1": "E301", "1F4C3": "E301", "1F4C4": "E301", "1F454": "E302", "1F33A": "E303", "1F337": "E304", "1F33C": "E305", "1F33B": "E305", "1F490": "E306", "1F334": "E307", "1F335": "E308", "1F6BE": "E309", "1F3A7": "E30A", "1F3EE": "E30B", "1F376": "E30B", "1F37B": "E30C", "3297": "E30D", "1F6AC": "E30E", "1F48A": "E30F", "1F388": "E310", "1F4A3": "E311", "1F389": "E312", "2702": "E313", "1F380": "E314", "3299": "E315", "1F4BE": "E316", "1F4BD": "E316", "1F4E3": "E317", "1F452": "E318", "1F457": "E319", "1F461": "E31A", "1F462": "E31B", "1F484": "E31C", "1F485": "E31D", "1F486": "E31E", "1F487": "E31F", "1F488": "E320", "1F458": "E321", "1F459": "E322", "1F45C": "E323", "1F3AC": "E324", "1F514": "E325", "1F3B6": "E326", "1F3BC": "E326", "1F496": "E327", "1F495": "E327", "1F49E": "E327", "1F493": "E327", "1F497": "E328", "1F48C": "E328", "1F498": "E329", "1F499": "E32A", "1F49A": "E32B", "1F49B": "E32C", "1F49C": "E32D", "2728": "E32E", "2747": "E32E", "2B50": "E32F", "1F4A8": "E330", "1F4A7": "E331", "1F4A6": "E331", "1F605": "E331", "2B55": "E332", "274C": "E333", "2716": "E333", "274E": "E333", "1F4A2": "E334", "1F31F": "E335", "2754": "E336", "2755": "E337", "1F375": "E338", "1F35E": "E339", "1F366": "E33A", "1F35F": "E33B", "1F361": "E33C", "1F358": "E33D", "1F35A": "E33E", "1F35D": "E33F", "1F35C": "E340", "1F35B": "E341", "1F359": "E342", "1F362": "E343", "1F363": "E344", "1F34E": "E345", "1F34F": "E345", "1F34A": "E346", "1F353": "E347", "1F349": "E348", "1F345": "E349", "1F346": "E34A", "1F382": "E34B", "1F371": "E34C", "1F372": "E34D", "1F625": "E401", "1F60F": "E402", "1F640": "E403", "1F614": "E403", "1F64D": "E403", "1F629": "E403", "1F63C": "E404", "1F624": "E404", "1F601": "E404", "1F638": "E404", "1F609": "E405", "1F623": "E406", "1F62B": "E406", "1F635": "E406", "1F4AB": "E407", "1F616": "E407", "1F62A": "E408", "1F61D": "E409", "1F445": "E409", "1F60C": "E40A", "1F606": "E40A", "1F628": "E40B", "1F637": "E40C", "1F633": "E40D", "1F612": "E40E", "1F630": "E40F", "1F632": "E410", "1F62D": "E411", "1F639": "E412", "1F602": "E412", "1F622": "E413", "1F63F": "E413", "263A": "E414", "1F604": "E415", "1F621": "E416", "1F64E": "E416", "1F63E": "E416", "1F61A": "E417", "1F618": "E418", "1F63D": "E418", "1F440": "E419", "1F443": "E41A", "1F442": "E41B", "1F444": "E41C", "1F64F": "E41D", "1F44B": "E41E", "1F44F": "E41F", "1F44C": "E420", "1F44E": "E421", "1F450": "E422", "1F645": "E423", "1F646": "E424", "1F491": "E425", "1F647": "E426", "1F64C": "E427", "1F46B": "E428", "1F46F": "E429", "1F3C0": "E42A", "1F3C8": "E42B", "1F3B1": "E42C", "1F3CA": "E42D", "1F699": "E42E", "1F69A": "E42F", "1F692": "E430", "1F691": "E431", "1F693": "E432", "1F6A8": "E432", "1F3A2": "E433", "1F687": "E434", "24C2": "E434", "1F684": "E435", "1F38D": "E436", "1F49D": "E437", "1F38E": "E438", "1F393": "E439", "1F392": "E43A", "1F38F": "E43B", "1F302": "E43C", "1F492": "E43D", "1F30A": "E43E", "1F367": "E43F", "1F387": "E440", "1F41A": "E441", "1F390": "E442", "1F300": "E443", "1F33E": "E444", "1F383": "E445", "1F391": "E446", "1F343": "E447", "1F385": "E448", "1F305": "E449", "1F307": "E44A", "1F30C": "E44B", "1F309": "E44B", "1F303": "E44B", "1F308": "E44C", "1F3E9": "E501", "1F3A8": "E502", "1F3A9": "E503", "1F3AD": "E503", "1F3EC": "E504", "1F3EF": "E505", "1F3F0": "E506", "1F3A6": "E507", "1F3ED": "E508", "1F5FC": "E509", "1F1F5": "E50B", "1F1F8": "E50C", "1F1EB": "E50D", "1F1E9": "E50E", "1F1EE": "E50F", "1F1EC": "E510", "1F1EA": "E511", "1F1F7": "E512", "1F1E8": "E513", "1F1F0": "E514", "1F471": "E515", "1F472": "E516", "1F473": "E517", "1F474": "E518", "1F475": "E519", "1F476": "E51A", "1F477": "E51B", "1F478": "E51C", "1F5FD": "E51D", "1F482": "E51E", "1F483": "E51F", "1F42C": "E520", "1F426": "E521", "1F420": "E522", "1F424": "E523", "1F425": "E523", "1F423": "E523", "1F439": "E524", "1F41B": "E525", "1F418": "E526", "1F428": "E527", "1F412": "E528", "1F411": "E529", "1F43A": "E52A", "1F42E": "E52B", "1F430": "E52C", "1F40D": "E52D", "1F414": "E52E", "1F417": "E52F", "1F42B": "E530", "1F438": "E531", "1F170": "E532", "1F171": "E533", "1F18E": "E534", "1F17E": "E535", "1F43E": "E536", "1F463": "E536", "2122": "E537"};
 
 var replacements = [
 					'E001','E002','E003','E004','E005','E006','E007','E008','E009','E00A','E00B',
