@@ -4,10 +4,9 @@ Name: WifiSMS
 Package: org.thebigboss.wifisms
 Conflicts: com.treason.treasonsmstwo
 Replaces: com.treason.treasonsmstwo
-Depends: firmware (>= 4.0), shell-cmds, sudo, coreutils-bin, coreutils
+Depends: firmware (>= 4.0), shell-cmds, coreutils-bin, coreutils
 Section: Messaging
-Installed-Size: 1354
-Version: 1.0.7
+Version: VERSION
 Architecture: iphoneos-arm
 Description: send & receive SMS thru PC's webbrowser
 Depiction: http://moreinfo.thebigboss.org/moreinfo/depiction.php?file=wifismsData

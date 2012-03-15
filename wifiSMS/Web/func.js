@@ -303,12 +303,17 @@ function cleanPhone(s) {
 	
 	 s = s.replace(/[^\d.]/g, "");
 	 
+     if (s.substring(0, 2) == "00") {
+	 	s = s.substring(2);
+     }
+    
 	 if (s.substring(0, 1) == "0") {
 	 	s = s.substring(1);
 	 }
 	 
-	 if (s.substring(0, 1) == localStorage.getItem("CC")) {
-	 	s = s.substring(1);
+     var cc = localStorage.getItem("CC");
+	 if (s.substring(0, cc.length) == cc) {
+	 	s = s.substring(cc.length);
 	 }
 	 
 	return s;
@@ -752,7 +757,7 @@ function QuerySMS() {
 							var tot = json.messages.length-1;
 							
 							for(var i = 1; i <= tot; i++) {
-								var Phone = json.messages[i].Phone;
+								var Phone = cleanPhone(json.messages[i].Phone);
 								var SMS = json.messages[i].Text;
 								var flags = json.messages[i].flags;
 								var group = json.messages[i].group;
