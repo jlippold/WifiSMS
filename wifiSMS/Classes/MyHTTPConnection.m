@@ -892,6 +892,10 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 			
 			phoneNoFormat = [[mobile componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
 			
+            if ([phoneNoFormat hasPrefix:@"00"]){
+				phoneNoFormat = [phoneNoFormat substringFromIndex:2];
+			}
+            
 			if ([phoneNoFormat hasPrefix:@"0"]){
 				phoneNoFormat = [phoneNoFormat substringFromIndex:1];
 			}

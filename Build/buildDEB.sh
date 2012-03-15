@@ -1,17 +1,24 @@
 #!/bin/bash
 
-cd ~/WifiSMS/
+VERSION="1.0.9"
+
+cd `dirname $0`
+cd ..
 
 find . -name .DS_Store -ls -exec rm {} \;
 
-rm -r ~/WifiSMS/Build/cydia/WifiSMS/var/mobile/Library/WifiSMS/
-rm -r ~/WifiSMS/Build/cydia/WifiSMS-NoSBS/var/mobile/Library/WifiSMS/
+rm -r temp
+mkdir -p temp/var/mobile/Library/SBSettings/
+cp -r wifiSMS/build/Release-iphoneos/WifiSMS/ temp/var/mobile/Library/WifiSMS/
+cp -r Build/cydia/WifiSMS/DEBIAN/ temp/DEBIAN/
+sed -e "s/^Version: VERSION$/Version: ${VERSION}/" Build/cydia/WifiSMS/DEBIAN/control > temp/DEBIAN/control
+cp -r SBS-Toggle/Commands/ temp/var/mobile/Library/SBSettings/Commands/
+cp -r SBS-Toggle/Themes/ temp/var/mobile/Library/SBSettings/Themes/
+cp -r SBS-Toggle/Toggles/ temp/var/mobile/Library/SBSettings/Toggles/
+dpkg-deb -b temp Build/deb/WifiSMS-${VERSION}.deb
 
-cp -r ~/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS/ ~/WifiSMS/Build/cydia/WifiSMS/var/mobile/Library/WifiSMS/
-cp -r ~/WifiSMS/wifiSMS/build/Release-iphoneos/WifiSMS/ ~/WifiSMS/Build/cydia/WifiSMS-NoSBS/var/mobile/Library/WifiSMS/
-
-cd ~/WifiSMS/Build/cydia/
-
-dpkg-deb -b WifiSMS ~/WifiSMS/Build/deb/WifiSMS-1.0.9.deb
-
-dpkg-deb -b WifiSMS-NoSBS ~/WifiSMS/Build/deb/WifiSMS-NOSBS-1.0.9.deb
+rm -r temp/var/mobile/Library/SBSettings/
+rm -r temp/DEBIAN/
+cp -r Build/cydia/WifiSMS-NoSBS/DEBIAN/ temp/DEBIAN/
+sed -e "s/^Version: VERSION$/Version: ${VERSION}/" Build/cydia/WifiSMS-NoSBS/DEBIAN/control > temp/DEBIAN/control
+dpkg-deb -b temp Build/deb/WifiSMS-NOSBS-${VERSION}.deb

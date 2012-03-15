@@ -6,5 +6,5 @@ then
 	killall WifiSMS;
 else
 	touch /tmp/WifiSMS-ON;
-	sudo -u mobile nohup /User/Library/WifiSMS/WifiSMS "$*" > /dev/null 2>&1 &
+	su - mobile -c "nohup /User/Library/WifiSMS/WifiSMS \"$*\" > /dev/null 2>&1 &"
 fi
