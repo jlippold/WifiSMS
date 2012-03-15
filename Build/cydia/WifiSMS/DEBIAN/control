@@ -4,7 +4,7 @@ Name: WifiSMS
 Package: org.thebigboss.wifisms
 Conflicts: com.treason.treasonsmstwo
 Replaces: com.treason.treasonsmstwo
-Depends: firmware (>= 4.0), mobilesubstrate, sbsettings, shell-cmds, sudo, coreutils-bin, coreutils
+Depends: firmware (>= 4.0), mobilesubstrate, sbsettings, shell-cmds, coreutils-bin, coreutils
 Section: Messaging
 Version: VERSION
 Architecture: iphoneos-arm
