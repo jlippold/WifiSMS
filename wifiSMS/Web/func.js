@@ -6,7 +6,7 @@ $(document).ready(function() {
   });
 
 	if ( $.browser.msie ) {
-		if ( !(confirm("Your browser sucks, and I'm not supporting it. Click yes to accept it sucks and continue anyway.")) ) {
+		if ( !(confirm(msgIE)) ) {
 			return;
 		}
 	}
@@ -37,7 +37,7 @@ $(document).ready(function() {
 	$("#SendNew").live('click', function() {
 		
 		if ( $("#NewContact").val() == "" || $("#NewMessage").val() == ""  ) {
-			alert("Please enter a contact and a message");
+			alert(msgNoSend);
 			return;
 		}
 		
@@ -45,48 +45,6 @@ $(document).ready(function() {
 		closeFB();
 				
 	});
-	
-//	$('div.btnDelete').live("click", function(event) {
-//		
-//		event.stopPropagation();
-//		if ( confirm("Are you sure you want to delete this conversation? There is no undo.") ) {
-//				var pa = $(this).parent()
-//				var grp = $(pa).attr("data-groupid");
-//				$.ajaxSetup({'beforeSend': function(xhr){
-//						if (xhr.overrideMimeType)
-//							xhr.overrideMimeType("text/plain");
-//						}
-//				});
-//				
-//				$.ajax({
-//					   type: "POST",
-//					   contentType: "text",
-//					   url: "/ajax/",
-//					   data: "action=deleteSMS&key=a4a1dda1-166d-47b0-8f31-a8581466da46&grp=" + grp, 
-//					   error:function (){
-//						   offline();
-//						   return;
-//					   },
-//					   success: function(resp){
-//					   	if (resp == "Deleted" ) {
-//								$(pa).remove();
-//								$("#grp").val("");
-//							  $('#ContactList li:first').trigger("click");
-//					   	} else {
-//					   		alert("Error deleting conversation");
-//					   	}
-//						 }
-//				});	
-//		}
-//	});
-//		
-//		
-//	$('#ContactList li').live("mouseenter", function() {
-//		$(this).find("div.btnDelete").delay(500).fadeIn();
-//	}).live("mouseleave", function() {
-//		$(this).find("div.btnDelete").stop().hide();
-//	});
-			
 		
 	$('#ContactList li').live('click', function() {
 		$("#Contact img:first").attr("src", $(this).attr("data-phone")+".jpg")
@@ -94,9 +52,9 @@ $(document).ready(function() {
 		var cName = $(this).find("div.desc").html();
 		var cPhone = $(this).attr("data-phone");
 		if (cName == cPhone) {
-			$("#Sender").html( "<div>Unknown Contact</div><div>" + cPhone + "&nbsp;&nbsp;&nbsp;<span class='download' title='Download Conversation' style='display:none'></span></div>'" );
+			$("#Sender").html( "<div>Unknown Contact</div><div>" + cPhone + "&nbsp;&nbsp;&nbsp;<span class='download' title='" + titDownload + "' style='display:none'></span></div>'" );
 		} else {
-			$("#Sender").html( "<div>" + cName+ "</div><div>" + cPhone + "&nbsp;&nbsp;&nbsp;<span class='download' title='Download Conversation' style='display:none'></span></div>" );	
+			$("#Sender").html( "<div>" + cName+ "</div><div>" + cPhone + "&nbsp;&nbsp;&nbsp;<span class='download' title='" + titDownload + "' style='display:none'></span></div>" );	
 		}
 		
 	  if ( $("#Phone").val() != $(this).attr("data-phone") ) {
@@ -112,9 +70,8 @@ $(document).ready(function() {
 		
 	$('#msg').bind('keydown', function(e) {
 		if (e.shiftKey && e.keyCode == 13) {
+                   $('#msg').val( $('#msg').val() + "" + String.fromCharCode(182) + "" );
                 e.preventDefault();
-	      	    $('#msg').val( $('#msg').val() + "" + String.fromCharCode(182) + "" ) //well, that didnt work
-                //e.preventDefault();
       			return false;
 		} else if ( e.keyCode==13 ) {
 		      	SendSMS();
@@ -138,20 +95,7 @@ $(document).ready(function() {
 	
 	$("div.btnconfig").click(function() {
 		
-		var htm = '<h2>Interface Settings</h2>'+
-			'<p>&nbsp;</p>'+
-			'<p>Refresh Interval:&nbsp;&nbsp;&nbsp;<input type="text" width="80px" onkeyup="save();" id="secs" value="' + (localStorage.getItem('timer')/1000) + '"></p><br />'+
-			'<p>My Phone Number (for pic):&nbsp;&nbsp;&nbsp;<input type="text" width="80px" placeholder="Format 3216549876" onkeyup="save();" id="myNumber" value="' + localStorage.getItem('myNumber') + '"></p><br />'+
-			'<p>Country Code Prefix:&nbsp;&nbsp;&nbsp;<input type="text" width="80px" data-original="' + localStorage.getItem('CC') + '" placeholder="1" onkeyup="save();" id="CC" value="' + localStorage.getItem('CC') + '"> </p>' +
-			'<p id="errConfig">&nbsp;</p><label><input type="checkbox" checked="checked" onclick="save();" id="isAudio"> Play Sounds </label> <br /><br />'+
-			'<button onclick="closeFB();">Save</button><br /><hr /><h2>Web Server Settings</h2><p>&nbsp;</p>'+
-			'<p>New Web Port:&nbsp;&nbsp;&nbsp;<input type="text" width="80px" placeholder="Leave blank to keep as-is" id="Port"></p><br />'+
-			'<label><input type="checkbox" onclick="showPass();" id="hasSecurity"> Set UserName / Password </label><p></p>'+
-			'<div id="security" style="display:none"><p>UserName:&nbsp;&nbsp;&nbsp;<input type="text" width="80px" placeholder="Leave blank for none" id="nUserName"></p><br />'+
-			'<p>Password:&nbsp;&nbsp;&nbsp;<input type="password" width="80px" placeholder="Leave blank for none" id="nPassword"></p></div>'+
-			'<p></p><button onclick="saveWeb();">Save</button><p id="errSettings">&nbsp;</p>'+
-		  '<p>&nbsp;</p><a href="javascript:void(0)" onclick="doDonate()">buy me a beer</a> | <a href="http://www.twitter.com/treason" target="blank">follow me on twitter</a> | <a href="https://github.com/treason/WifiSMS" target="blank">Fork Me on GitHub</a><p>&nbsp;</p>'
-		
+		var htm = confHTML;
 
 		$.fancybox(htm,
 			{
@@ -180,7 +124,7 @@ $(document).ready(function() {
 	
 
 	$("div.btnNew").click(function() {
-		var htm = "<h2>New Message</h2><br /><p>To:</p><br /><input id='NewContact' type='text'><p><br /></p><p>Message:</p><br /><textarea id='NewMessage'></textarea><p><br /></p><button id='SendNew'>Send</button>";
+		var htm = newHTML;
 
 		$.fancybox(htm,{
 					'titleShow' : false,
@@ -535,7 +479,7 @@ function switchContact(p, grp) {
 			   var out = "";
 		   
 			   if (resp == "||-||") {
-				   $("#chatWindow").html('<p style="text-align:center; padding-top: 20px">No SMS Messages Found</p>');
+				   $("#chatWindow").html(chatNoMsg);
 				   $("#pid").val(p);
 				   $('#msg').focus();
 				   return;
@@ -598,10 +542,10 @@ function switchContact(p, grp) {
 								  bubble.attr("class", "bubble");
 									if (fromMe) {
 										bubble.addClass("right");
-										bubble.attr("title", "Sent: "+ dt);
+										bubble.attr("title", msgSent + ": "+ dt);
 									} else {
 										bubble.addClass("left");
-										bubble.attr("title", "Received: " + dt);
+										bubble.attr("title", msgRecieved + ": " + dt);
 									}
 									
 									if (isMadrid) {
@@ -643,9 +587,9 @@ function switchContact(p, grp) {
 											a.attr("href", "/attachmentReal:" + msgID + "-0."+ ext);
 											a.attr("rel", "attachments");
 											if (fromMe) {
-												a.attr("title", "From Me at " + dt);
+												a.attr("title", msgfromMe + dt);
 											} else {
-												a.attr("title", "From " + $("#Sender div:first").text() + " at " + dt);
+												a.attr("title", $("#Sender div:first").text() + " " + dt);
 											}
 											if (attType == "image") {
 												a.fancybox({
@@ -860,7 +804,7 @@ function SendSMS() {
 	
 	
 	//add waiting bubble 
-	$("#chatWindow").append('<div class="bubble right" title="Sending Message..."><p>' + check4emoji(msg) + '</p><div class="spinner"></div></div>');
+	$("#chatWindow").append('<div class="bubble right" title="' + msgSending + '"><p>' + check4emoji(msg) + '</p><div class="spinner"></div></div>');
 	scrollBottom();
 	
 	ProcessSMS($("#Phone").val(), pid, grp, msg, Math.random());
@@ -884,7 +828,7 @@ function ProcessSMS(Phone, PID, grp, msg, rand) {
 			   data: "phone=" + Phone + "&msg=" + customEncode(msg) + "&pid=" + PID  + "&grp=" + grp + "&Country=" + localStorage.getItem("CC") + "&Epoch=12345&rand=" + rand,
 			   success: function(resp){
 				   if (resp != "SMS Sent!") {
-					  	alert("Error Sending SMS:" + msg );
+					  	alert(msgError + msg );
 				   }	else {
 				   		if ( localStorage.getItem("Audio") == "1"  ) {
 				   			document.getElementById("sentSMS").play();		
@@ -929,7 +873,7 @@ function shownotify(Phone, Sender, flags, SMS, lastMessage, group) {
       }
   	}
   	
-		$("<li id='PN" + Phone + "' data-groupid='" + group + "' data-lastMessageEpoch='" + lastMessage + "' data-phone='" + Phone + "'><div class='pic'><img src='" + Phone + ".jpg'></div><div class='desc'>" + ContactName + "</div><div class='lastMessage'>" + lmDate.toLocaleString() + "</div><div class='badge' style='display:block'>1</div><div class='btnDelete' title='Delete Conversation' style='display:none'></div></li>").prependTo( '#ContactList' );
+		$("<li id='PN" + Phone + "' data-groupid='" + group + "' data-lastMessageEpoch='" + lastMessage + "' data-phone='" + Phone + "'><div class='pic'><img src='" + Phone + ".jpg'></div><div class='desc'>" + ContactName + "</div><div class='lastMessage'>" + lmDate.toLocaleString() + "</div><div class='badge' style='display:block'>1</div></li>").prependTo( '#ContactList' );
 	}
 	
 	updateTitle();
@@ -952,9 +896,9 @@ function updateTitle() {
 	
 	if (unread > 0) {
 		if (unread == 1) {
-			document.title = "1 New Message";	
+			document.title = "1 " + msgNew + " Message";	
 		} else {
-			document.title = unread + " New Messages";	
+			document.title = unread + " " + msgNew + " Messages";	
 		}
 		
 	} else {
@@ -1015,7 +959,7 @@ function sortList() {
 
 
 function online() {
-	$("#status").html("Connected");
+	$("#status").html(msgOnline);
 	$("#status").attr("class", "online");
 	if ( $("#fav").attr("data-status") != "online" ) {
 		$("#fav").remove();
@@ -1032,7 +976,7 @@ function online() {
 
 function offline() {
 	$("#status").attr("class", "offline");
-	$("#status").html("Disconnected");
+	$("#status").html(msgOffline);
 	if ( $("#fav").attr("data-status") != "offline" ) {
 		$("#fav").remove();
     var link = document.createElement('link');
@@ -1076,10 +1020,10 @@ function save() {
     if ( isNumber($("#CC").val()) && $("#CC").val() != "" ) {
     	localStorage.setItem("CC", $("#CC").val() ); 
     	if (localStorage.getItem("CC") != $("#CC").attr("data-original") ) {
-    		$("#errConfig").attr("style","color:red; font-size: 0.8em;padding: 10px;").html("Reload the webpage to save, Americans use 1.<br>");
+    		$("#errConfig").attr("style","color:red; font-size: 0.8em;padding: 10px;").html(CChelper);
     	}
     } else {
-    	$("#errConfig").attr("style","color:red; font-size: 0.8em;padding: 10px;").html("Numbers Only!<br>");
+    	$("#errConfig").attr("style","color:red; font-size: 0.8em;padding: 10px;").html(CCnumericHelper);
     }
     	
     	
@@ -1122,7 +1066,7 @@ function loadAttachment(clocation, msgID) {
 		      'autoDimensions'	: false,
 			});
 		} else {
-			 alert("Sorry, I dunno how to open this");
+			 alert(msgNoExt);
 		}
 		
 	}
@@ -1153,12 +1097,12 @@ function saveWeb() {
 	
 	if ( $("#Port").val() != "" ) {
 		if ( isNumber($("#Port").val()) == false) {
-			alert("Port must be a Number!");
+			alert(portError);
 			return;
 		} else {
 			p = parseInt($("#Port").val());
 			if (p < 1 || p > 65535) {
-				alert("Port must be between 1 - 65535!");
+				alert(portError);
 				return;
 			} else {
 				
@@ -1169,12 +1113,12 @@ function saveWeb() {
 	if ( $("#hasSecurity:checked").size() > 0) {
 		
 		if ( ($("#nPassword").val() != "" && $("#nUserName").val() == "") ) {
-			alert("Please Enter both username and password, or leave them both blank for no security");
+			alert(msgBadAuth);
 			return;
 		}
 		
 		if ( ($("#nUserName").val() != "" && $("#nPassword").val() == "") ) {
-			alert("Please Enter both username and password, or leave them both blank for no security");
+			alert(msgBadAuth);
 			return;
 		}
 		user = $("#nUserName").val();

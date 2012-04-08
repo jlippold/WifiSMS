@@ -21,7 +21,39 @@
 
 <link href="jquery.autocomplete.css" rel="stylesheet" type="text/css">
 <script type='text/javascript' src='jquery.autocomplete.pack.js'></script>
-
+<script>
+	var msgIE = "Your browser sucks, and I'm not supporting it. Click yes to accept it sucks and continue anyway."
+	var msgNoSend = "Please enter a contact and a message";
+	var titDownload = "Download Conversation"
+	var confHTML = 	'<h2>Interface Settings</h2>'+
+			'<p>&nbsp;</p>'+
+			'<p>Refresh Interval:&nbsp;&nbsp;&nbsp;<input type="text" width="80px" onkeyup="save();" id="secs" value="' + (localStorage.getItem('timer')/1000) + '"></p><br />'+
+			'<p>My Phone Number (for pic):&nbsp;&nbsp;&nbsp;<input type="text" width="80px" placeholder="Format 3216549876" onkeyup="save();" id="myNumber" value="' + localStorage.getItem('myNumber') + '"></p><br />'+
+			'<p>Country Code Prefix:&nbsp;&nbsp;&nbsp;<input type="text" width="80px" data-original="' + localStorage.getItem('CC') + '" placeholder="1" onkeyup="save();" id="CC" value="' + localStorage.getItem('CC') + '"> </p>' +
+			'<p id="errConfig">&nbsp;</p><label><input type="checkbox" checked="checked" onclick="save();" id="isAudio"> Play Sounds </label> <br /><br />'+
+			'<button onclick="closeFB();">Save</button><br /><hr /><h2>Web Server Settings</h2><p>&nbsp;</p>'+
+			'<p>New Web Port:&nbsp;&nbsp;&nbsp;<input type="text" width="80px" placeholder="Leave blank to keep as-is" id="Port"></p><br />'+
+			'<label><input type="checkbox" onclick="showPass();" id="hasSecurity"> Set UserName / Password </label><p></p>'+
+			'<div id="security" style="display:none"><p>UserName:&nbsp;&nbsp;&nbsp;<input type="text" width="80px" placeholder="Leave blank for none" id="nUserName"></p><br />'+
+			'<p>Password:&nbsp;&nbsp;&nbsp;<input type="password" width="80px" placeholder="Leave blank for none" id="nPassword"></p></div>'+
+			'<p></p><button onclick="saveWeb();">Save</button><p id="errSettings">&nbsp;</p>'+
+		  '<p>&nbsp;</p><a href="javascript:void(0)" onclick="doDonate()">buy me a beer</a> | <a href="http://www.twitter.com/treason" target="blank">follow me on twitter</a> | <a href="https://github.com/treason/WifiSMS" target="blank">Fork Me on GitHub</a><p>&nbsp;</p>'
+	var newHTML = 	"<h2>New Message</h2><br /><p>To:</p><br /><input id='NewContact' type='text'><p><br /></p><p>Message:</p><br /><textarea id='NewMessage'></textarea><p><br /></p><button id='SendNew'>Send</button>"
+	var chatNoMsg = '<p style="text-align:center; padding-top: 20px">No SMS Messages Found</p>';
+	var msgSent = "Sent";
+	var msgRecieved = "Received";
+	var msgfromMe = "From Me at ";
+	var msgSending = "Sending Message...";
+	var msgError = "Error Sending SMS: ";
+	var msgNew = "New";
+	var msgOnline = "Connected";
+	var msgOffline = "Disconnected";
+	var msgNoExt = "Sorry, I dunno how to open this";
+	var CChelper = "Reload the webpage to save, Americans use 1.<br>";
+	var CCnumericHelper = "Numbers Only!<br>";
+	var portError = "Port must be between 1 - 65535!";
+	var msgBadAuth = "Please Enter both username and password, or leave them both blank for no security";
+</script>
 </head>
 
 <body>

@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>WifiSMS</title>
+	<link rel="apple-touch-icon-precomposed" href="touch-icon-iphone.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="touch-icon-ipad.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="touch-icon-iphone4.png" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; user-scalable=0;">
+	
+	<link rel="icon" href="touch-icon-iphone4.png" sizes="128x128" />
+	
+<script type='text/javascript' src='jquery.js'></script>
+<script type='text/javascript' src='func.js'></script>
+<link href="style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="jquery.fancybox-1.3.4.css" media="screen" />
+<script type="text/javascript" src="easing.js"></script>
+
+
+<link href="jquery.autocomplete.css" rel="stylesheet" type="text/css">
+<script type='text/javascript' src='jquery.autocomplete.pack.js'></script>
+<script>
+	var msgIE = "Votre navigateur est nul, et je ne supporte pas. Cliquez OUI pour approuver qu\'il est nul et continuer quand m&ecirc;me."
+	var msgNoSend = "S\'il vous plait entrez un contact et un message";
+	var titDownload = "T&eacute;l&eacute;charger la conversation";
+	var confHTML = '<h2>Param&egrave;tres</h2>'+
+			'<p>&nbsp;</p>'+
+			'<p>Interval d\'actualisation (s):&nbsp;&nbsp;&nbsp;<input type="text" width="80px" onkeyup="save();" id="secs" value="' + (localStorage.getItem('timer')/1000) + '"></p><br />'+
+			'<p>Mon num&eacute;ro (pour la photo):&nbsp;&nbsp;&nbsp;<input type="text" width="80px" placeholder="Format 3216549876" onkeyup="save();" id="myNumber" value="' + localStorage.getItem('myNumber') + '"></p><br />'+
+			'<p>Pr&eacute;fix du pays:&nbsp;&nbsp;&nbsp;<input type="text" width="80px" data-original="' + localStorage.getItem('CC') + '" placeholder="1" onkeyup="save();" id="CC" value="' + localStorage.getItem('CC') + '"> </p>' +
+			'<p id="errConfig">&nbsp;</p><label><input type="checkbox" checked="checked" onclick="save();" id="isAudio"> Jouer les sons </label> <br /><br />'+
+			'<button onclick="closeFB();">Enregister</button><br /><hr /><h2>Param&egrave;tres du serveur Web</h2><p>&nbsp;</p>'+
+			'<p>Nouveau port Web:&nbsp;&nbsp;&nbsp;<input type="text" width="80px" placeholder="Leave blank to keep as-is" id="Port"></p><br />'+
+			'<label><input type="checkbox" onclick="showPass();" id="hasSecurity"> Mettre un Utilisateur / Mot de passe </label><p></p>'+
+			'<div id="security" style="display:none"><p>Utilisateur:&nbsp;&nbsp;&nbsp;<input type="text" width="80px" placeholder="Leave blank for none" id="nUserName"></p><br />'+
+			'<p>Mot de passe:&nbsp;&nbsp;&nbsp;<input type="password" width="80px" placeholder="Leave blank for none" id="nPassword"></p></div>'+
+			'<p></p><button onclick="saveWeb();">Enregistrer</button><p id="errSettings">&nbsp;</p>'+
+		  '<p>&nbsp;</p><a href="javascript:void(0)" onclick="doDonate()">acheter moi une bi&egrave;re</a> | <a href="http://www.twitter.com/treason" target="blank">suivez moi sur twitter</a> | <a href="https://github.com/treason/WifiSMS" target="blank">Forkez moi sur GitHub</a><p>&nbsp;</p>'
+	var newHTML = 	"<h2>Nouveau message</h2><br /><p>To:</p><br /><input id='NewContact' type='text'><p><br /></p><p>Message:</p><br /><textarea id='NewMessage'></textarea><p><br /></p><button id='SendNew'>Envoyer</button>"
+	var chatNoMsg = '<p style="text-align:center; padding-top: 20px">Aucun message</p>';
+	var msgSent = "Envoy&eacute;";
+	var msgRecieved = "Re&ccedil;u";
+	var msgfromMe = "De ma part &agrave;";
+	var msgSending = "Envoi du message...";
+	var msgError = "Erreur d\'envoi du SMS:";
+	var msgNew = "Nouveau";
+	var msgOnline = "Connect&eacute;";
+	var msgOffline = "D&eacute;connect&eacute;";
+	var msgNoExt = "D&eacute;sol&eacute;, je ne peux pas ouvrir ceci";
+	var CChelper = "Rechargez la page pour enregister, Am&eacute;ricains utilisez le 1.<br>";
+	var CCnumericHelper = "Nombres seulement!<br>";
+	var portError = "Le port doit &ecirc;tre compris entre 1 et 65535!";
+	var msgBadAuth = "Entrez l\'Utilisateur et le Mot de passe, ou laissez les deux champs vide pour aucune s&eacute;curit&eacute;";
+</script>
+
+</head>
+
+<body>
+	
+	<div id="SMSSendStatus" >
+		
+	</div>
+		
+	<div id="sidebar">
+		<ul id="ContactList">
+
+		</ul>
+	</div>
+	
+
+		
+		<div class="header">
+			<div class="topContactContainer" style="display:none">
+				<div id="Contact">
+					<img src="contact.jpg" title="Actualiser la conversation">
+				</div>
+				<div id="Sender">
+
+				</div>
+		
+			</div>
+			
+			<div class="loadingContainer" title="Actualiser toutes les conversations">
+				<div id="status">
+
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="chatWindowContainer">
+					<div id="chatWindow">
+						<p style="text-align:center; padding-top: 20px">Aucun message</p>
+					</div>	
+		</div>
+		
+		<div class="footer" style="display:none;">
+			<form id="SMSbox" onSubmit = "return false;">
+			    <div class="optButton btnconfig" title="Configuration">
+			    	<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAGSSURBVCjPVVFNSwJhEF78Ad79Cf6PvXQRsotUlzKICosuRYmR2RJR0KE6lBFFZVEbpFBSqKu2rum6llFS9HHI4iUhT153n6ZtIWMOM+/MM88z7wwH7s9Ub16SJcnbmrNcxVm2q7Z8/QPvEOtntpj92NkCqITLepEpjix7xQtiLOoQ2b6+E7YAN/5nfOEJ2WbKqOIOJ4bYVMEQx4LfBBQDsvFMhUcCVU1/CxVXmDBGA5ZETrhDCQVcYAPbyEJBhvrnBVPiSpNr6cYDNCQwo4zzU/ySckkgDYuNuVpI42T9k4gLKGMPs/xPzzovQiY2hQYe0jlJfyNNhTqiWDYBq/wBMcSRpnyPzu1oS7WtxjVBSthU1vgVksiQ3Dn6Gp5ah2YOKQo5GiuHPA6xT1EKpxQNCNYejgIR457KKio0S56YckjSa9jo//3mrj+BV0QQagqGTOo+Y7gZIf1puP3WHoLhEb2PjTlCTCWGXtbp8DCX3hZuOdaIc9A+aQvWk4ihq95p67a7nP+u+Ws+r0dql9z/zv0NCYhdCPKZ7oYAAAAASUVORK5CYII=">
+			    </div>
+			    <div class="optButton btnNew" title="Commencer une nouvelle conversation">
+			    	<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJvSURBVDjLpZPrS5NhGIf9W7YvBYOkhlkoqCklWChv2WyKik7blnNris72bi6dus0DLZ0TDxW1odtopDs4D8MDZuLU0kXq61CijSIIasOvv94VTUfLiB74fXngup7nvrnvJABJ/5PfLnTTdcwOj4RsdYmo5glBWP6iOtzwvIKSWstI0Wgx80SBblpKtE9KQs/We7EaWoT/8wbWP61gMmCH0lMDvokT4j25TiQU/ITFkek9Ow6+7WH2gwsmahCPdwyw75uw9HEO2gUZSkfyI9zBPCJOoJ2SMmg46N61YO/rNoa39Xi41oFuXysMfh36/Fp0b7bAfWAH6RGi0HglWNCbzYgJaFjRv6zGuy+b9It96N3SQvNKiV9HvSaDfFEIxXItnPs23BzJQd6DDEVM0OKsoVwBG/1VMzpXVWhbkUM2K4oJBDYuGmbKIJ0qxsAbHfRLzbjcnUbFBIpx/qH3vQv9b3U03IQ/HfFkERTzfFj8w8jSpR7GBE123uFEYAzaDRIqX/2JAtJbDat/COkd7CNBva2cMvq0MGxp0PRSCPF8BXjWG3FgNHc9XPT71Ojy3sMFdfJRCeKxEsVtKwFHwALZfCUk3tIfNR8XiJwc1LmL4dg141JPKtj3WUdNFJqLGFVPC4OkR4BxajTWsChY64wmCnMxsWPCHcutKBxMVp5mxA1S+aMComToaqTRUQknLTH62kHOVEE+VQnjahscNCy0cMBWsSI0TCQcZc5ALkEYckL5A5noWSBhfm2AecMAjbcRWV0pUTh0HE64TNf0mczcnnQyu/MilaFJCae1nw2fbz1DnVOxyGTlKeZft/Ff8x1BRssfACjTwQAAAABJRU5ErkJggg==">
+			    </div>
+			    <div class="optButton btnemoji" title="Ins&eacute;rer un Emoji (cliquez pour les afficher tous)">
+			    	<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAEIElEQVQ4ja2UXWyTZRTHf33e923XD8a6bkPGgsAcQxxxIYIdRIQwhGAYasAERCHBG43xwiujmOiFkSv5UCABQgzKjUH52IYYNBB10I5MB9MhNGTAxoBRutJ27dr343hRFvGDxAtPcpLn+T8n/3PynPM/8D+b60EP9WU0LHuY55+cTFNNhV4DMBC3BqLXOHP8KocuJvn1PxGWl1D17hw2b2ipeHlc4yJdmzwfl78aABkZxL7WQbr7pPXZ0fjnH57l7cQoQw+sdmopM6IbVcw81iwSbxMZ6RZJRUSGfyh6KlLE4m1iHmuW6EYVm1rKjPsLGzu4gh6qTryiIo0vLZuizXod8mlwsiDyt7QuUD7wjMPu2Un3geNXlux3wsN5hgDR7oVpHy1w7WpZM22B3rAGcoNgDoGTBjsNZgqsNDiZImbegfwdVKieKm+szHszOfHbKxwZI1R1ZTTuetW73fv4XBfKgPwQGDkopEDLQj4Fdgb07J9YLgH2KMqrmOnub/iq0zqaGOWWArQVta61vpqAwmVBtg/0OL3Rc6xft5tTrR2g3wL9FqdaO1i/bje90XOgx4uxmoWvJqBW1LrWApoO6E21elgrdUPhJmAADocP/ka136H9yHkWPpEGoP1IH9V+h8MHu5g54zEYVYCJVuqmqVYP02XqCjCqQ1oVhhsKaSjEkUSC4KQA729poH52BZmkQybpUD+7gg+2NBCcFEASCSjEi81zu6kOaVWA4QLKO15zR8IrK+uURwO3DQEBtw6OA44GebvYOo8GygZdQdaCjAtMDSdvEzl6OzZ/VyGsA3I9YccxM3V4YdN7I4RCFvWPwISHoKwcSryAA7kcJBNw4wb0/g6mbbDpHT+khesJ+zYgOmBG+pzzz+XNJhWwMH3jUU/vJ+HL0R+/in15CMfKFgfW8GP4JuCbOQUqLOzODeDPYvcbRPqcHsAEMOqCtKR2eGzpCch3W5HVC+bKzh0fy49nf5EbKVtMEcmLyEAiLydPR2X71s3ywrxZEt2DSHdAUp947LogLYChA1ZsmK59rWb7m9OMFYtXBrh6oZO+PZ0MfglfK3BU8QuVDX4HJAmrm2HuMwGkB/a1m+2xYboAa0x67vIS5n3/hv5F4yrvJGrgmwMmmQsWpSU2hl6Un2kqUnlFsFGn+UUD+qD7UO764k+tdYlRTgOFMek5OYu7J3qd2FNeJzyxUhtft8jAN0XnrqaR03TM8QbeWoOG5W5mz9PhosPPraP9q/Zabw1mOANk/7FtgMqQl6Xblqu29D6PJaf9IpdLRfrv+eVSkZ/8kt7rsbYtV20hL0uByn/bNvffxwE19SHmPDvdtTA8XT1aU+WqABgYknjkknOh/ZKcuniHs8AAkAbkQYRjpoAyIAj4Afc9vACMAMNAsjidf7U/AC8J3bioSnIJAAAAAElFTkSuQmCC">
+			    </div>
+			    <input type="text" placeholder="Message" id="msg" autocomplete="off">
+
+			    
+			    <input type="submit" value="Envoyer" id="submit" onclick="SendSMS()">
+			</form>
+			<div id="charCountContainer">160</div>
+		</div>
+		<div id="donate" title="Cliquez pour fermer">
+			Digging the app so far? Consider <a href="javascript:void(0)" onclick="doDonate()">buying me a beer</a> or <a href="http://www.twitter.com/treason" target="blank"> follow me</a> on twitter.
+		</div>
+		<div style="display:none">
+			<input type="hidden" id="grp" value="">
+			<input type="hidden" id="pid" value="">
+			<input id="curMsg" type="hidden" value="">
+			<input id="curPhone" type="hidden" value="">
+			<input id="Phone" type="hidden" value="">
+			<input id="curPid" type="hidden" value="">
+			<input id="curGrp" type="hidden" value="">
+			<input id="curRand" type="hidden" value="">
+			<div style="display:none" id="msgcounts"></div>
+			<div id="charCountContainer">160</div>
+			<div id="notify"></div>
+			<div id="queue"></div>
+			
+			<div id="mySettings">
+				<textarea rows="3" id="statuslog"></textarea>
+			</div>
+			<div id="allEmoji" data-loaded="no" style="visibility: hidden; display:none">
+			</div>
+			
+		</div>
+		
+		<form id="download" action="/ajax/" target="_blank" method="POST" autocomplete="off">
+			<input type="hidden" name="action" value="downloadSMS">
+			<input type="hidden" name="key" value="a4a1dda1-166d-47b0-8f31-a8581466da46">
+			<input type="hidden" name="phone" value="" >			
+		</form>
+		
+		<form id="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" style="display:none" target="blank">
+			<input type="hidden" name="cmd" value="_s-xclick">
+			<input type="hidden" name="hosted_button_id" value="HMCRCD5YJWYGQ">
+			<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+			<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+		</form>
+		
+		<audio id="newSMS">
+		  <source src="SMS.wav" /> 
+		</audio>
+		<audio id="sentSMS">
+		  <source src="SentSMS.wav" /> 
+		</audio>
+		
+
+		
+		<div id="QuickEmoji" class="allEmoji" style="display:none">
+			<div onclick="addemoji(&quot;E056&quot;)" title="Ins&eacute;rer"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAD80lEQVQ4ja2UXYiUZRTHf8/zPjO7s86ss+s2pjuYNq2rspGI2kokGxgYoRBEoGkGKlSXGSHYRTdRl+FFhkVfUlC5pKuuhheZII5ZuX5guauurtPkjrM768zsfOz7vs/pYnZxi4QuOvCHw/8c/uc8h/Mc+J9N3S/QHqVj7UM89/g8VsVbTBwglfVSZ4Y4fewm310Z49J/EmyuJ7ZrBe+9vL5lc2TpU8aZ9wRqxlwAZDyNP3SKQt8P3mc92X3vnGXnaIXMfbtd0MiiM1v1gNu7RiR7WGS8TySfFMmdrCGfrHHZw+L2rpEzW/XAgkYWTW9sylFNdcSOv6STS19cO9959DWoFsCWQOQfZRXoBqiL4F/8gL4vj914+gvbmauSAcSZTHPeXa32rN/w8GrTsQHKaXAzYAvgF8DNg1cAW6xx7ghUR9Cz2omFBqKh22Nzvr/BwSlB3RZl6Z5tod2hx1YqdACqGQiUYSIPTgmqefCLYEr3uPIo+BV0SLMkeKuj+yevZ7TCsAacdQm1saE1rNE+FAfByXI5eZ4tm/Zy4tApMMNghjlx6BRbNu3lcvI8ONlarvZpaA3rdQm1EXAMYFYlTKcTCUI+DdaAZznQ/TutYcuRgxfoWl4A4MjBQVrDlgPdv7IksQjGNWgPJxJkVcJ08otrDBCY2+zE8AzcGYOKj2ihqTXEjp0J9n2doThma7u5rIXNG2J88nkauZpBWQV1DtQZ5jY7MXADBjCIRQoTMCKQ91CNilfWNKBKOba9EALXBaj5xVwtNliFvGBnGmhSYC2AMYCks35WSsU2ygJFD7SgfCCowKEGAAsEQXmCFEGNK5Qx2DpFOuvfAUQDbvKmvWCth4766JjHcJ3H7m9dCuUqtFZgziTiFbK5Ku/vd7k7w4VmDxX1sZ5HcsheBFwDVHuuSe/bRbs90BbQuJYHZ1k6QsKbu4S2NmH+I7X9vt6vuD4IW7YronEFOY0Yh+o11/Zck16g6gAyWqE4W8vClctNu4orCMOC5dD1DBTLitt/aMoVTfsyeHWH4qE2VXvcTAfJw4f7q4e/uiQfAXenPlSwuZ6uc2+YlD0ZEbkaFhmsF0kHRfKBexgLiAwFRa7Wi/SHxf4YkXM7TKq5nq7adKeNu+xx9/hlO/Bk2HbOfsDMVCEHREFZw7iCkoayA54DEwabgr6jlVvPf+y9ni5yGihNFwSo5ipkus/Zn0N/ek2LG0kEtKOVOKAdcB0oauwwFC66/t5Pq0e3feO/NSk2Csj0azP9+kSAePssVjy7UHV1LtSL4zHVApDKSDbZb3870i8nroxwFkgBhSmxfxOcMg1EgSZgxtR8gAlgHMgBY5Ob+Tf7C2bR3ypQnhOCAAAAAElFTkSuQmCC"></div>
+			<div onclick="addemoji(&quot;E057&quot;)" title="Ins&eacute;rer"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAEGUlEQVQ4ja2UXWzTZRTGf/+vfq+0bGtglq/NMRogLCbARhQxTCEQ5kfAZPgRAndqNDFeEEVvDBFvDKjoBYQYlBsvJOqGGDQSJbCtAacj4DZxY90G1Nq1a7uu/X8cL7olxEjihU9ykvc878nJed9zngP/M5R7XTSFWLV1CU+uX0xrtEaPAoylrLGeUS6dvcnpgQxX/1PC+R4ib6zl0J72mueqmjfp2uIHUfx1AEhhAnv0Arm+89YnX6U+PRhnf3qG5D2rXRZkRc8+dcg80yaS6hQp/iIy1S0y+WPFprorXKpTzDNt0rNPHVoWZMXdhc0dlLCbyLnn1e7mZ7Yu1Va/CEyDMwPiQNmsRLkMUFRQPYAPu/8ofafOjjx60mmZLJEERJtNqL2zUfm4vaN+o76qA+wkxeQIr71wkPVr6vBWAUyTHh1h/yvvsqklimHkUUP3E/EOhby3Mwu/HeFLQFRAbQyxZu92T4e+JAaFBNgJrl2JkxlMcTXeC9wB7nA13ktmMMW1K3GwE1BIoC+JsXe7p6MxxBpAVQFtR4Oy2xcNqCgWFIehfItCNklNGPLZFJQSUEqQz6aoCUMhm4TyrUqsauGLBtQdDcpuQNMBvbVBb9GCLijfBjFAsQm4sxQtqPKkIdMHQJUnT9GCgDsL+d+hqIFiogVdtDboLVw2dR0w6qq1CIYLyjlwHLAVYvUaC2IhVjb5oVj56JVNfhbEQsTqNchlwJJKk1wu6qq1CJiGDujgIHYZRdfAbYNX8M5XeOvtMBTKUJbKjC6a5UrFCldQwNQQ0wYcAF0HZDxtpzDzjXjhwJsFwtUWy+thUR0EwuDxVCosFiE/CaPj8NsAmLbBgdf9kBPG0/afgOiA2T3s/PpEyWxVAxambx7GwyfJ+opMpG5i/5HEsaYrA2v4MXwRfCuXQa2F3bsH/NPYCYPuYacfMAGMxjDtU0fdtvQH5LvDyK6N6+Sjo+/JT/Gf5daULaaIlERkLF2SHy72yPuHD8lTG1ZLzzFE+gIy9YHbbgzTDhg6YA1NcvnE12bXy/XGjs2PB7h5vZfhY71MfA5fqOColSerNvgdkAzsaoN1jwWQfjjRZXYNTXIZsOak55rvYcP3L+mfNe/03kcUvjllkr9uEfTYGHqlKaapMlVSCTfrtD1twDD0nS6Ob/7QejY9w0WgPCc9p2iRPXfNGXrI67QsrNXmNT5i4Fuqk9U0ipqOOc/A22CwapuLBzboMOBw5euZxM7j1qsTeS5VxP+PbQPUVnvZcmSb2pk74bbkol/kRlAkMWs3giIX/JI77raObFM7q71sAWr/bdvc7VcB0aZq1m5frmxqWa7GohGlBmAsKanuQed616CcH/iLODAG5AC5V8I5qEAICAN+wDXLl4ECMAlk5qb5bvwNrDvQie5JWqMAAAAASUVORK5CYII="></div>
+			<div onclick="addemoji(&quot;E058&quot;)" title="Ins&eacute;rer"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAD1UlEQVQ4ja2UT2xUVRTGf/e+96addmZoaTMN2CC0pQVTTRcW25AgRkgaEYIxmIDRaIobN66amMhGg9GVrtSoCw0GY1BEpVSQEEUhtJbGWmqkLabYtEja6bTMn/bNvPfucTEzsTYhceFJTnJz7r3f9517zznwP5u620ZLFa1d9/LEQxvorK+16wGmE/70wBRXzv7JqbFFRv8T4Npy4q+08+Zz+2qfibY9YlsbtqMq1wMg2VsEU5dJD3/vf/xN4pPXB3k56TJ7V7WbYmwZ6NYTXt8ukUSvSHZYJNUvsvBjwVP9hViiV7y+XTLQrSc2xdiyUlhpoarLiJ9/Vve3Pd210br/RcinIVgCkVW0CqwKCEUJrr3L8PGzN3cfMx0LOWYBsYrHrDd2qPf2HWzYYbcehOVbkJsFPwV+epWnID8P+Xl0TQvx8ERV+PbiunM3+RoQBejNVbRdPRIejD38qCbaDF7m34pW2krFTgTS46QuXjAPHl1un1hk2AasvY3qUEV9RKN8WJoEE5RuFwFKIKpIUCTxLLB8Kuojem+je+itIblmA3Zno91hxUKQvw3igMmB8UB8kOAfVUqBskDZoB3QZaA8rFiIzka7gyHPtgFnfY0VxwkVPsIYCAlUaFAaMqWXKQqLCEgOlpfBVaA1hEKsr7Hi4Dk2YINBgjzKsqBCSCcNlwfypLLCk3vKsZwCXuDDyc9cYpWK7dtCRGs0ZBXiBYABsG1AZpJBQvKZzaxRnPoqz+dn8tyzQdHSpvDDWSynkLKfV6TKAgavCse+FJ56PMT+vSFMRphJBnOA2IDXP2lG9rtep6UUZXWG145qmloN2AayHugCYFm54vALGgLFjVHNjT8MKA9ZFvonzTXA00Du9IT0uXOBwWge2w1NDQIpgWwA1bDkKty8grXAUgB3hKaNQtcuwNe4c4E5PSF9QM4CJOmSqTPSvO0Bp0VFNNgCYSCmOPaO5u1XbXq/sBCjuK9TQaABDb6DmYP3j+d6Px2VD4E7pU7J/Twt011xs7tukxNT1RrWwE/nFb+NaJ5/SdG5U3HpkiYaVaxrsiBwkKRi5Jw7030i6Fn2GQNKBYwCqhuqODDUY08FFyIiY1FxxyMiybDIQnnBE2HJXY+IXI9K8F1EhnrsqYYqDgDVpWovKQTILbjMnvzFXA3/5VdvraSxwtFaLVngWpCxYEGjZ4X0r17wwUe5bw+fCI7cynAFSJbaafU8VEAUqG+poX1Ps9rZ0ay31sdVLcD0rCT6x83vZ8blh7F5BoFpIL2iN+86sTVQVUylEggV43kgCywAi6VqXml/Ayx2vbFkDCohAAAAAElFTkSuQmCC"></div>
+			<div onclick="addemoji(&quot;E059&quot;)" title="Ins&eacute;rer"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAD+klEQVQ4ja2UXYiUVRjHf+e87zs7szszzrQ22rJs6uauilsLau0SbF8KVmhY7YWGEWkEQdBFgpB0ZdRFdCMUfUCiWCCJGH4W9kXhmG5tq6XrYm7LuOU6H7szO7Pzfj5dzA6IJXTRH/5wOOfwf/7Pc87zwP8MdauDzgTL197Jhvva6G2da7YCZLJe5vQYp47/wcHhSc7/J8HbwqReW8Vbz62fuznW/ZBptN2PamoBQMrj+GM/UBr82tv9eXbvG2fYnq8ycUu3C+MsOb1Fj7hHV4tkD4uUB0WKaZHCdzUW07W97GFxj66W01v0yMI4S240Vl+oZAOpL5/V6e5n1i4wul4CpwR+BURuCqvAaIRQDP/cuwzuOz66Zk/QU7CZAMSYvWa82afeW79xUZ+5fCPMjIM9AV4RvNJNLIKTAyeHbu4kFRlJRP6avOPEKIcAUYBenKD77I7ImfgDj2hiHeBPg1CjuqnMIrW8FGBEoXSJ4rcng5U7Z1aNTDJoAsa6drWpsTWq0R5Ur4DhQ0RDAJQ8CGbT1gpiJmhgJgDHAMOjsTWq17VXN70zIOdMwOxtN3uMeAjsa2Ba7PponLHfSjz1RBM9DzdBxasJRk3Sh8ocOFSmbVmMl7e2gOdixEP0tps9DLimCVgtzUYKKwROEZyAFzc3MnotzO69WTJZh6efTADw2f4CP130eOGV21kwX0P5OqAhFKKl2UiBa5mACQHiO4g20L5PKO4yvyFgatRm8i4DTBuASU+YGrVpaagQMjTBjCAYKM+nVh9MDcjVvJ8NnGlEivh6Chry/Ho5Rzjn0hYrw5wczMnRFi0TzrkMXc5BOA96ClSRwJnmat6/DogG3PSVYEiqLirkokIOuDZdK12W9iu6+mwwK2BW6OqzWdKvuHuFC7YNhoOyXGTGJX0lOAe4CrAWJ3l0YGfDwVh3SGO6oH0IB9AsEBHKv4OhIbwAqCjIKyhr8A3wLUq/OMGK1+0NIwWOGYDkq0zPC6Tj3nusTpXUEBZoAEKw523YtV1z5FOF78OyFQpcDZYGwyLIwvv77MOfnJcPgal6p9g/ZiSzNhWsmbfQiqukhjnw/VeK4Qua51/V9D6mOZXWxGKa+e0GBBaSUwydqF7dst/fNuMxDPg39nRyUYL+gW3mmH8yKjIcE3skKlKIiBTCNWYjYl+MilyIif9FVAa2mWOLEvQDyfpcqDsEsAtVJg78HJyN/OkllzbRHrG0VhUDqgZMG5DV6KxQGnL9Dz62j23d7+8Yn+YUkJ9t1H/MQwXEgNbOZlY93qEe7OnQS1tTai5AZkKy6UvBhSOX5JvhHGeADFCqi/2bYB0aSMym0lR7HgAcoAwUgMn6b74RfwPFb8rBf8Tc/wAAAABJRU5ErkJggg=="></div>
+			<div onclick="addemoji(&quot;E40D&quot;)" title="Ins&eacute;rer"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAEQ0lEQVQ4ja2UW2xUVRSGv33mzHSmQ4fODJ3SUlqwaacoWBOtBZISLoIogaSNQESJNvhgIT4QXoz2UY08oA+CDQFRIkZuKYkWSiIVAg0UKQ0Fmt64FGgL0plOr3M5M3OWD0ONUUl88E92srLX2v9ee/9ZP/zPUE9L+DOZv7qAyvJ8FuXN0PMA+gOJ/sv3uXT6Hie6R7j5nwg9dnwfv8znW9ZlbXaWLtMtsxeDKzeVHBsk+eAik+1nE9/8NPT9p7/x4XCUx0/tdq6LkrYaS69cWCcSaBAx2kUirSKhC6kVaU3tBRpELqyTthpL71wXJX9tbCpQ7jR8v75nabHN98+pb88h+PARbq+bD3a8idubDkAoGOarXT8SCobw5sykqvQhxs3uvuX7kwtDMR4DMkVo+XKZOrh1W+Fb9QMreL4kl3l+L4aRwKYmUVoCADF1DHFis+l0dge53jVI1awmvt5z+4ftZ+UdIKkArSiTF67U2q9MX7FSY24pPLoPkRhkpoNhA+PJtTbAZsBIGBxpMDMf7rYz2vSLWfZJtKx3hGs6YFlbqDZlFGRoqDG+3dNCx1ARKBf56V1sWxvHkjYNgOTkBHt+tnI/XAKS5LmsFqrXxMkoyNDWFsY2fXFVbgA4jm2wNktTlhzZWS4HDp+X8YjIRFSkvvG61NVWiDRniTRnSV1thdQ3XpeJqMh4ROTA4fNyZGe5SFOWHNtgbQYcGmCd5dV8ZthgzFVF9cYKqjevZ/mScipXL8BZXEM4GCccjOMsrqFy9QKWLymnevN6qjdWMOaqIhkxyPVqPsCqA7qIkIwYuNxuALKzs9FUSq/pHi+iYqnY6wVgTkEBWT4fAC63m2TYABEAXQdkIJAMLI4nirzRg7TdfZfdu3cD0NMPhOpwzoukROmso6d/FUeOHgWgrS+OZ/wgNkeMgYAaAsQC6Pl2Slf47S8V6ne4ea+JjpCT3r4eQp3beXXOSSx2QINnnF20drTQHUin60478WtbWWlexByz8925+KlLDzmtAGvxdF67+r7txDQ3GuMGMQeYHnDkALMBlwIBRgUGIDIIWhDSokCGjYkQ5ot7jcqeURotgARjTOSaZnFZjs2vREOPCVabAo9iOKmYiCrCk4rYmMIRU1iHFPqIAqxIzMK+80bDoVvsA0anJsXmSWPxuTX6oQXzrbNwm+AWyBM+2q8YG0oVuXzwWbVAv4JhBaMaNzriA0tPJt4ejnERMP6cZSCzcBqvHH9d31W6yDpbFWiQY8JMBXZJVUQUDAo80pA+k/bL8QdvnErsuD3BGWBkSpQpxEIGj4/fMlsdk6b7WZ8q1B0WTVMWEA2iGgxrJIdg8nYiubfBaNxyJlk7EOESMEzql//hhwrIAPL8HsrWFKmlC/3avLxsNQOg/3cJtHSbnSd75Vz3MFeAfmB8iuzfCKegAZmAG3CSsgVI2cQkEHryRPPvB/8A9L7Znjl0mX0AAAAASUVORK5CYII="></div>
+			<div onclick="addemoji(&quot;E409&quot;)" title="Ins&eacute;rer"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAENUlEQVQ4ja2UaWxUVRiGn3OXTmlLy9hhSktbKMWUUJA2LYWAxeovkE2iQTQWBBN/GOMCISYQ4y9NVGKCSyAxEA2iiKLBpCKBEMAEWVoL2MpmQQbodGiZ6Sydzp17537+mDa4kfjDL3mTk7M8+U7Oe174n0vda2H8GCa0lLFwXjkPPVBGPcD5XjpP3OTY0V5+6B+m7z8Bc3XyXprFphcX5b3sb5xdYEyahyqqBECiAZzrJ7jdfibx4YHk1vfP8VYqQ/Ke3ZbkUX5wJe3Wvjkiwb0iyXMiiQ6R6MmsEh3ZueBesfbNkYMraS/Jo/zPjY0OVIHJuO9WqeMLnmmZoTeuBzsNdgyQf17KLAQzh0z7exz/7GjXsj2yIGEzCIg+skt/Y57a+tTqSQuNhrVg90OqF5w4ZP5Fdj+4MTT/dMrzLvi1W9HiIwHaRoFaVSG1Hz+Xuz2/ca42lNSIh66R53Ozh61BcGJZZWJgJMEzzJ2rvyOORa7XYIYRmLX3tPPNoMWADhhratUrSx8d16z5y3Bciy/arnDs+06mlgn54x1IDmbh+SluX+1l+7afuBJKUjfNwNQtTLtfu35xOH4qyFEd8GxoNjfNmFtUqXTBJEFjYw66SvDO2x3EgiFmTRsCZ4BdOy+w49NuVqzw8tgiL2YqAukoCotEYFi+6nZ3G4A5sVgrwTTBioG4ADRUCEUeEzw6qJG38+gUeUwaKgTivZAAdA1yTCYWayWAqQGGUijJOIjrgMoQCdps3BJiaauf1jWFkE5BOkXr2kKWtvrZuCVEJGiDlsF1HMR2UAoFGAYgfVEnLOkEYih03aEnnuHVDQaVFTGIR2DMiBdi8HCzTnWVwdVQmIZiHXEMJC30RZ0wIAZgn7nmdi2x0k2mV+FmbBrrXChyQRO4T+461gUcRWWNonKChoQ1dI+LHRHOXHO7ANsArP2X5cDmAXetOc1Uxw4qdn3gUlsn5HgFMx/IzQIlCfaQkA5Dd6fLC6/rzG7SsLps2X9ZDgCWDkh/kliV7s6sn25WVzXpBC8J4d8ymOfLWdX5ILlniyntnMz8X2o4ez3FYCpOfXMOi9eYSAB27Ukd3tkpHwHR0Z9inboht5aUsnD8FCO//gmDy+E0eriOlqbnKb1/CqVTaxlbPZ+f3Sv4lt1g3WtjIKS4eCjdv/pzZ8OQzQXAGQW6QzaDh7szPS0FMn+CXy9oWJQGt4GJZU8jk8aiykvR/NXoM0+yeN1F6Mmhq80KPb7NXh+I8SNZEzEKBEjdGabv6w63fWyf46vxSFU6PlX5vMthnKDle1BGIbFEG2bokvvJDufQs7szm0dgd0ZT5O95qIBCoHy6jzmPVBY8srF684oyX0UeQO/AjeS7PW9+eySQOPLrAKeAm1kz3Y2keyW2BngBX01uYdOT3snLQfgyEth/KRU9DQwAkREj/aX+AOdC7fDEM6chAAAAAElFTkSuQmCC"></div>
+			<div onclick="addemoji(&quot;E40F&quot;)" title="Ins&eacute;rer"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAEX0lEQVQ4ja2UW2xUVRSGv30uM512pnRoO4wW6AXTi0BprUC5ioCAgo0QFY0aogkJxCcTjUQTNDwYo5EHJdFYEjCgL4hctEi4SKkJrcWKFFpsaaeFttDOpTNlOtPpOTNn+9CSNCQkPrge9/r3v9bK2vuD/znEwxKKo3Se4q7ZrLmXLrFlzJoJYMT6+pPhS41W+OQxa+yf6//JUOjZHtvsPZ96y7e/sWqRrlXPh7zsidxACJquQX2zmRxsrT1k3N69S5oh/8MMheYoLMms/PHnZ9ZVPLbjBYF3OhgGGKkJgU0Fmw0Gh+Gb45KzZ/7uunflxeeTYz0dgJxqKFQ9y5O/4ljTc5sWFLy2zsGYoRBPWFiWnFBOihVFkJ6m4LBZfH9mjFO/XO299fvm6pQZ8QNSndSqBeVvf71y9fKVm1enI4XCkD9ALDqKUCSmmSCZHMeyTKIjEeKJGLY0O0Vek+g4WZGweCQy2HjivqHidHkr1m7c8eX6VZlimjPJryea+G7vUZYsn41NT5EyR5GpOAoJjNEQn+06iBQmJSUuPFkJEgnnvJ6OhpOGMTqkAlpZyYJ3Nm2Yu6y7rYcvPrlIf0eY9z9cgccrScVDaHIETd5DSY3gdkNVRT6Hv73C8aOXme6MUjrHEre6e0eH/H2/aYBWVeiqLnLfpSQvm6cXV+CdkSIW95EyBFgJUubEVlRdxWGkke+VHNg/h8EhFYhixu9SVeiqvnoNTQP0uV7T86gziG4PIqREjgjsRorm5jaqqspIdzkAiMfHaGm4weJFcxGmSl6aRAqBqcA8r+kBdAXQPGqIHL2Pnft03OoA+e4A/e2NnK89x80/6ynMHaQwd5CbLfWcrz1HX3sjBe4AbnUAt3KHHL2PXDUEoCmATIz4g8NBP7nbPuDMdUhX2ykti1G+zMH8SpP0tDbS7W3MLzcpX+ag7PEYDrWdTK2LTNWHK+UjERkKAFIDzNbu4dYfGmqWnNufSeW7O3nd3EppkcLuz3MQahiSAQAWLNQor8pBxEIYoxY2VUUIFSMhafWFrwGmAozXdemX3Ju20WvCs1uX8kevG2QQkTEAMkBwOEJoOAIiMHkWxKZHsOsj2EUUORS2TneOnwLGNSDpy1jz5KtF2YzEoCDbxr4jNax4ai/HD0uOHZIkIhOvP306vLJdsL4GiAqEAdaAyYG6RN3NsGwBkhogSdzpGo6aRKVOKA4zXAOg6Fy8YFDghdwnJuFwGxoaFNZv0cCuIUOC1vqxgT311l4gcP8/A0zLWP5x89r9Pln5Vq3ZfyRTyi6XNHxOGe/JkNLvkNLvkLGuDGn6nFJ2umTqrFO2vKfdLsriJcB9nwtTaTMLyHPbKf5ojfLym1v0DZnFmopbAdtkbRMIWtzrTqYO/mSe3nPB+io0xl9A8EHaTMWZC5hZks3CjcViVXWxUjbTI3IA+v0y2NRp3ajrlPUdIS4D/UB06qgPI7YCZE2OksFEjwAGEAPCQASwHrz4L34b6ZSrEM1zAAAAAElFTkSuQmCC"></div>
+		</div>
+</body>
+
+</html>

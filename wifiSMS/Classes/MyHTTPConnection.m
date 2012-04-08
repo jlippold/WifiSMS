@@ -284,6 +284,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
             {
                 //CKMadridService *madridService = [CKMadridService sharedMadridService];
                 //NSString *foo = [madridService _temporaryFileURLforGUID:@"A5F70DCD-F145-4D02-B308-B7EA6C248BB2"];
+                
                 NSLog(@"Sending SMS");
                 conversationList = [CKConversationList sharedConversationList];
                 CKSMSEntity *ckEntity = [smsService copyEntityForAddressString:Phone];
@@ -449,8 +450,13 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 				}
 				return [[[HTTPFileResponse alloc] initWithFilePath:webPath] autorelease];
 				
-			} else {
-				//return fake index.html		
+			} else if ([path hasSuffix:@".html"]) {
+				//return other .html		
+				NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
+				webPath = [NSString stringWithFormat:@"%@/%@", webPath, path];
+				return [[[HTTPFileResponse alloc] initWithFilePath:webPath] autorelease];
+            } else {
+				//return english index.html		
 				NSString *webPath = [myAppPath stringByAppendingString:@"/Web/index.html"];
 				return [[[HTTPFileResponse alloc] initWithFilePath:webPath] autorelease];
 				
@@ -695,7 +701,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
                             //NSLog(@"file: %@", file);
                             
                             if ([blobstring rangeOfString:[[file stringByDeletingLastPathComponent] lastPathComponent]].location != NSNotFound) {
-                                NSLog(@"found");
+                                //NSLog(@"found");
                                 if ([flags isEqualToString:@"2"]) { //to me
                                     if ( [[file stringByDeletingPathExtension] hasSuffix:@"preview-left"] && [preview isEqualToString:@""] ){
                                         [preview appendString:attPath];
