@@ -19,6 +19,13 @@ Umm I'm sure there's some other stuff I am forgetting to mention but yea install
 
 Change Log:
 
+1.1.0
+Fixed shift-enter on chrome
+Fixed incoming imessage image display
+Added 2 previously unknown imessage flags credit: @Rian083 
+Added french translation ( http://IP:Port/index-fr.html ) credit: @daReal68
+Other bugs I can't remember ATM
+
 1.0.9
 
 Fixed:
