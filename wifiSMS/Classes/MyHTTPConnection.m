@@ -612,7 +612,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
         
         const char *sql4 = "SELECT * FROM ( select message.text, message.flags, message.date as DT, message.address, message.group_ID, msg_pieces.content_type, msg_pieces.content_loc, msg_pieces.data, msg_pieces.message_id, message.rowid, 0 as isMadrid from message left join msg_pieces ON message.rowid=msg_pieces.message_id WHERE ((text is null AND content_type is not null AND content_loc is not null) OR (text is not null)) AND group_id = ? ORDER BY message.rowid desc limit 100) Order by DT ASC"; 
         
-        const char *sql5 = "SELECT * FROM ( select message.text, message.flags, message.date as DT, message.address, message.group_ID, msg_pieces.content_type, msg_pieces.content_loc, msg_pieces.data, msg_pieces.message_id,  message.rowid, message.is_madrid from message left join msg_pieces ON message.rowid=msg_pieces.message_id WHERE ((text is null AND content_type is not null AND content_loc is not null) OR (text is not null)) AND group_id = ?001  UNION SELECT text, case when madrid_flags = 12289  then 2 else 3 end as flags, date, madrid_handle, ?002 as group_id, NULL as a, CASE WHEN madrid_AttachmentInfo is null then '' else 'madridattachment' end as b, madrid_attachmentInfo as c, NULL as d, rowid, message.is_madrid FROM message where madrid_handle LIKE ?003 ORDER BY message.rowid desc limit 100) Order by rowid ASC";
+        const char *sql5 = "SELECT * FROM ( select message.text, message.flags, message.date as DT, message.address, message.group_ID, msg_pieces.content_type, msg_pieces.content_loc, msg_pieces.data, msg_pieces.message_id,  message.rowid, message.is_madrid from message left join msg_pieces ON message.rowid=msg_pieces.message_id WHERE ((text is null AND content_type is not null AND content_loc is not null) OR (text is not null)) AND group_id = ?001  UNION SELECT text, case when madrid_flags = 12289 OR madrid_flags = 4097 then 2 else 3 end as flags, date, madrid_handle, ?002 as group_id, NULL as a, CASE WHEN madrid_AttachmentInfo is null then '' else 'madridattachment' end as b, madrid_attachmentInfo as c, NULL as d, rowid, message.is_madrid FROM message where madrid_handle LIKE ?003 ORDER BY message.rowid desc limit 100) Order by rowid ASC";
         
 
         NSString *value =[[UIDevice currentDevice] systemVersion];         
@@ -695,8 +695,8 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
                             //NSLog(@"file: %@", file);
                             
                             if ([blobstring rangeOfString:[[file stringByDeletingLastPathComponent] lastPathComponent]].location != NSNotFound) {
-                                //NSLog(@"found");
-                                if ([flags isEqualToString:@"3"]) { //from me
+                                NSLog(@"found");
+                                if ([flags isEqualToString:@"2"]) { //to me
                                     if ( [[file stringByDeletingPathExtension] hasSuffix:@"preview-left"] && [preview isEqualToString:@""] ){
                                         [preview appendString:attPath];
                                         [preview appendString:file];
@@ -719,12 +719,11 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 
                         }
                         
+                        //NSLog(@"flags: %@", flags);
                         //NSLog(@"attachment: %@", attachment);
                         //NSLog(@"preview: %@", preview);
                         if (([attachment isEqualToString:@""] == NO) && ([preview isEqualToString:@""] == NO)) { //We have the attachment                             
                             //copy to temp
-                            
-
                             
                             NSString *writableDBPath =  [myAppPath stringByAppendingString:@"tmp/"];
                             NSMutableString *newpreviewPath = [NSMutableString new];
@@ -753,7 +752,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
                             if ( [[attachment pathExtension] isEqualToString:@"jpg"]) {
                                 content_type = @"image/jpeg";
                             }
-                            
+
                             hexdata = @"(null)";
                             content_loc = [attachment lastPathComponent] ;
                             
