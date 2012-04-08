@@ -112,8 +112,9 @@ $(document).ready(function() {
 		
 	$('#msg').bind('keydown', function(e) {
 		if (e.shiftKey && e.keyCode == 13) {
-				console.log("foo");
-	      	    $(this).val( $(this).val() + "" +  String.fromCharCode(25) + "" ) //well, that didnt work
+                e.preventDefault();
+	      	    $('#msg').val( $('#msg').val() + "" + String.fromCharCode(182) + "" ) //well, that didnt work
+                //e.preventDefault();
       			return false;
 		} else if ( e.keyCode==13 ) {
 		      	SendSMS();
@@ -231,6 +232,14 @@ $(document).ready(function() {
 	    $(this).fadeOut();
 	  }
 	);
+                  
+    $("#msg").hover(
+        function () {
+          $("#QuickEmoji").fadeOut();
+        },
+        function () {
+            //$(this).fadeOut();
+        });
 
 	$("div.btnemoji").click(function() {
 		$("#QuickEmoji").fadeOut();
@@ -846,7 +855,7 @@ function SendSMS() {
 	if (msg == "" || grp == "" || pid == "") {
 		return false;
 	}
-	msg = msg.replace(//g, "\r\n")
+	msg = msg.replace(new RegExp(String.fromCharCode(182), 'g'), "\r\n");
 	$('#msg').val("");
 	
 	

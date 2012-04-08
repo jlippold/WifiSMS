@@ -1046,7 +1046,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 	[outdata appendString:@"{\"messages\" :[ {\"foo\": \"bar\"}"];
 	
 	if(sqlite3_open([@"/private/var/mobile/Library/SMS/sms.db" UTF8String], &database) == SQLITE_OK) {
-		const char *sqlStatement2 = "SELECT Max(rowid) as rowid, g as group_id, Max(naddress) as address, text, flags FROM (select Max(message .rowid) as rowid, Max(group_id) as g,  CASE WHEN address is Null THEN madrid_handle ELSE address  end as naddress, text, CASE WHEN flags = 3 OR madrid_flags = 12289 THEN 'toMe' ELSE 'fromMe' END as flags from message Group by CASE WHEN address is Null THEN madrid_handle ELSE address  end ) tmp  where group_id <> 0 GROUP BY g ORDER BY rowID DESC";
+		const char *sqlStatement2 = "SELECT Max(rowid) as rowid, g as group_id, Max(naddress) as address, text, flags FROM (select Max(message .rowid) as rowid, Max(group_id) as g,  CASE WHEN address is Null THEN madrid_handle ELSE address  end as naddress, text, CASE WHEN flags = 3 OR madrid_flags = 12289 OR madrid_flags = 4097 THEN 'toMe' ELSE 'fromMe' END as flags from message Group by CASE WHEN address is Null THEN madrid_handle ELSE address  end ) tmp  where group_id <> 0 GROUP BY g ORDER BY rowID DESC";
 
 		sqlite3_stmt *compiledStatement;
 		if(sqlite3_prepare_v2(database, sqlStatement2, -1, &compiledStatement, NULL) == SQLITE_OK) {
