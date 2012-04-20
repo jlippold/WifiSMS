@@ -959,7 +959,7 @@ function sortList() {
 
 
 function online() {
-	$("#status").html(msgOnline);
+	// $("#status").html(msgOnline);
 	$("#status").attr("class", "online");
 	if ( $("#fav").attr("data-status") != "online" ) {
 		$("#fav").remove();
@@ -976,7 +976,7 @@ function online() {
 
 function offline() {
 	$("#status").attr("class", "offline");
-	$("#status").html(msgOffline);
+	// $("#status").html(msgOffline);
 	if ( $("#fav").attr("data-status") != "offline" ) {
 		$("#fav").remove();
     var link = document.createElement('link');
@@ -993,9 +993,9 @@ function offline() {
 function loading(s) {
 	$("#status").attr("class", "loading");
 	if (s == "") {
-		$("#status").html(s);
+		// $("#status").html(s);
 	} else {
-		$("#status").html("Loading");	
+		// $("#status").html("Loading");	
 	}
 }
 
