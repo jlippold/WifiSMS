@@ -81,46 +81,47 @@ h2 {
   position: fixed;
   width: 250px;
   z-index: 500;
-  background-color: #FFFFFF;
+  background-color: #f2f2f2;
 }
 
 #ContactList li {
-  background-color: #E7E7E7;
-  border-radius: 0.5em 0.5em 0.5em 0.5em;
-  box-shadow: 2px 2px 2px #BBBBBB;
+   background-color: #f2f2f2;
   -moz-box-shadow: 2px 2px 2px #BBBBBB;
-  -webkit-box-shadow: 2px 2px 2px #BBBBBB;
   color: #000000;
   display: block;
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 1em;
+  font-size: 13px;
   height: 50px;
-  margin: 10px 0 10px 5px;
   opacity: 1;
-  padding: 5px 10px;
+  padding: 10px 10px;
   position: relative;
-  width: 200px;
   cursor: pointer;
   
   /* css flip */
   -moz-transform: skew(0deg, 0deg);
 
+  border-bottom: 1px solid #C0C6D0;
+  border-right: 1px solid #C0C6D0;
+  border-top: 1px solid #fff;
+  font-weight: bold;
 }
 
 #ContactList div.pic {
     float: left;
-    height: 50px;
-    width: 50px;
 }
 
 #ContactList div.pic img {
-  border-radius: 5px 5px 5px 5px;
-  box-shadow: 0 0 2px 2px #BBBBBB;
-  -moz-box-shadow: 0 0 2px 2px #BBBBBB;
-  -webkit-box-shadow: 0 0 2px 2px #BBBBBB;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(255, 255, 255, .75);
+  -moz-box-shadow: 0 1px 2px rgba(255, 255, 255, .75);
+  -webkit-box-shadow: 0 1px 1px rgba(255, 255, 255, .75);
+  border-top: 1px solid #868686;
+  border-right: 1px solid #a6a6a6;
+  border-left: 1px solid #a6a6a6;
+  border-bottom: 1px solid #a0a3a7
   float: left;
-  height: 48px;
-  width: 48px;
+  height: 42px;
+  width: 42px;
 }
 
 #ContactList div.desc {
@@ -129,7 +130,7 @@ h2 {
   line-height: 22px;
   overflow: hidden;
   padding-left: 10px;
-  padding-top: 5px;
+  padding-top: 0px;
   width: 140px;
 }
 
@@ -408,10 +409,11 @@ li div.btnDelete {
         #msg
         {
             padding: 5px 9px;
-            height: 23px;
+            height: 34px;
+            resize: none;
             width: 80%;
             border: 1px solid #C4CCDF;
-            font: normal 13px 'trebuchet MS', arial, helvetica;
+            font: normal 13px Helvetica, Arial, sans-serif;
             background: #f1f1f1;
             
             -moz-border-radius: 3px;
