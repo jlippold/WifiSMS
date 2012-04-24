@@ -1,228 +1,220 @@
-	/* reset stylesheet */
-	html, body, div, span, applet, object, iframe,
-	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-	a, abbr, acronym, address, big, cite, code,
-	del, dfn, em, font, img, ins, kbd, q, s, samp,
-	small, strike, strong, sub, sup, tt, var,
-	dl, dt, dd, ol, ul, li,
-	fieldset, form, label, legend,
-	table, caption, tbody, tfoot, thead, tr, th, td {
-		margin: 0;
-		padding: 0;
-		border: 0;
-		outline: 0;
-		font-weight: inherit;
-		font-style: inherit;
-		font-size: 100%;
-		font-family: inherit;
-		vertical-align: baseline;
-	}
-	/* remember to define focus styles! */
-	:focus {
-		outline: 0;
-	}
-	body {
-		line-height: 1;
-		color: black;
-		background-color: #EDEDED;
-		overflow: hidden;
-		font-family: "Futura","Futura Std",FuturaStd-Medium,"Avant Garde","Avant Garde Std",AvantGardeStd-Regular,"Century Gothic","Century Gothic Std",CenturyGothicStd-Regular,"Twentieth Century","Twentieth Century Std",TwentiethCenturyStd-Regular,Corbel,"Lucida Sans Regular","Trebuchet MS",Helvetica,sans-serif;
-	}
-	ol, ul {
-		list-style: none;
-	}
-	/* tables still need 'cellspacing="0"' in the markup */
-	table {
-		border-collapse: separate;
-		border-spacing: 0;
-	}
-	caption, th, td {
-		text-align: left;
-		font-weight: normal;
-	}
-	blockquote:before, blockquote:after,
-	q:before, q:after {
-		content: "";
-	}
-	blockquote, q {
-		quotes: "" "";
-	}
-	
-	html {
-		height: 100%;
-	}
-	
-	h2 {
-		
-    font-size: 1.2em;
-    padding-bottom: 10px;
-	}
+/* reset stylesheet */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+/* remember to define focus styles! */
+:focus {
+  outline: 0;
+}
+body {
+  line-height: 1;
+  color: black;
+  background-color: #EDEDED;
+  overflow: hidden;
+  font-family: Helvetica, Arial, sans-serif;
+}
+ol, ul {
+  list-style: none;
+}
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+}
+blockquote, q {
+  quotes: "" "";
+}
 
-	#mainWindow {
-		height: 100%;
-		margin-left: -300px;
-		position: fixed;
-		width: 100%;
-	}
-	
-	.header {
-		height: auto;
-		left: 250px;
-		position: fixed;
-		width: 100%;
-		background-color: #EDEDED;
-	}
-	
-	#sidebar {
-		float: left;
-		height: 100%;
-		overflow-x: hidden;
-		overflow-y: auto;
-		-webkit-overflow-scrolling: touch;
-		position: fixed;
-		width: 250px;
-		z-index: 500;
-		/*min-height: 100%;*/
-		background-color: #FFFFFF;
-	}
-	
-	#ContactList li {
-		background-color: #E7E7E7;
-		border-radius: 0.5em 0.5em 0.5em 0.5em;
-		box-shadow: 2px 2px 2px #BBBBBB;
-		-moz-box-shadow: 2px 2px 2px #BBBBBB;
-		-webkit-box-shadow: 2px 2px 2px #BBBBBB;
-		color: #000000;
-		display: block;
-		font-family: "Gill Sans","Lucida Sans Unicode","Lucida Grande",sans-serif;
-		font-size: 1em;
-		height: 50px;
-		margin: 10px 0 10px 5px;
-		opacity: 1;
-		padding: 5px 10px;
-		position: relative;
-		width: 200px;
-		cursor: pointer;
-		
-		/* css flip */
-		-moz-transform: skew(0deg, 0deg);
+html {
+  height: 100%;
+}
 
-	}
-	
-	#ContactList div.pic {
-	    float: left;
-	    height: 50px;
-	    width: 50px;
-	}
-	
-	#ContactList div.pic img {
-		border-radius: 5px 5px 5px 5px;
-		box-shadow: 0 0 2px 2px #BBBBBB;
-		-moz-box-shadow: 0 0 2px 2px #BBBBBB;
-		-webkit-box-shadow: 0 0 2px 2px #BBBBBB;
-		float: left;
-		height: 48px;
-		width: 48px;
-	}
-	
-	#ContactList div.desc {
-		float: left;
-		height: 20px;
-		line-height: 22px;
-		overflow: hidden;
-		padding-left: 10px;
-		padding-top: 5px;
-		width: 140px;
-	}
-	
-	#ContactList div.desc img {
-		margin-top: -6px;
-	}
-	
-	#ContactList div.lastMessage {
-		color: #999999;
-		float: left;
-		font-size: 10px;
-		height: 20px;
-		line-height: 10px;
-		overflow: hidden;
-		padding-left: 10px;
-		padding-top: 3px;
-		width: 140px;
-	}
-	
-	.topContactContainer {
-		background-color: #DFDFDF;
-		border-bottom: 2px solid #CCCCCC;
-		float: left;
-		width: 100%;
-	}
-	.loadingContainer {
-		float: right;
-		position: fixed;
-		right: 0;
-		top: 25px;
-		width: 200px;
-		cursor: pointer;
-	}
+h2 {
+  
+  font-size: 1.2em;
+  padding-bottom: 10px;
+}
 
-	.Sender {
-		font-size: 2em;
-		color: black;
-		float: left;
-		margin-left: 96px;
-	}
-	.chatWindowContainer {
-		background-color: #EDEDED;
-		bottom: 120px;
-		padding: 0 !important;
-		position: fixed;
-		right: 0;
-		top: 118px;
-		
-	}
-	
-	#chatWindow {
+#mainWindow {
+  height: 100%;
+  margin-left: -300px;
+  position: fixed;
+  width: 100%;
+}
 
-		
-		/*
-		background: -moz-linear-gradient(0% 40% 90deg, #FFFFFF, #DBE2ED) repeat scroll 0 0 transparent;
-		border: 1px solid #DDDDDD;
-		border-radius: 10px 10px 10px 10px;
-		box-shadow: 0 0 50px #CCCCCC;
-		*/
+.header {
+  height: 33px;
+  left: 250px;
+  position: fixed;
+  width: 100%;
+}
 
-		position: relative;
-		height: 100%;
-		overflow-x: hidden;
-		overflow-y: auto;
-		-webkit-overflow-scrolling: touch;
-	}
-	#chatWindow span{
-		
-		clear: both;
-		display: block;
-		float: left;
-		
-		
-		width: 100%;
-		
-	}
-	.content {
-		border: 1px solid red;
-		height: 100%;
-		margin-top: 0;
-		position: relative;
-	}
-	
-	.footer {
-			bottom: 0;
-			height: 120px;
-			left: 250px;
-			position: fixed;
-			width: 100%;
-			background-color: #EDEDED;
-	}
+#sidebar {
+  float: left;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  position: fixed;
+  width: 250px;
+  z-index: 500;
+  background-color: #f2f2f2;
+}
+
+#ContactList li {
+   background-color: #f2f2f2;
+  -moz-box-shadow: 2px 2px 2px #BBBBBB;
+  color: #000000;
+  display: block;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  height: 50px;
+  opacity: 1;
+  padding: 10px 10px;
+  position: relative;
+  cursor: pointer;
+  
+  /* css flip */
+  -moz-transform: skew(0deg, 0deg);
+
+  border-bottom: 1px solid #C0C6D0;
+  border-right: 1px solid #C0C6D0;
+  border-top: 1px solid #fff;
+  font-weight: bold;
+}
+
+#ContactList div.pic {
+    float: left;
+}
+
+#ContactList div.pic img {
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(255, 255, 255, .75);
+  -moz-box-shadow: 0 1px 2px rgba(255, 255, 255, .75);
+  -webkit-box-shadow: 0 1px 1px rgba(255, 255, 255, .75);
+  border-top: 1px solid #868686;
+  border-right: 1px solid #a6a6a6;
+  border-left: 1px solid #a6a6a6;
+  border-bottom: 1px solid #a0a3a7
+  float: left;
+  height: 42px;
+  width: 42px;
+}
+
+#ContactList div.desc {
+  float: left;
+  height: 20px;
+  line-height: 22px;
+  overflow: hidden;
+  padding-left: 10px;
+  padding-top: 0px;
+  width: 140px;
+}
+
+#ContactList div.desc img {
+  margin-top: -6px;
+}
+
+#ContactList div.lastMessage {
+  color: #999999;
+  float: left;
+  font-size: 10px;
+  height: 20px;
+  line-height: 10px;
+  overflow: hidden;
+  padding-left: 10px;
+  padding-top: 3px;
+  width: 140px;
+}
+
+.topContactContainer {
+  z-index: 50;
+background-image: url(data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABLAAD/4QMtaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MSA2NC4xNDA5NDksIDIwMTAvMTIvMDctMTA6NTc6MDEgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUuMSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QTY2OEEzMjk4MkMxMTFFMTlCRENBQ0M1N0NBOUMxNjAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QTY2OEEzMkE4MkMxMTFFMTlCRENBQ0M1N0NBOUMxNjAiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpBNjY4QTMyNzgyQzExMUUxOUJEQ0FDQzU3Q0E5QzE2MCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpBNjY4QTMyODgyQzExMUUxOUJEQ0FDQzU3Q0E5QzE2MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv/uAA5BZG9iZQBkwAAAAAH/2wCEAAMCAgICAgMCAgMFAwMDBQUEAwMEBQYFBQUFBQYIBgcHBwcGCAgJCgoKCQgMDAwMDAwODg4ODhAQEBAQEBAQEBABAwQEBgYGDAgIDBIODA4SFBAQEBAUERAQEBAQEREQEBAQEBAREBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEP/AABEIAHgAeAMBEQACEQEDEQH/xABpAAEBAQEAAAAAAAAAAAAAAAABAAIJAQEBAQEAAAAAAAAAAAAAAAAAAQMEEAABAgUCBQUAAgMBAAAAAAABABEhMUFRAvASYZGxIjJxgaHB0VID4fFCkhEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A6FMCG4cF1sTtxb3NBZEW3Fz+DigtuL4oAjB0E2LH/CB2jdlxBQa/sAfIhFZaUUBkA7ohxxiEDlUPbogyBGaDTeMboAPuEaDoghKsrIGLe9uCKGJJd+SIm8Z6KCIjVAMWKBY7spyQa/sBczQZGJ4oqOOThnRDiMnE+Yugct1jSosistlukeaDQGR2wNUABluxhQdERBodtEFSVfpFVTBEDeMNOirKBkEQf8mSBi+URL7RT/Y8YiX2iM8te6oiS4Zte6gQTCI0fVBZEsYimpoM/wDUwg0DARFUAH3CIp0QIpCiBpKv0ig+Rkgm8fbqgsnfXFAt2oiIifRA5ibW+0UUCCIiEE0o6dEWYgY2VVlowuojQAbmiggONURGsTD2RQ8JaZAO5MLoL+KIMiH1xRSSNqBfFzqqIszjH0PVFDhp2REchCKA3Bx3adA5ZBjFFZcPOqI0C4Z7oAmIidBBrHHtEKWRUBcdEEwsUEw7J06ogIDyOnRTDYgRAy+eKAzI+CgSYe90BlQ+qCeUdOgjKaDJdxGv36ojWIO2d9TQB3PNFOIgIdEEBwQAayqEMNsNOoAmPjqKDR8D2oIV7UFnIwoUVEsC4qgjlAQuiAZQEKnqgjl2y03qgCZQrx/UGgTtML0P6ig+X+0AAIP0QQAZ0BFj6/qIQC+GqoA7twgdOgXy2syCfJygsnYzkbII7owM+FkEd+0QNUENzCcz1QUdsjoIM0DhBoGY9UVExQQaEURADb5IqYNlGqIWA2xp9qgbuEaqBHj5VQEX8qIHInb5UKKS5B7qogjtHdeqCDsIiZrxQBfbMc0C5YRHNFIJYxCCyJeB+R+IgBDzsggYT0yKnDFzUohcdsafaKCQC7oFwxEaIDdi80FkzEcCgnEZzREG4zRU4asP1AODjVBOGrzRDCM0EZ15oCsOqKSINCd0RNCkroqBHCRRBkfTnxRUDGlKoLItzRFke5kE5aaBxLxeqKgYGNkA84ogJhO/0g0TCaKj61KIKw6BFJMC4rZETwkJIqA9JFEGQ03FBARlanBBZA2rZA5YnfJBljCCDeINkUAT7bIDaYwRAcSwhQ34INHEtKyKjOVTdEAAd3HJAkBpiaKWDUkUQAC4kUUZM09OiGD8kBltRSW3SRGWi7a5oNDWnRUJmFkQQeXyij2vUcEGsiTQ0qiAu/igd2Tn8VVHPJp1UQjLJjGlkFjlle6KMssmd0Duzf8A8oMnLNEJOW53OggHyJmaINjdcorIGUYmiIiMnmZcUARlc1qeCDRGTmcxdBkg7hOfG6CAy/iUBkMpbTr3QPcx7TLVUFiM6431NAZbmbbrmgS7y/jqaDJcGSBPlLqggeFrqjQyag5n9UVHMRh8lEG4bpUugt44Sv6INHLH5CDBzxcMflB//9k=);
+  border-bottom: 1px solid #C0C6D0;
+  float: left;
+  width: 100%;
+}
+.loadingContainer {
+  float: right;
+  position: fixed;
+  right: 0;
+  top: 25px;
+  width: 200px;
+  cursor: pointer;
+}
+
+.Sender {
+  font-size: 2em;
+  color: black;
+  float: left;
+  margin-left: 96px;
+}
+.chatWindowContainer {
+  background-image: url(data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABLAAD/4QMtaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MSA2NC4xNDA5NDksIDIwMTAvMTIvMDctMTA6NTc6MDEgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUuMSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QTY2OEEzMjk4MkMxMTFFMTlCRENBQ0M1N0NBOUMxNjAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QTY2OEEzMkE4MkMxMTFFMTlCRENBQ0M1N0NBOUMxNjAiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpBNjY4QTMyNzgyQzExMUUxOUJEQ0FDQzU3Q0E5QzE2MCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpBNjY4QTMyODgyQzExMUUxOUJEQ0FDQzU3Q0E5QzE2MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv/uAA5BZG9iZQBkwAAAAAH/2wCEAAMCAgICAgMCAgMFAwMDBQUEAwMEBQYFBQUFBQYIBgcHBwcGCAgJCgoKCQgMDAwMDAwODg4ODhAQEBAQEBAQEBABAwQEBgYGDAgIDBIODA4SFBAQEBAUERAQEBAQEREQEBAQEBAREBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEP/AABEIAHgAeAMBEQACEQEDEQH/xABpAAEBAQEAAAAAAAAAAAAAAAABAAIJAQEBAQEAAAAAAAAAAAAAAAAAAQMEEAABAgUCBQUAAgMBAAAAAAABABEhMUFRAvASYZGxIjJxgaHB0VID4fFCkhEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A6FMCG4cF1sTtxb3NBZEW3Fz+DigtuL4oAjB0E2LH/CB2jdlxBQa/sAfIhFZaUUBkA7ohxxiEDlUPbogyBGaDTeMboAPuEaDoghKsrIGLe9uCKGJJd+SIm8Z6KCIjVAMWKBY7spyQa/sBczQZGJ4oqOOThnRDiMnE+Yugct1jSosistlukeaDQGR2wNUABluxhQdERBodtEFSVfpFVTBEDeMNOirKBkEQf8mSBi+URL7RT/Y8YiX2iM8te6oiS4Zte6gQTCI0fVBZEsYimpoM/wDUwg0DARFUAH3CIp0QIpCiBpKv0ig+Rkgm8fbqgsnfXFAt2oiIifRA5ibW+0UUCCIiEE0o6dEWYgY2VVlowuojQAbmiggONURGsTD2RQ8JaZAO5MLoL+KIMiH1xRSSNqBfFzqqIszjH0PVFDhp2REchCKA3Bx3adA5ZBjFFZcPOqI0C4Z7oAmIidBBrHHtEKWRUBcdEEwsUEw7J06ogIDyOnRTDYgRAy+eKAzI+CgSYe90BlQ+qCeUdOgjKaDJdxGv36ojWIO2d9TQB3PNFOIgIdEEBwQAayqEMNsNOoAmPjqKDR8D2oIV7UFnIwoUVEsC4qgjlAQuiAZQEKnqgjl2y03qgCZQrx/UGgTtML0P6ig+X+0AAIP0QQAZ0BFj6/qIQC+GqoA7twgdOgXy2syCfJygsnYzkbII7owM+FkEd+0QNUENzCcz1QUdsjoIM0DhBoGY9UVExQQaEURADb5IqYNlGqIWA2xp9qgbuEaqBHj5VQEX8qIHInb5UKKS5B7qogjtHdeqCDsIiZrxQBfbMc0C5YRHNFIJYxCCyJeB+R+IgBDzsggYT0yKnDFzUohcdsafaKCQC7oFwxEaIDdi80FkzEcCgnEZzREG4zRU4asP1AODjVBOGrzRDCM0EZ15oCsOqKSINCd0RNCkroqBHCRRBkfTnxRUDGlKoLItzRFke5kE5aaBxLxeqKgYGNkA84ogJhO/0g0TCaKj61KIKw6BFJMC4rZETwkJIqA9JFEGQ03FBARlanBBZA2rZA5YnfJBljCCDeINkUAT7bIDaYwRAcSwhQ34INHEtKyKjOVTdEAAd3HJAkBpiaKWDUkUQAC4kUUZM09OiGD8kBltRSW3SRGWi7a5oNDWnRUJmFkQQeXyij2vUcEGsiTQ0qiAu/igd2Tn8VVHPJp1UQjLJjGlkFjlle6KMssmd0Duzf8A8oMnLNEJOW53OggHyJmaINjdcorIGUYmiIiMnmZcUARlc1qeCDRGTmcxdBkg7hOfG6CAy/iUBkMpbTr3QPcx7TLVUFiM6431NAZbmbbrmgS7y/jqaDJcGSBPlLqggeFrqjQyag5n9UVHMRh8lEG4bpUugt44Sv6INHLH5CDBzxcMflB//9k=);
+  bottom: 0px;
+  /* padding: 0 !important; */
+  position: fixed;
+  right: 0;
+  top: 36px;
+  -moz-box-shadow: 0 2px 5px #b7bec8 inset;
+  -webkit-box-shadow: 0 2px 5px #b7bec8 inset;
+  box-shadow: 0 2px 5px #b7bec8 inset;
+  padding-bottom: 95px;
+}
+
+#chatWindow {
+  position: relative;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#chatWindow span{
+  clear: both;
+  display: block;
+  float: left;
+  width: 100%;
+}
+
+.content {
+  border: 1px solid red;
+  height: 100%;
+  margin-top: 0;
+  position: relative;
+}
+
+.footer {
+    bottom: 0;
+    height: 120px;
+    left: 250px;
+    position: fixed;
+    width: 100%;
+    /* background-color: #EDEDED; */
+}
 	
 
 
@@ -273,16 +265,35 @@ div.emoji {
 
 #Sender {
     float: left;
-    height: 50px;
+    height: 25px;
     overflow: hidden;
-    padding-left: 10px;
-    padding-top: 30px;
-    width: auto;
-		font-family: "Futura","Futura Std",FuturaStd-Medium,"Avant Garde","Avant Garde Std",AvantGardeStd-Regular,"Century Gothic","Century Gothic Std",CenturyGothicStd-Regular,"Twentieth Century","Twentieth Century Std",TwentiethCenturyStd-Regular,Corbel,"Lucida Sans Regular","Trebuchet MS",Helvetica,sans-serif;
-		font-size: 1.4em;
+    padding-left: 5px;
+    padding-top: 10px;
+		font-family: Helvetica, Arial, sans-serif;
+    color: #7c7f94;
+    font-size: 13px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .75);
 		cursor: pointer;
-		
+		font-weight: bold;
 }
+
+#Sender div {
+  float: left;
+  display: block;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#toField {
+  padding-top: 10px;
+  color: #7c7f94;
+  font-size: 13px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .75);
+  float: left;
+  margin-left: 15px;
+  margin-right: 10px;
+}
+
 
 
 @-moz-document url-prefix() {
@@ -294,9 +305,12 @@ div.emoji {
 
 
 #status {
-	padding-left: 20px;
-	font-family: "Futura","Futura Std",FuturaStd-Medium,"Avant Garde","Avant Garde Std",AvantGardeStd-Regular,"Century Gothic","Century Gothic Std",CenturyGothicStd-Regular,"Twentieth Century","Twentieth Century Std",TwentiethCenturyStd-Regular,Corbel,"Lucida Sans Regular","Trebuchet MS",Helvetica,sans-serif;
-	font-size: 1em;
+  margin-top: 8px;
+  padding-top: 10px;
+	display: block;
+	width:15px;
+	height: 15px;
+	float: left;
 }
 
 #status.online {
@@ -370,21 +384,21 @@ li div.btnDelete {
 
 			#SMSbox
 			{
-				background: #eaf8fc;
-				background-image: -moz-linear-gradient(#fff, #C4CCDF);
-				background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #C4CCDF),color-stop(1, #fff));
-				
-				-moz-border-radius: 35px;
-				border-radius: 35px;
-				
-				border-width: 1px;
-				border-style: solid;
-				border-color: #D0D9ED #C4CCDF #B3B9C9;            
+				/* background: #eaf8fc; */
+				/* background-image: -moz-linear-gradient(#fff, #C4CCDF); */
+				/* background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #C4CCDF),color-stop(1, #fff)); */
+				/*  */
+				/* -moz-border-radius: 35px; */
+				/* border-radius: 35px; */
+				/*  */
+				/* border-width: 1px; */
+				/* border-style: solid; */
+				/* border-color: #D0D9ED #C4CCDF #B3B9C9;             */
 				width: 90%;
 				height: 35px;
 				padding: 10px;
 				margin: 35px auto 50px;
-				overflow: hidden;
+				/* overflow: hidden; */
 			}
         
         #msg, #submit
@@ -395,10 +409,11 @@ li div.btnDelete {
         #msg
         {
             padding: 5px 9px;
-            height: 23px;
+            height: 34px;
+            resize: none;
             width: 80%;
             border: 1px solid #C4CCDF;
-            font: normal 13px 'trebuchet MS', arial, helvetica;
+            font: normal 13px Helvetica, Arial, sans-serif;
             background: #f1f1f1;
             
             -moz-border-radius: 3px;
@@ -427,7 +442,7 @@ li div.btnDelete {
            -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
            box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;   		
 
-			height: 35px;
+			height: 45px;
 			margin: 0 0 0 10px;
 			padding: 0;
 			width: 50px;
@@ -435,7 +450,7 @@ li div.btnDelete {
 			font: bold 14px Arial, Helvetica;
 			color: #23441e;
 			
-			text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+			text-shadow: 0 1px 0 rgba(255,255,255,0.75);
 		}
 		
 		#submit:hover
@@ -490,7 +505,7 @@ li div.btnDelete {
 
     cursor: pointer;
     float: left;
-    padding: 5px;
+    padding: 10px 5px;
     text-align: center;
     
     
@@ -542,20 +557,20 @@ li div.btnDelete {
 
 #chatWindow div.left {
   float: left;
-  padding-left: 85px;
+  padding-left: 60px;
 }
 #chatWindow div.right {
   float: right;
-  padding-right: 85px;
+  padding-right: 60px;
 }
 
 
 
 div.left div.avatar {
-	bottom: 25px;
+  bottom: 34px;
 	float: left;
 	height: 0;
-	left: -55px;
+	left: -45px;
 	position: relative;
 }
 
@@ -567,9 +582,9 @@ div.left div.hasAttachment {
 div.right div.avatar {
 	float: right;
 	height: 0;
-	right: -55px;
+	right: -45px;
 	position: relative;
-	bottom: 25px;
+	bottom: 34px;
 }
 
 div.right div.hasAttachment {
@@ -577,12 +592,16 @@ div.right div.hasAttachment {
 }
 
 div.avatar img {
-	height: 50px;
-	width: 50px;
-  border-radius: 5px 5px 5px 5px;
-  box-shadow: 0.2em 0.2em 0.2em #CCCCCC;
-  -moz-box-shadow: 0.2em 0.2em 0.2em #CCCCCC;
-  -webkit-box-shadow: 0.2em 0.2em 0.2em #CCCCCC;
+	height: 32px;
+	width: 32px;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(255, 255, 255, .75);
+  -moz-box-shadow: 0 1px 2px rgba(255, 255, 255, .75);
+  -webkit-box-shadow: 0 1px 1px rgba(255, 255, 255, .75);
+  border-top: 1px solid #868686;
+  border-right: 1px solid #a6a6a6;
+  border-left: 1px solid #a6a6a6;
+  border-bottom: 1px solid #a0a3a7
 }
 
 div.right div.spinner {
@@ -638,14 +657,16 @@ a.attachment img {
 
 #chatWindow  div.bubble p {
   color: #000000;
-  font-size: 16px;
+  font-size: 12px;
+  line-height: 18px;
   margin: 0;
-  font-family: "Gill Sans","Lucida Sans Unicode","Lucida Grande",sans-serif;
-  
+  font-family: Helvetica, Arial, sans-serif;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .75);
 }
 
 #chatWindow  div.bubble p img {
   margin-top: -5px;
+  margin-bottom: -6px;
 }
 
 #chatWindow div.left p {
@@ -696,7 +717,7 @@ a.attachment img {
 	background-color: #000000;
 	color: #FFFFFF;
 	cursor: pointer;
-	font-family: "Futura","Futura Std",FuturaStd-Medium,"Avant Garde","Avant Garde Std",AvantGardeStd-Regular,"Century Gothic","Century Gothic Std",CenturyGothicStd-Regular,"Twentieth Century","Twentieth Century Std",TwentiethCenturyStd-Regular,Corbel,"Lucida Sans Regular","Trebuchet MS",Helvetica,sans-serif;
+	font-family: Helvetica, Arial, sans-serif;
 	height: 20px;
 	left: 250px;
 	opacity: 0.8;
@@ -721,7 +742,7 @@ a.attachment img {
 #charCountContainer {
 	bottom: 0px;
 	color: #CCCCCC;
-	font-family: "Futura","Futura Std",FuturaStd-Medium,"Avant Garde","Avant Garde Std",AvantGardeStd-Regular,"Century Gothic","Century Gothic Std",CenturyGothicStd-Regular,"Twentieth Century","Twentieth Century Std",TwentiethCenturyStd-Regular,Corbel,"Lucida Sans Regular","Trebuchet MS",Helvetica,sans-serif;
+	font-family: Helvetica, Arial, sans-serif;
 	font-size: 2em;
 	position: absolute;
 	right: 2px;
@@ -789,3 +810,4 @@ a.attachment img {
 #QuickEmoji div {
 	cursor: hand;
 }
+
