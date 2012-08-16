@@ -884,6 +884,46 @@ function shownotify(Phone, Sender, flags, SMS, lastMessage, group) {
 	
 }
 
+c=0;
+function favIconClear() {
+	var icon=document.getElementById("favicon");
+	(newIcon = icon.cloneNode(true)).setAttribute('href','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wIEAklFDS5Vb8AAAMFSURBVDjLVZNNaFxlFIaf833fncn8JTOTWmvTBGKyEUMW4g/SotnURTYiFSxIXQgWXYjbFlcuKihuFMxGQVBcFI1gUxB/a6UYsP4UmVJT2wnJNMkkM5lJ5ufeOzP33s/FJFpX5+VwnvNu3lfen5/TyWziRCqXPJfJDE4IElqxYAGhP+lrsYLF6kajcdvdcV/3mt68cXX7qVjWOV+L6mzv1ABMn7D/sn1e/tNKJnVWn2+32rPGHXBPB16wT4jFEtmIAR0npmMg4AcdOoGPVhoRtXeJdJ3uabPj1dNaG7BIaAOSJsHY0CgP5h8il8jRC7vsdOuUdle5WV+i2W1ilBGAoBekzba/bZXShGHA4fQI0/dNcVO+ZTcsMB3NcDT/DAPa0DzoMlL+lYu3vmSzXUaLwfqh1eNPj59yI29CKcXxsVkeP/IEbs+j2tng6+2PuNr4hvtjj5J17uVQagSv51Ko/Emz16TjdYuqUCqw7VVJ6hTT9zxG1a/w/c4nrPgFTuTO0ul1eav4POutVXqhMDX8MAknRc2rcn2tgCrVSiwWFylurKLCJLEwz/H0Kzg2xYeV1ziWOIkNhU/X36DrCybKsLy5ws9/L3KnUUKRtkRxy1ZQZqW2goRJJp0ZXj3wOUfjL/Bx5QwziZe57l5hqXGNO/UNyn6ZKNHnFBlBsrCqbvPj1gUS8YC5ree41H6PF0fP4UiMhllmSIbZjK7xU/UiJV1EcsCgoM2z+lQ4FE50YwG3/BsciR1mbHCER/JPMpmbwIaWQwOjxO0gl9cv80VlgVq8hiTAcXTRSA5IgQLWow3erb7DV+PfsewXmV/7jEz8Adb8NX5pr7LQuURzqIXaD6ULhmFEUuynl7RJ83b5TRZ2L1ALaoClHXngAAf7RlhAgW0iRrRUOQCEWCXIkv2LP6LfCYYjUCARKPl/rwBrBdG+VI36Tc054+ZkNxeIiqAlLegb9CELosBGe4u9ZjlNA1fVnCRnE8pO2WMyIy+Rtnks0d1NFrkL7j9TtKUW/WA/kBty5R+VwGHZCCAY1QAAAABJRU5ErkJggg==');
+	// better would be to set the href for the render (background image)
+	// then just use it like the flashing
+	icon.parentNode.replaceChild(newIcon,icon);
+}
+
+window.onfocus = function () { 
+	favIconClear();
+	c = 0;
+}; 
+
+tf = 0; // temp var for flashing
+function flash() {
+	var c6 = document.getElementById("render");
+	var c6_context = c6.getContext("2d");
+	if (c > 0) {
+		c6_context.clearRect(0, 0, 600, 300);
+		c6_context.fillStyle= '#000';
+		c6_context.fillRect(0, 0,50,100);
+		
+		c6_context.fillStyle= '#f00';
+		if (tf % 2) {
+			c6_context.fillStyle= '#faa';
+		}
+		tf=tf+1;
+		c6_context.fillRect(0, 0,16,4);
+		c6_context.fillStyle = '#aaf';
+		c6_context.textAlign = 'right';
+		c6_context.fillText(c.toString(), 16, 16);
+		var icon=document.getElementById("favicon");
+		// (newIcon = icon.cloneNode(true)).setAttribute('href',c6.canvas.toDataURL());
+		(newIcon = icon.cloneNode(true)).setAttribute('href',c6.toDataURL());
+		icon.parentNode.replaceChild(newIcon,icon);
+	}
+}
+setInterval(function(){flash()},500);
+
 function updateTitle() {
 	
 	//Update doc title
@@ -904,7 +944,7 @@ function updateTitle() {
 	} else {
 		document.title = "WifiSMS";	
 	}
-	
+	c = unread;
 }
 
 function isNumber(n) {
