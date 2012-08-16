@@ -3,13 +3,15 @@
 
 <head>
 	<title>WifiSMS</title>
-	<link rel="apple-touch-icon-precomposed" href="touch-icon-iphone.png" />
+<!-- 	<link rel="apple-touch-icon-precomposed" href="touch-icon-iphone.png" />
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="touch-icon-ipad.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="touch-icon-iphone4.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="touch-icon-iphone4.png" /> -->
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; user-scalable=0;">
 	
-	<link rel="icon" href="touch-icon-iphone4.png" sizes="128x128" />
+<!-- 	<link id="favicon" rel="icon" href="touch-icon-iphone4.png" sizes="128x128" /> -->
+	<link id="favicon" rel="shortcut icon" type="image/png" href="touch-icon-iphone4.png"/>
+
 	
 <script type='text/javascript' src='jquery.js'></script>
 <script type='text/javascript' src='func.js'></script>
@@ -169,6 +171,7 @@
 			<div onclick="addemoji(&quot;E409&quot;)" title="Insert"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAENUlEQVQ4ja2UaWxUVRiGn3OXTmlLy9hhSktbKMWUUJA2LYWAxeovkE2iQTQWBBN/GOMCISYQ4y9NVGKCSyAxEA2iiKLBpCKBEMAEWVoL2MpmQQbodGiZ6Sydzp17537+mDa4kfjDL3mTk7M8+U7Oe174n0vda2H8GCa0lLFwXjkPPVBGPcD5XjpP3OTY0V5+6B+m7z8Bc3XyXprFphcX5b3sb5xdYEyahyqqBECiAZzrJ7jdfibx4YHk1vfP8VYqQ/Ke3ZbkUX5wJe3Wvjkiwb0iyXMiiQ6R6MmsEh3ZueBesfbNkYMraS/Jo/zPjY0OVIHJuO9WqeMLnmmZoTeuBzsNdgyQf17KLAQzh0z7exz/7GjXsj2yIGEzCIg+skt/Y57a+tTqSQuNhrVg90OqF5w4ZP5Fdj+4MTT/dMrzLvi1W9HiIwHaRoFaVSG1Hz+Xuz2/ca42lNSIh66R53Ozh61BcGJZZWJgJMEzzJ2rvyOORa7XYIYRmLX3tPPNoMWADhhratUrSx8d16z5y3Bciy/arnDs+06mlgn54x1IDmbh+SluX+1l+7afuBJKUjfNwNQtTLtfu35xOH4qyFEd8GxoNjfNmFtUqXTBJEFjYw66SvDO2x3EgiFmTRsCZ4BdOy+w49NuVqzw8tgiL2YqAukoCotEYFi+6nZ3G4A5sVgrwTTBioG4ADRUCEUeEzw6qJG38+gUeUwaKgTivZAAdA1yTCYWayWAqQGGUijJOIjrgMoQCdps3BJiaauf1jWFkE5BOkXr2kKWtvrZuCVEJGiDlsF1HMR2UAoFGAYgfVEnLOkEYih03aEnnuHVDQaVFTGIR2DMiBdi8HCzTnWVwdVQmIZiHXEMJC30RZ0wIAZgn7nmdi2x0k2mV+FmbBrrXChyQRO4T+461gUcRWWNonKChoQ1dI+LHRHOXHO7ANsArP2X5cDmAXetOc1Uxw4qdn3gUlsn5HgFMx/IzQIlCfaQkA5Dd6fLC6/rzG7SsLps2X9ZDgCWDkh/kliV7s6sn25WVzXpBC8J4d8ymOfLWdX5ILlniyntnMz8X2o4ez3FYCpOfXMOi9eYSAB27Ukd3tkpHwHR0Z9inboht5aUsnD8FCO//gmDy+E0eriOlqbnKb1/CqVTaxlbPZ+f3Sv4lt1g3WtjIKS4eCjdv/pzZ8OQzQXAGQW6QzaDh7szPS0FMn+CXy9oWJQGt4GJZU8jk8aiykvR/NXoM0+yeN1F6Mmhq80KPb7NXh+I8SNZEzEKBEjdGabv6w63fWyf46vxSFU6PlX5vMthnKDle1BGIbFEG2bokvvJDufQs7szm0dgd0ZT5O95qIBCoHy6jzmPVBY8srF684oyX0UeQO/AjeS7PW9+eySQOPLrAKeAm1kz3Y2keyW2BngBX01uYdOT3snLQfgyEth/KRU9DQwAkREj/aX+AOdC7fDEM6chAAAAAElFTkSuQmCC"></div>
 			<div onclick="addemoji(&quot;E40F&quot;)" title="Insert"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAEX0lEQVQ4ja2UW2xUVRSGv30uM512pnRoO4wW6AXTi0BprUC5ioCAgo0QFY0aogkJxCcTjUQTNDwYo5EHJdFYEjCgL4hctEi4SKkJrcWKFFpsaaeFttDOpTNlOtPpOTNn+9CSNCQkPrge9/r3v9bK2vuD/znEwxKKo3Se4q7ZrLmXLrFlzJoJYMT6+pPhS41W+OQxa+yf6//JUOjZHtvsPZ96y7e/sWqRrlXPh7zsidxACJquQX2zmRxsrT1k3N69S5oh/8MMheYoLMms/PHnZ9ZVPLbjBYF3OhgGGKkJgU0Fmw0Gh+Gb45KzZ/7uunflxeeTYz0dgJxqKFQ9y5O/4ljTc5sWFLy2zsGYoRBPWFiWnFBOihVFkJ6m4LBZfH9mjFO/XO299fvm6pQZ8QNSndSqBeVvf71y9fKVm1enI4XCkD9ALDqKUCSmmSCZHMeyTKIjEeKJGLY0O0Vek+g4WZGweCQy2HjivqHidHkr1m7c8eX6VZlimjPJryea+G7vUZYsn41NT5EyR5GpOAoJjNEQn+06iBQmJSUuPFkJEgnnvJ6OhpOGMTqkAlpZyYJ3Nm2Yu6y7rYcvPrlIf0eY9z9cgccrScVDaHIETd5DSY3gdkNVRT6Hv73C8aOXme6MUjrHEre6e0eH/H2/aYBWVeiqLnLfpSQvm6cXV+CdkSIW95EyBFgJUubEVlRdxWGkke+VHNg/h8EhFYhixu9SVeiqvnoNTQP0uV7T86gziG4PIqREjgjsRorm5jaqqspIdzkAiMfHaGm4weJFcxGmSl6aRAqBqcA8r+kBdAXQPGqIHL2Pnft03OoA+e4A/e2NnK89x80/6ynMHaQwd5CbLfWcrz1HX3sjBe4AbnUAt3KHHL2PXDUEoCmATIz4g8NBP7nbPuDMdUhX2ykti1G+zMH8SpP0tDbS7W3MLzcpX+ag7PEYDrWdTK2LTNWHK+UjERkKAFIDzNbu4dYfGmqWnNufSeW7O3nd3EppkcLuz3MQahiSAQAWLNQor8pBxEIYoxY2VUUIFSMhafWFrwGmAozXdemX3Ju20WvCs1uX8kevG2QQkTEAMkBwOEJoOAIiMHkWxKZHsOsj2EUUORS2TneOnwLGNSDpy1jz5KtF2YzEoCDbxr4jNax4ai/HD0uOHZIkIhOvP306vLJdsL4GiAqEAdaAyYG6RN3NsGwBkhogSdzpGo6aRKVOKA4zXAOg6Fy8YFDghdwnJuFwGxoaFNZv0cCuIUOC1vqxgT311l4gcP8/A0zLWP5x89r9Pln5Vq3ZfyRTyi6XNHxOGe/JkNLvkNLvkLGuDGn6nFJ2umTqrFO2vKfdLsriJcB9nwtTaTMLyHPbKf5ojfLym1v0DZnFmopbAdtkbRMIWtzrTqYO/mSe3nPB+io0xl9A8EHaTMWZC5hZks3CjcViVXWxUjbTI3IA+v0y2NRp3ajrlPUdIS4D/UB06qgPI7YCZE2OksFEjwAGEAPCQASwHrz4L34b6ZSrEM1zAAAAAElFTkSuQmCC"></div>
 		</div>
+		<canvas id="render" width="16" height="16" style="display:none"></canvas>
 </body>
 
 </html>
